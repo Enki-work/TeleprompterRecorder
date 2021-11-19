@@ -56,6 +56,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4A523BE2747B68E006B22F9 /* RxSwift in Frameworks */,
+				A4A523BC2747B68E006B22F9 /* RxCocoa in Frameworks */,
+				A4A523BA2747B68E006B22F9 /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +130,41 @@
 			path = TeleprompterRecorderUITests;
 			sourceTree = "<group>";
 		};
+		A4A523D12747CDB2006B22F9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A4A523D22747CDB2006B22F9 /* NetworkingApi.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		A4A523D32747CDB2006B22F9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A4A523D42747CDB2006B22F9 /* Repo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A4A523D52747CDB2006B22F9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A4A523D62747CDB2006B22F9 /* ActivityIndicator.swift */,
+				A4A523D72747CDB2006B22F9 /* ViewModelType.swift */,
+				A4A523D82747CDB2006B22F9 /* UIViewController+Rx.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A4A523D92747CDB3006B22F9 /* ReposScene */ = {
+			isa = PBXGroup;
+			children = (
+				A4A523DA2747CDB3006B22F9 /* ReposViewController.swift */,
+				A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */,
+			);
+			path = ReposScene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +181,11 @@
 			dependencies = (
 			);
 			name = TeleprompterRecorder;
+			packageProductDependencies = (
+				A4A523B92747B68E006B22F9 /* RxBlocking */,
+				A4A523BB2747B68E006B22F9 /* RxCocoa */,
+				A4A523BD2747B68E006B22F9 /* RxSwift */,
+			);
 			productName = TeleprompterRecorder;
 			productReference = A4A523852747B33E006B22F9 /* TeleprompterRecorder.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +258,9 @@
 				Base,
 			);
 			mainGroup = A4A5237C2747B33E006B22F9;
+			packageReferences = (
+				A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = A4A523862747B33E006B22F9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -626,6 +672,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A4A523B92747B68E006B22F9 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		A4A523BB2747B68E006B22F9 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		A4A523BD2747B68E006B22F9 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A4A5237D2747B33E006B22F9 /* Project object */;
 }
