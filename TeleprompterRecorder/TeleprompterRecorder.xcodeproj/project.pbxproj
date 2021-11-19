@@ -9,13 +9,22 @@
 /* Begin PBXBuildFile section */
 		A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523882747B33E006B22F9 /* AppDelegate.swift */; };
 		A4A5238B2747B33E006B22F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5238A2747B33E006B22F9 /* SceneDelegate.swift */; };
-		A4A5238D2747B33E006B22F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5238C2747B33E006B22F9 /* ViewController.swift */; };
 		A4A523902747B33E006B22F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4A5238E2747B33E006B22F9 /* Main.storyboard */; };
 		A4A523922747B343006B22F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4A523912747B343006B22F9 /* Assets.xcassets */; };
 		A4A523952747B343006B22F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4A523932747B343006B22F9 /* LaunchScreen.storyboard */; };
 		A4A523A02747B344006B22F9 /* TeleprompterRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5239F2747B344006B22F9 /* TeleprompterRecorderTests.swift */; };
 		A4A523AA2747B344006B22F9 /* TeleprompterRecorderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523A92747B344006B22F9 /* TeleprompterRecorderUITests.swift */; };
 		A4A523AC2747B344006B22F9 /* TeleprompterRecorderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523AB2747B344006B22F9 /* TeleprompterRecorderUITestsLaunchTests.swift */; };
+		A4A523BA2747B68E006B22F9 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = A4A523B92747B68E006B22F9 /* RxBlocking */; };
+		A4A523BC2747B68E006B22F9 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A4A523BB2747B68E006B22F9 /* RxCocoa */; };
+		A4A523BE2747B68E006B22F9 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A4A523BD2747B68E006B22F9 /* RxSwift */; };
+		A4A523DC2747CDB3006B22F9 /* NetworkingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523D22747CDB2006B22F9 /* NetworkingApi.swift */; };
+		A4A523DD2747CDB3006B22F9 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523D42747CDB2006B22F9 /* Repo.swift */; };
+		A4A523DE2747CDB3006B22F9 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523D62747CDB2006B22F9 /* ActivityIndicator.swift */; };
+		A4A523DF2747CDB3006B22F9 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523D72747CDB2006B22F9 /* ViewModelType.swift */; };
+		A4A523E02747CDB3006B22F9 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523D82747CDB2006B22F9 /* UIViewController+Rx.swift */; };
+		A4A523E12747CDB3006B22F9 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523DA2747CDB3006B22F9 /* ReposViewController.swift */; };
+		A4A523E22747CDB3006B22F9 /* ReposViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +48,6 @@
 		A4A523852747B33E006B22F9 /* TeleprompterRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeleprompterRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A523882747B33E006B22F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4A5238A2747B33E006B22F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A4A5238C2747B33E006B22F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A4A5238F2747B33E006B22F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A4A523912747B343006B22F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4A523942747B343006B22F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +57,13 @@
 		A4A523A52747B344006B22F9 /* TeleprompterRecorderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeleprompterRecorderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A523A92747B344006B22F9 /* TeleprompterRecorderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeleprompterRecorderUITests.swift; sourceTree = "<group>"; };
 		A4A523AB2747B344006B22F9 /* TeleprompterRecorderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeleprompterRecorderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A4A523D22747CDB2006B22F9 /* NetworkingApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingApi.swift; sourceTree = "<group>"; };
+		A4A523D42747CDB2006B22F9 /* Repo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
+		A4A523D62747CDB2006B22F9 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		A4A523D72747CDB2006B22F9 /* ViewModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		A4A523D82747CDB2006B22F9 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		A4A523DA2747CDB3006B22F9 /* ReposViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
+		A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,9 +117,12 @@
 		A4A523872747B33E006B22F9 /* TeleprompterRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				A4A523D32747CDB2006B22F9 /* Models */,
+				A4A523D12747CDB2006B22F9 /* Networking */,
+				A4A523D92747CDB3006B22F9 /* ReposScene */,
+				A4A523D52747CDB2006B22F9 /* Utils */,
 				A4A523882747B33E006B22F9 /* AppDelegate.swift */,
 				A4A5238A2747B33E006B22F9 /* SceneDelegate.swift */,
-				A4A5238C2747B33E006B22F9 /* ViewController.swift */,
 				A4A5238E2747B33E006B22F9 /* Main.storyboard */,
 				A4A523912747B343006B22F9 /* Assets.xcassets */,
 				A4A523932747B343006B22F9 /* LaunchScreen.storyboard */,
@@ -304,9 +322,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4A5238D2747B33E006B22F9 /* ViewController.swift in Sources */,
+				A4A523E12747CDB3006B22F9 /* ReposViewController.swift in Sources */,
+				A4A523DC2747CDB3006B22F9 /* NetworkingApi.swift in Sources */,
+				A4A523DD2747CDB3006B22F9 /* Repo.swift in Sources */,
 				A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */,
+				A4A523DE2747CDB3006B22F9 /* ActivityIndicator.swift in Sources */,
+				A4A523E22747CDB3006B22F9 /* ReposViewModel.swift in Sources */,
 				A4A5238B2747B33E006B22F9 /* SceneDelegate.swift in Sources */,
+				A4A523E02747CDB3006B22F9 /* UIViewController+Rx.swift in Sources */,
+				A4A523DF2747CDB3006B22F9 /* ViewModelType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
