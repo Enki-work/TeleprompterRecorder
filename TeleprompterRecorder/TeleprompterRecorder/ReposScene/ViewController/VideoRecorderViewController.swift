@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import AVFoundation
+import Photos
 
 class VideoRecorderViewController: UIViewController {
     
@@ -110,6 +111,43 @@ class VideoRecorderViewController: UIViewController {
         self.cameraPreviewLayer?.frame = view.frame
         self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
         
+        AVCaptureDevice.rx.requestAuthorization(for: .video).map({$0 == .authorized}).flatMap({ element -> Single<Bool> in
+            if (element) {
+                return AVCaptureDevice.rx.requestAuthorization(for: .audio).map({$0 == .authorized})
+            } else {
+                return Single.just(false)
+            }
+        }).flatMap({ element -> Single<Bool> in
+            if (element) {
+                    return PHPhotoLibrary.rx.requestAuthorization().map({$0 == .authorized})
+                } else {
+                    return Single.just(false)
+                }
+        }).subscribe(onSuccess: { result in
+            if result {
+                session.startRunning()
+            } else {
+                debugPrint("requestAuthorization failed")
+            }
+        }, onFailure: {_ in
+                debugPrint("requestAuthorization failed")
+        }).disposed(by: disposeBag)
+
+        
+        AVCaptureDevice.requestAccess(for: .audio) { result in
+            if result {
+                debugPrint("audio requestAccess true")
+                
+                
+                AVCaptureDevice.requestAccess(for: .video) { result in
+                    if result {
+                        debugPrint("video requestAccess true")
+                    }
+                }
+            }
+        }
+    }
+    
     }
 }
 
