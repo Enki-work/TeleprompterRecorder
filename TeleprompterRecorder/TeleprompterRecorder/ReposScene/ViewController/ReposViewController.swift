@@ -14,8 +14,6 @@ class ReposViewController: UIViewController {
     private let tableView = UITableView()
     let searchController = UISearchController(searchResultsController: nil)
 
-    private let searchTextField = UITextField()
-
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {

@@ -25,6 +25,8 @@
 		A4A523E02747CDB3006B22F9 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523D82747CDB2006B22F9 /* UIViewController+Rx.swift */; };
 		A4A523E12747CDB3006B22F9 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523DA2747CDB3006B22F9 /* ReposViewController.swift */; };
 		A4A523E22747CDB3006B22F9 /* ReposViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */; };
+		A4A523E4274887CA006B22F9 /* VideoRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523E3274887CA006B22F9 /* VideoRecorderViewController.swift */; };
+		A4A523E827488884006B22F9 /* VideoRecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523E727488884006B22F9 /* VideoRecorderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		A4A523D82747CDB2006B22F9 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		A4A523DA2747CDB3006B22F9 /* ReposViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
 		A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewModel.swift; sourceTree = "<group>"; };
+		A4A523E3274887CA006B22F9 /* VideoRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecorderViewController.swift; sourceTree = "<group>"; };
+		A4A523E727488884006B22F9 /* VideoRecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecorderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,10 +181,28 @@
 		A4A523D92747CDB3006B22F9 /* ReposScene */ = {
 			isa = PBXGroup;
 			children = (
-				A4A523DA2747CDB3006B22F9 /* ReposViewController.swift */,
-				A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */,
+				A4A523E62748884B006B22F9 /* ViewModel */,
+				A4A523E52748883B006B22F9 /* ViewController */,
 			);
 			path = ReposScene;
+			sourceTree = "<group>";
+		};
+		A4A523E52748883B006B22F9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A4A523DA2747CDB3006B22F9 /* ReposViewController.swift */,
+				A4A523E3274887CA006B22F9 /* VideoRecorderViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		A4A523E62748884B006B22F9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */,
+				A4A523E727488884006B22F9 /* VideoRecorderViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,8 +346,10 @@
 			files = (
 				A4A523E12747CDB3006B22F9 /* ReposViewController.swift in Sources */,
 				A4A523DC2747CDB3006B22F9 /* NetworkingApi.swift in Sources */,
+				A4A523E827488884006B22F9 /* VideoRecorderViewModel.swift in Sources */,
 				A4A523DD2747CDB3006B22F9 /* Repo.swift in Sources */,
 				A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */,
+				A4A523E4274887CA006B22F9 /* VideoRecorderViewController.swift in Sources */,
 				A4A523DE2747CDB3006B22F9 /* ActivityIndicator.swift in Sources */,
 				A4A523E22747CDB3006B22F9 /* ReposViewModel.swift in Sources */,
 				A4A5238B2747B33E006B22F9 /* SceneDelegate.swift in Sources */,
