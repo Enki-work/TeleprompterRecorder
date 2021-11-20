@@ -27,6 +27,8 @@
 		A4A523E22747CDB3006B22F9 /* ReposViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */; };
 		A4A523E4274887CA006B22F9 /* VideoRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523E3274887CA006B22F9 /* VideoRecorderViewController.swift */; };
 		A4A523E827488884006B22F9 /* VideoRecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523E727488884006B22F9 /* VideoRecorderViewModel.swift */; };
+		A4A523EB27488947006B22F9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A523EA27488947006B22F9 /* AVFoundation.framework */; };
+		A4A523ED27488B30006B22F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A523EC27488B30006B22F9 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewModel.swift; sourceTree = "<group>"; };
 		A4A523E3274887CA006B22F9 /* VideoRecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecorderViewController.swift; sourceTree = "<group>"; };
 		A4A523E727488884006B22F9 /* VideoRecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecorderViewModel.swift; sourceTree = "<group>"; };
+		A4A523EA27488947006B22F9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A4A523EC27488B30006B22F9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,9 +79,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4A523EB27488947006B22F9 /* AVFoundation.framework in Frameworks */,
 				A4A523BE2747B68E006B22F9 /* RxSwift in Frameworks */,
 				A4A523BC2747B68E006B22F9 /* RxCocoa in Frameworks */,
 				A4A523BA2747B68E006B22F9 /* RxBlocking in Frameworks */,
+				A4A523ED27488B30006B22F9 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +111,7 @@
 				A4A5239E2747B344006B22F9 /* TeleprompterRecorderTests */,
 				A4A523A82747B344006B22F9 /* TeleprompterRecorderUITests */,
 				A4A523862747B33E006B22F9 /* Products */,
+				A4A523E927488947006B22F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -203,6 +210,15 @@
 				A4A523E727488884006B22F9 /* VideoRecorderViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A4A523E927488947006B22F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A4A523EC27488B30006B22F9 /* UIKit.framework */,
+				A4A523EA27488947006B22F9 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -536,6 +552,9 @@
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TeleprompterRecorder/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "写真ライブラリへのアクセスの許可を求める";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -565,6 +584,9 @@
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TeleprompterRecorder/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "写真ライブラリへのアクセスの許可を求める";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
