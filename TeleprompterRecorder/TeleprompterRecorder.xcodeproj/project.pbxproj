@@ -29,6 +29,7 @@
 		A4A523E827488884006B22F9 /* VideoRecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523E727488884006B22F9 /* VideoRecorderViewModel.swift */; };
 		A4A523EB27488947006B22F9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A523EA27488947006B22F9 /* AVFoundation.framework */; };
 		A4A523ED27488B30006B22F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A523EC27488B30006B22F9 /* UIKit.framework */; };
+		A4A523EF2748A483006B22F9 /* RxExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523EE2748A483006B22F9 /* RxExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		A4A523E727488884006B22F9 /* VideoRecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecorderViewModel.swift; sourceTree = "<group>"; };
 		A4A523EA27488947006B22F9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A4A523EC27488B30006B22F9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A4A523EE2748A483006B22F9 /* RxExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				A4A523D62747CDB2006B22F9 /* ActivityIndicator.swift */,
 				A4A523D72747CDB2006B22F9 /* ViewModelType.swift */,
 				A4A523D82747CDB2006B22F9 /* UIViewController+Rx.swift */,
+				A4A523EE2748A483006B22F9 /* RxExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */,
 				A4A523E4274887CA006B22F9 /* VideoRecorderViewController.swift in Sources */,
 				A4A523DE2747CDB3006B22F9 /* ActivityIndicator.swift in Sources */,
+				A4A523EF2748A483006B22F9 /* RxExtension.swift in Sources */,
 				A4A523E22747CDB3006B22F9 /* ReposViewModel.swift in Sources */,
 				A4A5238B2747B33E006B22F9 /* SceneDelegate.swift in Sources */,
 				A4A523E02747CDB3006B22F9 /* UIViewController+Rx.swift in Sources */,
