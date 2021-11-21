@@ -30,6 +30,7 @@
 		A4A523EB27488947006B22F9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A523EA27488947006B22F9 /* AVFoundation.framework */; };
 		A4A523ED27488B30006B22F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A523EC27488B30006B22F9 /* UIKit.framework */; };
 		A4A523EF2748A483006B22F9 /* RxExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523EE2748A483006B22F9 /* RxExtension.swift */; };
+		A4A523F12748B400006B22F9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523F02748B400006B22F9 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		A4A523EA27488947006B22F9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A4A523EC27488B30006B22F9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A4A523EE2748A483006B22F9 /* RxExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxExtension.swift; sourceTree = "<group>"; };
+		A4A523F02748B400006B22F9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				A4A523D72747CDB2006B22F9 /* ViewModelType.swift */,
 				A4A523D82747CDB2006B22F9 /* UIViewController+Rx.swift */,
 				A4A523EE2748A483006B22F9 /* RxExtension.swift */,
+				A4A523F02748B400006B22F9 /* Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				A4A523DE2747CDB3006B22F9 /* ActivityIndicator.swift in Sources */,
 				A4A523EF2748A483006B22F9 /* RxExtension.swift in Sources */,
 				A4A523E22747CDB3006B22F9 /* ReposViewModel.swift in Sources */,
+				A4A523F12748B400006B22F9 /* Extension.swift in Sources */,
 				A4A5238B2747B33E006B22F9 /* SceneDelegate.swift in Sources */,
 				A4A523E02747CDB3006B22F9 /* UIViewController+Rx.swift in Sources */,
 				A4A523DF2747CDB3006B22F9 /* ViewModelType.swift in Sources */,
@@ -558,7 +562,7 @@
 				INFOPLIST_FILE = TeleprompterRecorder/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "写真ライブラリへのアクセスの許可を求める";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真ライブラリへのアクセスの許可を求める";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -590,7 +594,7 @@
 				INFOPLIST_FILE = TeleprompterRecorder/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "写真ライブラリへのアクセスの許可を求める";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真ライブラリへのアクセスの許可を求める";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -33,7 +33,6 @@ class VideoRecorderViewController: UIViewController {
         super.viewDidLoad()
         
         let session = AVCaptureSession()
-        session.startRunning()
         session.beginConfiguration()
         if (session.canSetSessionPreset(.high)) {
             session.sessionPreset = .high
@@ -119,35 +118,21 @@ class VideoRecorderViewController: UIViewController {
             }
         }).flatMap({ element -> Single<Bool> in
             if (element) {
-                    return PHPhotoLibrary.rx.requestAuthorization().map({$0 == .authorized})
-                } else {
-                    return Single.just(false)
-                }
+                return PHPhotoLibrary.rx.requestAuthorization().map({$0 == .authorized})
+            } else {
+                return Single.just(false)
+            }
         }).subscribe(onSuccess: { result in
             if result {
                 session.startRunning()
             } else {
-                debugPrint("requestAuthorization failed")
-            }
-        }, onFailure: {_ in
-                debugPrint("requestAuthorization failed")
-        }).disposed(by: disposeBag)
-
-        
-        AVCaptureDevice.requestAccess(for: .audio) { result in
-            if result {
-                debugPrint("audio requestAccess true")
-                
-                
-                AVCaptureDevice.requestAccess(for: .video) { result in
-                    if result {
-                        debugPrint("video requestAccess true")
+                UIAlertController.showTwoBtnAlert(title: "アプリ正常に使用するのに必要の権限オンにしてください", secondBtnTitle: "設定画面へ") { _ in
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
                 }
             }
-        }
-    }
-    
+        }).disposed(by: disposeBag)
     }
 }
 
