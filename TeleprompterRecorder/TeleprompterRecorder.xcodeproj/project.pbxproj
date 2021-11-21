@@ -132,9 +132,10 @@
 		A4A523872747B33E006B22F9 /* TeleprompterRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				A4A523E62748884B006B22F9 /* ViewModel */,
+				A4A523E52748883B006B22F9 /* ViewController */,
 				A4A523D32747CDB2006B22F9 /* Models */,
 				A4A523D12747CDB2006B22F9 /* Networking */,
-				A4A523D92747CDB3006B22F9 /* ReposScene */,
 				A4A523D52747CDB2006B22F9 /* Utils */,
 				A4A523882747B33E006B22F9 /* AppDelegate.swift */,
 				A4A5238A2747B33E006B22F9 /* SceneDelegate.swift */,
@@ -189,15 +190,6 @@
 				A4A523F02748B400006B22F9 /* Extension.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		A4A523D92747CDB3006B22F9 /* ReposScene */ = {
-			isa = PBXGroup;
-			children = (
-				A4A523E62748884B006B22F9 /* ViewModel */,
-				A4A523E52748883B006B22F9 /* ViewController */,
-			);
-			path = ReposScene;
 			sourceTree = "<group>";
 		};
 		A4A523E52748883B006B22F9 /* ViewController */ = {
