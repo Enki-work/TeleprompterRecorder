@@ -19,7 +19,6 @@ class VideoRecorderViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
-    
     override func loadView() {
         self.view = CameraPreview()
     }
@@ -31,7 +30,13 @@ class VideoRecorderViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        let input = VideoRecorderViewModel.Input(ready: rx.viewWillAppear.flatMap({Driver.just(self.cameraPreview)}).asDriver(onErrorJustReturn: self.cameraPreview))
+        
+        let input = VideoRecorderViewModel.Input(ready: rx.viewWillAppear.flatMap({Driver.just(self.cameraPreview)}).asDriver(onErrorJustReturn: self.cameraPreview),
+                                                 isVideoWillStart: cameraPreview.captureButtonsView.recordBtn.rx.tap.asDriver().flatMap({
+            let isVideoWillStart = !self.cameraPreview.captureButtonsView.recordBtn.isSelected
+            self.cameraPreview.captureButtonsView.recordBtn.isSelected = isVideoWillStart
+            return Driver.just(isVideoWillStart)
+        }))
 
         let output = viewModel.transform(input: input)
         

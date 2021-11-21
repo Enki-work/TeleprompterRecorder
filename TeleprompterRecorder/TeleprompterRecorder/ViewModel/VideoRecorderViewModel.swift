@@ -15,6 +15,7 @@ final class VideoRecorderViewModel: ViewModelType {
     
     struct Input {
         let ready: Driver<CameraPreview>
+        let isVideoWillStart: Driver<Bool>
     }
     
     struct Output {
@@ -26,6 +27,7 @@ final class VideoRecorderViewModel: ViewModelType {
     }
     
     private let dependencies: Dependencies
+    private let disposeBag = DisposeBag()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -51,12 +53,19 @@ final class VideoRecorderViewModel: ViewModelType {
         
         let requestAuthorizationFailed: Driver<Bool> = Driver.combineLatest(input.ready, requestAuthorization).flatMap {
             if ($0.1) {
-                $0.0.cameraPreviewLayer.session = self.dependencies.captureManager.captureSession
+                let cameraPreview = $0.0
+                cameraPreview.cameraPreviewLayer.session = self.dependencies.captureManager.captureSession
                 self.dependencies.captureManager.initSetting()
                 self.dependencies.captureManager.captureSession.startRunning()
             }
             return Driver<Bool>.just($0.1)
         }
+        
+        input.isVideoWillStart.drive(onNext: { isVideoWillStart in
+            if (isVideoWillStart) {
+                self.dependencies.captureManager.startRecording()
+            }
+        }).disposed(by: disposeBag)
         
         return Output(requestAuthorizationFailed: requestAuthorizationFailed)
     }
