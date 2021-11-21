@@ -14,7 +14,7 @@ import Photos
 final class VideoRecorderViewModel: ViewModelType {
     
     struct Input {
-        let ready: Driver<AVCaptureVideoPreviewLayer>
+        let ready: Driver<CameraPreview>
     }
     
     struct Output {
@@ -51,7 +51,7 @@ final class VideoRecorderViewModel: ViewModelType {
         
         let requestAuthorizationFailed: Driver<Bool> = Driver.combineLatest(input.ready, requestAuthorization).flatMap {
             if ($0.1) {
-                $0.0.session = self.dependencies.captureManager.captureSession
+                $0.0.cameraPreviewLayer.session = self.dependencies.captureManager.captureSession
                 self.dependencies.captureManager.initSetting()
                 self.dependencies.captureManager.captureSession.startRunning()
             }

@@ -8,5 +8,9 @@
 import UIKit
 
 class CaptureButtonsView: UIView {
+    @IBOutlet weak var recordBtn: UIButton!
     
+    override func awakeFromNib() {
+        
+    }
 }

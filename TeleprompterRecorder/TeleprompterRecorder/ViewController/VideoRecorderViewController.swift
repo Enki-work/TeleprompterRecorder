@@ -12,9 +12,9 @@ import AVFoundation
 
 class VideoRecorderViewController: UIViewController {
     let viewModel = VideoRecorderViewModel(dependencies: .init(captureManager: CaptureManager(captureSession: AVCaptureSession())))
-    // プレビュー表示用のレイヤ
-    var cameraPreviewLayer : AVCaptureVideoPreviewLayer {
-        (view as! CameraPreview).layer as! AVCaptureVideoPreviewLayer
+    // プレビュー
+    var cameraPreview : CameraPreview {
+        view as! CameraPreview
     }
     
     let disposeBag = DisposeBag()
@@ -31,7 +31,7 @@ class VideoRecorderViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        let input = VideoRecorderViewModel.Input(ready: rx.viewWillAppear.flatMap({Driver.just(self.cameraPreviewLayer)}).asDriver(onErrorJustReturn: self.cameraPreviewLayer))
+        let input = VideoRecorderViewModel.Input(ready: rx.viewWillAppear.flatMap({Driver.just(self.cameraPreview)}).asDriver(onErrorJustReturn: self.cameraPreview))
 
         let output = viewModel.transform(input: input)
         
