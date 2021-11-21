@@ -25,9 +25,16 @@ class VideoRecorderViewController: UIViewController {
     // キャプチャーの出力データを受け付けるオブジェクト
     var photoOutput : AVCapturePhotoOutput?
     // プレビュー表示用のレイヤ
-    var cameraPreviewLayer : AVCaptureVideoPreviewLayer?
+    var cameraPreviewLayer : AVCaptureVideoPreviewLayer {
+        (view as! CameraPreview).layer as! AVCaptureVideoPreviewLayer
+    }
     
     let disposeBag = DisposeBag()
+    
+    
+    override func loadView() {
+        self.view = CameraPreview()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,16 +107,6 @@ class VideoRecorderViewController: UIViewController {
             debugPrint(error)
         }
         
-        // 指定したAVCaptureSessionでプレビューレイヤを初期化
-        self.cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
-        // プレビューレイヤが、カメラのキャプチャーを縦横比を維持した状態で、表示するように設定
-        self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        // プレビューレイヤの表示の向きを設定
-        self.cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-        
-        self.cameraPreviewLayer?.frame = view.frame
-        self.view.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
-        
         AVCaptureDevice.rx.requestAuthorization(for: .video).map({$0 == .authorized}).flatMap({ element -> Single<Bool> in
             if (element) {
                 return AVCaptureDevice.rx.requestAuthorization(for: .audio).map({$0 == .authorized})
@@ -124,6 +121,7 @@ class VideoRecorderViewController: UIViewController {
             }
         }).subscribe(onSuccess: { result in
             if result {
+                self.cameraPreviewLayer.session = session
                 session.startRunning()
             } else {
                 UIAlertController.showTwoBtnAlert(title: "アプリ正常に使用するのに必要の権限オンにしてください", secondBtnTitle: "設定画面へ") { _ in

@@ -31,6 +31,7 @@
 		A4A523ED27488B30006B22F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A523EC27488B30006B22F9 /* UIKit.framework */; };
 		A4A523EF2748A483006B22F9 /* RxExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523EE2748A483006B22F9 /* RxExtension.swift */; };
 		A4A523F12748B400006B22F9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523F02748B400006B22F9 /* Extension.swift */; };
+		A4A523F42749D40F006B22F9 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523F32749D40F006B22F9 /* CameraPreview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		A4A523EC27488B30006B22F9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A4A523EE2748A483006B22F9 /* RxExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxExtension.swift; sourceTree = "<group>"; };
 		A4A523F02748B400006B22F9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		A4A523F32749D40F006B22F9 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 		A4A523872747B33E006B22F9 /* TeleprompterRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				A4A523F22749D3F1006B22F9 /* View */,
 				A4A523E62748884B006B22F9 /* ViewModel */,
 				A4A523E52748883B006B22F9 /* ViewController */,
 				A4A523D32747CDB2006B22F9 /* Models */,
@@ -217,6 +220,14 @@
 				A4A523EA27488947006B22F9 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A4A523F22749D3F1006B22F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A4A523F32749D40F006B22F9 /* CameraPreview.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,6 +372,7 @@
 				A4A523E12747CDB3006B22F9 /* ReposViewController.swift in Sources */,
 				A4A523DC2747CDB3006B22F9 /* NetworkingApi.swift in Sources */,
 				A4A523E827488884006B22F9 /* VideoRecorderViewModel.swift in Sources */,
+				A4A523F42749D40F006B22F9 /* CameraPreview.swift in Sources */,
 				A4A523DD2747CDB3006B22F9 /* Repo.swift in Sources */,
 				A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */,
 				A4A523E4274887CA006B22F9 /* VideoRecorderViewController.swift in Sources */,
