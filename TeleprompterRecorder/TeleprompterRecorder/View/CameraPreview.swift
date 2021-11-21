@@ -15,16 +15,23 @@ class CameraPreview: UIView {
         layer as! AVCaptureVideoPreviewLayer
     }
     
+    let captureButtonsView: CaptureButtonsView
+    
     override class var layerClass: AnyClass {
         AVCaptureVideoPreviewLayer.self
     }
     
     init() {
-        super.init(frame: .zero)
+        captureButtonsView = UINib(nibName: "CaptureButtonsView", bundle: nil)
+                    .instantiate(withOwner: nil, options: nil)
+                    .first as! CaptureButtonsView
+        super.init(frame: UIScreen.main.bounds)
+        captureButtonsView.frame = UIScreen.main.bounds
         // プレビューレイヤが、カメラのキャプチャーを縦横比を維持した状態で、表示するように設定
         self.cameraPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         // プレビューレイヤの表示の向きを設定
         self.cameraPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+        self.addSubview(captureButtonsView)
     }
     
     required init?(coder: NSCoder) {
