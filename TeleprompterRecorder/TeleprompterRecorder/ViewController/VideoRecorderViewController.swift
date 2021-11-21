@@ -9,7 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import AVFoundation
-import Photos
 
 class VideoRecorderViewController: UIViewController {
     let viewModel = VideoRecorderViewModel(dependencies: .init(captureManager: CaptureManager(captureSession: AVCaptureSession())))
@@ -27,8 +26,8 @@ class VideoRecorderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         bindViewModel()
+        bindNotification()
     }
     
     private func bindViewModel() {
@@ -46,16 +45,18 @@ class VideoRecorderViewController: UIViewController {
             }
         }).disposed(by: disposeBag)
     }
-}
-
-extension VideoRecorderViewController: AVCapturePhotoCaptureDelegate {
-    // 撮影した画像データが生成されたときに呼び出されるデリゲートメソッド
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        if let imageData = photo.fileDataRepresentation() {
-            // Data型をUIImageオブジェクトに変換
-            let uiImage = UIImage(data: imageData)
-            // 写真ライブラリに画像を保存
-            UIImageWriteToSavedPhotosAlbum(uiImage!, nil,nil,nil)
-        }
+    
+    private func bindNotification() {
+        NotificationCenter.default.rx.notification(NSNotification.Name.AVCaptureSessionRuntimeError).take(until: self.rx.deallocated).subscribe { notification in
+            debugPrint("AVCaptureSessionRuntimeError")
+        }.disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(NSNotification.Name.AVCaptureDeviceWasDisconnected).take(until: self.rx.deallocated).subscribe { notification in
+            debugPrint("AVCaptureDeviceWasDisconnected")
+        }.disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(NSNotification.Name.AVCaptureSessionDidStartRunning).take(until: self.rx.deallocated).subscribe { notification in
+            debugPrint("AVCaptureSessionDidStartRunning")
+        }.disposed(by: disposeBag)
     }
 }

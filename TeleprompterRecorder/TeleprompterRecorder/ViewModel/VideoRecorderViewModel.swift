@@ -19,22 +19,19 @@ final class VideoRecorderViewModel: ViewModelType {
     
     struct Output {
         let requestAuthorizationFailed: Driver<Bool>
-        let notification: Driver<Notification>
     }
     
     struct Dependencies {
-        var captureManager: CaptureManager
+        let captureManager: CaptureManager
     }
     
-    private var dependencies: Dependencies
+    private let dependencies: Dependencies
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
     
     func transform(input: Input) -> Output {
-        
-        let loading = ActivityIndicator()
         
         let requestAuthorization = input.ready.flatMap { _ in
             AVCaptureDevice.rx.requestAuthorization(for: .video).map({$0 == .authorized}).flatMap({ element -> Single<Bool> in
@@ -55,15 +52,12 @@ final class VideoRecorderViewModel: ViewModelType {
         let requestAuthorizationFailed: Driver<Bool> = Driver.combineLatest(input.ready, requestAuthorization).flatMap {
             if ($0.1) {
                 $0.0.session = self.dependencies.captureManager.captureSession
-                self.dependencies.captureManager.start()
+                self.dependencies.captureManager.initSetting()
                 self.dependencies.captureManager.captureSession.startRunning()
             }
             return Driver<Bool>.just($0.1)
         }
         
-        let notification = Observable<Notification>.merge(NotificationCenter.default.rx.notification(NSNotification.Name.AVCaptureSessionRuntimeError), NotificationCenter.default.rx.notification(NSNotification.Name.AVCaptureDeviceWasDisconnected)).asDriver(onErrorJustReturn: .init(name: NSNotification.Name.AVCaptureSessionRuntimeError, object: nil, userInfo: nil))
-        
-        return Output(requestAuthorizationFailed: requestAuthorizationFailed,
-                      notification: notification)
+        return Output(requestAuthorizationFailed: requestAuthorizationFailed)
     }
 }

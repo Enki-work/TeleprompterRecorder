@@ -6,8 +6,10 @@
 //
 
 import AVFoundation
+import Photos
+import UIKit
 
-struct CaptureManager {
+class CaptureManager: NSObject {
     let captureSession: AVCaptureSession
     
     
@@ -27,7 +29,7 @@ struct CaptureManager {
         self.captureSession = captureSession
     }
     
-    mutating func start() {
+    func initSetting() {
         
         captureSession.beginConfiguration()
         if (captureSession.canSetSessionPreset(.high)) {
@@ -87,5 +89,17 @@ struct CaptureManager {
             debugPrint(error)
         }
 
+    }
+}
+
+extension CaptureManager: AVCapturePhotoCaptureDelegate {
+    // 撮影した画像データが生成されたときに呼び出されるデリゲートメソッド
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if let imageData = photo.fileDataRepresentation() {
+            // Data型をUIImageオブジェクトに変換
+            let uiImage = UIImage(data: imageData)
+            // 写真ライブラリに画像を保存
+            UIImageWriteToSavedPhotosAlbum(uiImage!, nil,nil,nil)
+        }
     }
 }
