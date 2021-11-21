@@ -21,15 +21,10 @@ class CameraPreview: UIView {
     
     init() {
         super.init(frame: .zero)
-        self.backgroundColor = .red
-        
-//        self.cameraPreviewLayer.session = session
         // プレビューレイヤが、カメラのキャプチャーを縦横比を維持した状態で、表示するように設定
         self.cameraPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         // プレビューレイヤの表示の向きを設定
         self.cameraPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-        
-        self.cameraPreviewLayer.frame = frame
     }
     
     required init?(coder: NSCoder) {
