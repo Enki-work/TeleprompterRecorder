@@ -64,6 +64,8 @@ final class VideoRecorderViewModel: ViewModelType {
         input.isVideoWillStart.drive(onNext: { isVideoWillStart in
             if (isVideoWillStart) {
                 self.dependencies.captureManager.startRecording()
+            } else {
+                self.dependencies.captureManager.stopRecording()
             }
         }).disposed(by: disposeBag)
         
