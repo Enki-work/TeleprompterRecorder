@@ -36,8 +36,6 @@ class CaptureManager: NSObject {
     private var videoDataOutput: AVCaptureVideoDataOutput?
     private var audioDataOutput: AVCaptureAudioDataOutput?
     
-    
-    
     init(captureSession: AVCaptureSession) {
         self.captureSession = captureSession
     }
@@ -45,8 +43,8 @@ class CaptureManager: NSObject {
     func initSetting() {
         
         captureSession.beginConfiguration()
-        if (captureSession.canSetSessionPreset(.high)) {
-            captureSession.sessionPreset = .high
+        if (captureSession.canSetSessionPreset(.hd1920x1080)) {
+            captureSession.sessionPreset = .hd1920x1080
         }
         captureSession.commitConfiguration()
         
@@ -163,8 +161,15 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
             let desc = CMAudioFormatDescriptionGetStreamBasicDescription(fmt)
             let samplerate = desc?.pointee.mSampleRate
             let channels = desc?.pointee.mChannelsPerFrame
+            var videoSize = CGSize.init(width: 1280, height: 720)
+            switch captureSession.sessionPreset {
+            case .hd1920x1080:
+                videoSize = .init(width: 1920, height: 1080)
+            default:
+                break
+            }
             recordEncoder = try? CaptureEncoder(path: getUploadFilePath(),
-                                           videoSize: .init(width: 1920, height: 1080),
+                                           videoSize: videoSize,
                                            channels: Int(channels ?? 1),
                                            rate: samplerate ?? 44100)
         }
