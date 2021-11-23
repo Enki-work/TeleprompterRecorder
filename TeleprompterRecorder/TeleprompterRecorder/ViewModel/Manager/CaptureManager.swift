@@ -38,6 +38,12 @@ class CaptureManager: NSObject {
     private var videoDataOutput: AVCaptureVideoDataOutput?
     private var audioDataOutput: AVCaptureAudioDataOutput?
     
+    lazy var selectedFormat: Binder<AVCaptureDevice.Format> = .init(self) { manager, format in
+        try? manager.currentCamera?.lockForConfiguration()
+        manager.currentCamera?.activeFormat = format
+        manager.currentCamera?.unlockForConfiguration()
+    }
+    
     var currentCameraFormat: Driver<(activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])?> {
         guard let currentCamera = self.currentCamera else {return .just(nil)}
         return .just((activeFormat: currentCamera.activeFormat,

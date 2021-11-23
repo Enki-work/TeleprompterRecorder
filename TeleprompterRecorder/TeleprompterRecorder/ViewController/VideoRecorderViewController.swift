@@ -51,8 +51,8 @@ class VideoRecorderViewController: UIViewController {
             }
         }).disposed(by: disposeBag)
         
-        output.formats.drive(onNext: { formats in
-            self.performSegue(withIdentifier: "showformatlist", sender: formats)
+        output.formats.drive(onNext: { [weak self] formats in
+            self?.performSegue(withIdentifier: "showformatlist", sender: (formats, output.selectedFormat))
         }).disposed(by: disposeBag)
     }
     
@@ -73,12 +73,10 @@ class VideoRecorderViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showformatlist",
             let formatListVC = segue.destination as? FormatListViewController,
-        let formats = sender as? (activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format]) {
+        let sender = sender as? ((activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format]), Binder<AVCaptureDevice.Format>) {
             formatListVC.title = "FormatList"
-            formatListVC.formats = formats
-            formatListVC.selectedFormat.subscribe(onNext: {[weak self] selecedItem in
-                print(selecedItem)
-            }).disposed(by: formatListVC.disposeBag)
+            formatListVC.formats = sender.0
+            formatListVC.selectedFormat.bind(to: sender.1).disposed(by: formatListVC.disposeBag)
         }
     }
 }

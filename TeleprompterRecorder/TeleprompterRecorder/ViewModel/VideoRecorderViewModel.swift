@@ -22,6 +22,7 @@ final class VideoRecorderViewModel: ViewModelType {
     struct Output {
         let requestAuthorizationFailed: Driver<Bool>
         let formats: Driver<(activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])?>
+        let selectedFormat: Binder<AVCaptureDevice.Format>
     }
     
     struct Dependencies {
@@ -76,6 +77,7 @@ final class VideoRecorderViewModel: ViewModelType {
         }
         
         return Output(requestAuthorizationFailed: requestAuthorizationFailed,
-                      formats: formats)
+                      formats: formats,
+                      selectedFormat: dependencies.captureManager.selectedFormat)
     }
 }

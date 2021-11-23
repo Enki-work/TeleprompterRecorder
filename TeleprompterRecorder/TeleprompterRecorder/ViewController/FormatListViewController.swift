@@ -49,7 +49,6 @@ class FormatListViewController: UIViewController {
 //                "Rate{\(Int64(item.videoSupportedFrameRateRanges.first?.minFrameRate ?? -1))-\(Int64(item.videoSupportedFrameRateRanges.first?.maxFrameRate ?? -1))}," +
                 cell.textLabel?.text = item.debugDescription
                 if (item.debugDescription.identity == self?.formats.activeFormat.debugDescription.identity) {
-                    print(item)
                     tv.selectRow(at: index, animated: true, scrollPosition: .none)
                 }
                 return cell
