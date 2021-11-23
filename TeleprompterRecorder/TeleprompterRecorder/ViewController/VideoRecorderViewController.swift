@@ -37,8 +37,9 @@ class VideoRecorderViewController: UIViewController {
             self.cameraPreview.captureButtonsView.recordBtn.isSelected = isVideoWillStart
             return Driver.just(isVideoWillStart)
         }),
-                                                 formats: cameraPreview.captureButtonsView.formatChangeBtn.rx.tap.asDriver().flatMap({Driver.just(())}))
-
+                                                 formats: cameraPreview.captureButtonsView.formatChangeBtn.rx.tap.asDriver(),
+                                                 changeCamera: cameraPreview.captureButtonsView.changeCameraBtn.rx.tap.asDriver())
+        
         let output = viewModel.transform(input: input)
         
         output.requestAuthorizationFailed.drive(onNext: { result in
@@ -54,6 +55,8 @@ class VideoRecorderViewController: UIViewController {
         output.formats.drive(onNext: { [weak self] formats in
             self?.performSegue(withIdentifier: "showformatlist", sender: (formats, output.selectedFormat))
         }).disposed(by: disposeBag)
+        
+        output.didChangeCamera.drive(onNext: {_ in }).disposed(by: disposeBag)
     }
     
     private func bindNotification() {

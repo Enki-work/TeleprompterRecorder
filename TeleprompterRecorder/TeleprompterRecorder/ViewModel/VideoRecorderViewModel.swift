@@ -17,12 +17,14 @@ final class VideoRecorderViewModel: ViewModelType {
         let ready: Driver<CameraPreview>
         let isVideoWillStart: Driver<Bool>
         let formats: Driver<Void>
+        let changeCamera: Driver<Void>
     }
     
     struct Output {
         let requestAuthorizationFailed: Driver<Bool>
         let formats: Driver<(activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])?>
         let selectedFormat: Binder<AVCaptureDevice.Format>
+        let didChangeCamera: Driver<Bool>
     }
     
     struct Dependencies {
@@ -75,8 +77,15 @@ final class VideoRecorderViewModel: ViewModelType {
             return self.dependencies.captureManager.currentCameraFormat
         }
         
+        let didChangeCamera: Driver<Bool> = input.changeCamera.flatMap({[weak self] in
+            guard let self = self else {return .just(false)}
+            let result = (try? self.dependencies.captureManager.changeCamera()) ?? false
+            return .just(result)
+        })
+        
         return Output(requestAuthorizationFailed: requestAuthorizationFailed,
                       formats: formats,
-                      selectedFormat: dependencies.captureManager.selectedFormat)
+                      selectedFormat: dependencies.captureManager.selectedFormat,
+                      didChangeCamera: didChangeCamera)
     }
 }

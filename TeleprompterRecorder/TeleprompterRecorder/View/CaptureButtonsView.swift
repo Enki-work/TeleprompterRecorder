@@ -10,6 +10,7 @@ import UIKit
 class CaptureButtonsView: UIView {
     @IBOutlet weak var recordBtn: UIButton!
     @IBOutlet weak var formatChangeBtn: UIButton!
+    @IBOutlet weak var changeCameraBtn: UIButton!
     
     override func awakeFromNib() {
         

@@ -267,10 +267,30 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         return sout
     }
     
-//    func changeFormat(btn: UIButton) {
-//        guard let currentCamera = self.currentCamera else {return}
-//        currentCamera.formats.flatMap(<#T##transform: (AVCaptureDevice.Format) throws -> Sequence##(AVCaptureDevice.Format) throws -> Sequence#>)
-//    }
+    func changeCamera() throws -> Bool {
+        guard let currentCamera = self.currentCamera else {return false}
+        captureSession.stopRunning()
+        
+        let isFront = currentCamera == innerCamera
+        if let videoInput = captureSession.inputs.first(where: {($0 as? AVCaptureDeviceInput)?.device.hasMediaType(.video) ?? false}) {
+            captureSession.removeInput(videoInput)
+        }
+        var videoInput: AVCaptureDeviceInput?
+        if isFront {
+            videoInput = try AVCaptureDeviceInput(device: mainCamera!)
+            self.currentCamera = mainCamera
+        } else {
+            videoInput = try AVCaptureDeviceInput(device: innerCamera!)
+            self.currentCamera = innerCamera
+        }
+        if let videoInput = videoInput, captureSession.canAddInput(videoInput) {
+            captureSession.addInput(videoInput)
+        } else {
+            return false
+        }
+        captureSession.startRunning()
+        return true
+    }
 }
 
 extension CaptureManager: AVCapturePhotoCaptureDelegate {
