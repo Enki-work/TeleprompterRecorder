@@ -17,11 +17,12 @@ class FormatListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let disposeBag = DisposeBag()
+    let selectedFormat = PublishSubject<AVCaptureDevice.Format>()
     
     var formats: (activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])!
-    var datas: BehaviorSubject<[MySection]>? = nil
+    private var datas: BehaviorSubject<[MySection]>? = nil
     
-    var dataSource: RxTableViewSectionedAnimatedDataSource<MySection>?
+    private var dataSource: RxTableViewSectionedAnimatedDataSource<MySection>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +41,17 @@ class FormatListViewController: UIViewController {
         }).sorted(by: {$0.dimensionsWidth >= $1.dimensionsWidth}))
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<MySection>(
-            configureCell: { ds, tv, _, item in
+            configureCell: { [weak self] ds, tv, index, item in
                 let cell = tv.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
                 cell.textLabel?.numberOfLines = 0
 //                cell.textLabel?.text = "fps{\(Int64(item.videoSupportedFrameRateRanges.first?.minFrameRate ?? -1))-\(Int64(item.videoSupportedFrameRateRanges.first?.maxFrameRate ?? -1))}," +
 //                "ISO{\(Int(item.minISO))-\(Int(item.maxISO))}," +
 //                "Rate{\(Int64(item.videoSupportedFrameRateRanges.first?.minFrameRate ?? -1))-\(Int64(item.videoSupportedFrameRateRanges.first?.maxFrameRate ?? -1))}," +
                 cell.textLabel?.text = item.debugDescription
+                if (item.debugDescription.identity == self?.formats.activeFormat.debugDescription.identity) {
+                    print(item)
+                    tv.selectRow(at: index, animated: true, scrollPosition: .none)
+                }
                 return cell
             },
             titleForHeaderInSection: { ds, index in
@@ -58,6 +63,16 @@ class FormatListViewController: UIViewController {
         
         datas?.bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        tableView.rx.itemSelected.subscribe(onNext: { indexPath in
+            print("\(indexPath)")
+        }).disposed(by: disposeBag)
+         
+        tableView.rx.modelSelected(AVCaptureDevice.Format.self).subscribe(onNext: {[weak self] item in
+            self?.selectedFormat.onNext(item)
+            self?.selectedFormat.onCompleted()
+            self?.dismiss(animated: true)
+        }).disposed(by: disposeBag)
         
     }
 }

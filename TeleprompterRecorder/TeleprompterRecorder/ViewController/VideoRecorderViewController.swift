@@ -76,6 +76,9 @@ class VideoRecorderViewController: UIViewController {
         let formats = sender as? (activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format]) {
             formatListVC.title = "FormatList"
             formatListVC.formats = formats
+            formatListVC.selectedFormat.subscribe(onNext: {[weak self] selecedItem in
+                print(selecedItem)
+            }).disposed(by: formatListVC.disposeBag)
         }
     }
 }
