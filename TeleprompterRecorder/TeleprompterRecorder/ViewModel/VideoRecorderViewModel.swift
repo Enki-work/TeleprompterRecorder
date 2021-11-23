@@ -59,7 +59,6 @@ final class VideoRecorderViewModel: ViewModelType {
                 let cameraPreview = $0.0
                 cameraPreview.cameraPreviewLayer.session = self.dependencies.captureManager.captureSession
                 self.dependencies.captureManager.initSetting()
-                self.dependencies.captureManager.captureSession.startRunning()
             }
             return Driver<Bool>.just($0.1)
         }

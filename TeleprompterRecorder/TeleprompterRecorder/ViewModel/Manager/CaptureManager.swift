@@ -12,6 +12,8 @@ import RxSwift
 import RxCocoa
 
 class CaptureManager: NSObject {
+    static let selectedFormatKey = "selectedFormatKey"
+    
     let captureSession: AVCaptureSession
     private let recordingQueue = DispatchQueue.init(label: "CaptureManager")
     private var recordEncoder: CaptureEncoder?
@@ -42,6 +44,7 @@ class CaptureManager: NSObject {
         try? manager.currentCamera?.lockForConfiguration()
         manager.currentCamera?.activeFormat = format
         manager.currentCamera?.unlockForConfiguration()
+        UserDefaults.standard.set(format.debugDescription.identity, forKey: CaptureManager.selectedFormatKey)
     }
     
     var currentCameraFormat: Driver<(activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])?> {
@@ -57,8 +60,8 @@ class CaptureManager: NSObject {
     func initSetting() {
         
         captureSession.beginConfiguration()
-        if (captureSession.canSetSessionPreset(.hd1920x1080)) {
-            captureSession.sessionPreset = .hd1920x1080
+        if (captureSession.canSetSessionPreset(.high)) {
+            captureSession.sessionPreset = .high
         }
         captureSession.commitConfiguration()
         
@@ -97,7 +100,6 @@ class CaptureManager: NSObject {
              // 撮影された画像をdelegateメソッドで処理
              self.photoOutput?.capturePhoto(with: settings, delegate: self)
              */
-            currentCamera?.activeVideoMinFrameDuration = CMTimeMake(value: 1, timescale: 30)
             
             let videoInput = try AVCaptureDeviceInput(device: currentCamera!)
             
@@ -109,12 +111,7 @@ class CaptureManager: NSObject {
             if captureSession.canAddInput(audioInput) {
                 captureSession.addInput(audioInput)
             }
-            print(mainCamera?.activeColorSpace.rawValue)
-            print(mainCamera?.activeFormat)
-            print(mainCamera?.activeFormat.isVideoHDRSupported)
-            for formats in mainCamera?.formats ?? [] where formats.highResolutionStillImageDimensions.width == 1920 {
-                print(formats)
-            }
+            
             let videoDataOutput = AVCaptureVideoDataOutput()
             videoDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
             videoDataOutput.alwaysDiscardsLateVideoFrames = true
@@ -142,6 +139,13 @@ class CaptureManager: NSObject {
             debugPrint(error)
         }
         
+        self.captureSession.startRunning()
+        if let selectedFormatId = UserDefaults.standard.object(forKey: CaptureManager.selectedFormatKey) as? String,
+        let selectedFormat = currentCamera?.formats.first(where: {$0.debugDescription.identity == selectedFormatId}){
+            try? currentCamera?.lockForConfiguration()
+            currentCamera?.activeFormat = selectedFormat
+            currentCamera?.unlockForConfiguration()
+        }
     }
     
     func startRecording() {
