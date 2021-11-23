@@ -38,6 +38,8 @@
 		A4DDBEE9274B31F4009199FC /* CaptureEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEE8274B31F4009199FC /* CaptureEncoder.swift */; };
 		A4DDBEEB274CABB5009199FC /* FormatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEEA274CABB5009199FC /* FormatListViewController.swift */; };
 		A4DDBEEE274D07B8009199FC /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = A4DDBEED274D07B8009199FC /* RxDataSources */; };
+		A4DDBEF0274D37FD009199FC /* MySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEEF274D37FD009199FC /* MySection.swift */; };
+		A4DDBEF2274D38AE009199FC /* FormatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEF1274D38AE009199FC /* FormatListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		A4A523FA274A0AC8006B22F9 /* CaptureButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureButtonsView.swift; sourceTree = "<group>"; };
 		A4DDBEE8274B31F4009199FC /* CaptureEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureEncoder.swift; sourceTree = "<group>"; };
 		A4DDBEEA274CABB5009199FC /* FormatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatListViewController.swift; sourceTree = "<group>"; };
+		A4DDBEEF274D37FD009199FC /* MySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySection.swift; sourceTree = "<group>"; };
+		A4DDBEF1274D38AE009199FC /* FormatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				A4A523D42747CDB2006B22F9 /* Repo.swift */,
+				A4DDBEEF274D37FD009199FC /* MySection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				A4A523F5274A0297006B22F9 /* Manager */,
 				A4A523DB2747CDB3006B22F9 /* ReposViewModel.swift */,
 				A4A523E727488884006B22F9 /* VideoRecorderViewModel.swift */,
+				A4DDBEF1274D38AE009199FC /* FormatListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -408,7 +414,9 @@
 				A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */,
 				A4A523E4274887CA006B22F9 /* VideoRecorderViewController.swift in Sources */,
 				A4A523DE2747CDB3006B22F9 /* ActivityIndicator.swift in Sources */,
+				A4DDBEF0274D37FD009199FC /* MySection.swift in Sources */,
 				A4A523EF2748A483006B22F9 /* RxExtension.swift in Sources */,
+				A4DDBEF2274D38AE009199FC /* FormatListViewModel.swift in Sources */,
 				A4A523E22747CDB3006B22F9 /* ReposViewModel.swift in Sources */,
 				A4A523F12748B400006B22F9 /* Extension.swift in Sources */,
 				A4A5238B2747B33E006B22F9 /* SceneDelegate.swift in Sources */,
