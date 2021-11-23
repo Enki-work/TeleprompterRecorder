@@ -36,7 +36,8 @@ class VideoRecorderViewController: UIViewController {
             let isVideoWillStart = !self.cameraPreview.captureButtonsView.recordBtn.isSelected
             self.cameraPreview.captureButtonsView.recordBtn.isSelected = isVideoWillStart
             return Driver.just(isVideoWillStart)
-        }))
+        }),
+                                                 formats: cameraPreview.captureButtonsView.formatChangeBtn.rx.tap.asDriver().flatMap({Driver.just(())}))
 
         let output = viewModel.transform(input: input)
         
@@ -48,6 +49,10 @@ class VideoRecorderViewController: UIViewController {
                     }
                 }
             }
+        }).disposed(by: disposeBag)
+        
+        output.formats.drive(onNext: { formats in
+            print(formats)
         }).disposed(by: disposeBag)
     }
     

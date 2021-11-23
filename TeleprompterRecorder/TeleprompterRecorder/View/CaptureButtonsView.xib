@@ -35,6 +35,11 @@
                     </state>
                     <state key="selected" image="stop_circle_fill"/>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udl-81-MuR">
+                    <rect key="frame" x="286" y="44" width="120" height="31"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="FormatChange"/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="LOJ-Lb-BDy"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,13 +47,16 @@
                 <constraint firstItem="S3v-zx-5hW" firstAttribute="trailing" secondItem="LOJ-Lb-BDy" secondAttribute="trailing" id="3Ym-E9-Vp9"/>
                 <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5Hd-7J-RXT"/>
                 <constraint firstItem="S3v-zx-5hW" firstAttribute="bottom" secondItem="Ujm-3p-vMU" secondAttribute="bottom" constant="20" id="Sdr-Q2-5XC"/>
+                <constraint firstItem="LOJ-Lb-BDy" firstAttribute="trailing" secondItem="Udl-81-MuR" secondAttribute="trailing" constant="8" id="eNZ-q5-aGD"/>
                 <constraint firstAttribute="bottom" secondItem="S3v-zx-5hW" secondAttribute="bottom" id="iVZ-CM-4WM"/>
                 <constraint firstItem="S3v-zx-5hW" firstAttribute="leading" secondItem="LOJ-Lb-BDy" secondAttribute="leading" id="qRZ-vG-7wF"/>
+                <constraint firstItem="Udl-81-MuR" firstAttribute="top" secondItem="LOJ-Lb-BDy" secondAttribute="top" id="qTZ-9d-NjQ"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="formatChangeBtn" destination="Udl-81-MuR" id="j40-Q7-ny6"/>
                 <outlet property="recordBtn" destination="Ujm-3p-vMU" id="yy0-bO-tIB"/>
             </connections>
             <point key="canvasLocation" x="-91.304347826086968" y="103.79464285714285"/>

@@ -8,6 +8,8 @@
 import AVFoundation
 import Photos
 import UIKit
+import RxSwift
+import RxCocoa
 
 class CaptureManager: NSObject {
     let captureSession: AVCaptureSession
@@ -35,6 +37,12 @@ class CaptureManager: NSObject {
     private var photoOutput: AVCapturePhotoOutput?
     private var videoDataOutput: AVCaptureVideoDataOutput?
     private var audioDataOutput: AVCaptureAudioDataOutput?
+    
+    var currentCameraFormat: Driver<(activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])?> {
+        guard let currentCamera = self.currentCamera else {return .just(nil)}
+        return .just((activeFormat: currentCamera.activeFormat,
+                      supportFormats: currentCamera.formats))
+    }
     
     init(captureSession: AVCaptureSession) {
         self.captureSession = captureSession
@@ -95,8 +103,12 @@ class CaptureManager: NSObject {
             if captureSession.canAddInput(audioInput) {
                 captureSession.addInput(audioInput)
             }
-            
-            
+            print(mainCamera?.activeColorSpace.rawValue)
+            print(mainCamera?.activeFormat)
+            print(mainCamera?.activeFormat.isVideoHDRSupported)
+            for formats in mainCamera?.formats ?? [] where formats.highResolutionStillImageDimensions.width == 1920 {
+                print(formats)
+            }
             let videoDataOutput = AVCaptureVideoDataOutput()
             videoDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
             videoDataOutput.alwaysDiscardsLateVideoFrames = true
@@ -246,6 +258,11 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         free(pInfo);
         return sout
     }
+    
+//    func changeFormat(btn: UIButton) {
+//        guard let currentCamera = self.currentCamera else {return}
+//        currentCamera.formats.flatMap(<#T##transform: (AVCaptureDevice.Format) throws -> Sequence##(AVCaptureDevice.Format) throws -> Sequence#>)
+//    }
 }
 
 extension CaptureManager: AVCapturePhotoCaptureDelegate {

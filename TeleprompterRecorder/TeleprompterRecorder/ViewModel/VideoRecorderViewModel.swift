@@ -16,10 +16,12 @@ final class VideoRecorderViewModel: ViewModelType {
     struct Input {
         let ready: Driver<CameraPreview>
         let isVideoWillStart: Driver<Bool>
+        let formats: Driver<Void>
     }
     
     struct Output {
         let requestAuthorizationFailed: Driver<Bool>
+        let formats: Driver<(activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])?>
     }
     
     struct Dependencies {
@@ -69,6 +71,11 @@ final class VideoRecorderViewModel: ViewModelType {
             }
         }).disposed(by: disposeBag)
         
-        return Output(requestAuthorizationFailed: requestAuthorizationFailed)
+        let formats: Driver<(activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])?> = input.formats.flatMap { _ in
+            return self.dependencies.captureManager.currentCameraFormat
+        }
+        
+        return Output(requestAuthorizationFailed: requestAuthorizationFailed,
+                      formats: formats)
     }
 }
