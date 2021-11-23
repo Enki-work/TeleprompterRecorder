@@ -52,7 +52,7 @@ class VideoRecorderViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         output.formats.drive(onNext: { formats in
-            print(formats)
+            self.performSegue(withIdentifier: "showformatlist", sender: formats)
         }).disposed(by: disposeBag)
     }
     
@@ -68,5 +68,14 @@ class VideoRecorderViewController: UIViewController {
         NotificationCenter.default.rx.notification(NSNotification.Name.AVCaptureSessionDidStartRunning).take(until: self.rx.deallocated).subscribe { notification in
             debugPrint("AVCaptureSessionDidStartRunning")
         }.disposed(by: disposeBag)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showformatlist",
+            let formatListVC = segue.destination as? FormatListViewController,
+        let formats = sender as? (activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format]) {
+            formatListVC.title = "FormatList"
+            formatListVC.formats = formats
+        }
     }
 }

@@ -36,6 +36,8 @@
 		A4A523F9274A0ABA006B22F9 /* CaptureButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4A523F8274A0ABA006B22F9 /* CaptureButtonsView.xib */; };
 		A4A523FB274A0AC8006B22F9 /* CaptureButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523FA274A0AC8006B22F9 /* CaptureButtonsView.swift */; };
 		A4DDBEE9274B31F4009199FC /* CaptureEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEE8274B31F4009199FC /* CaptureEncoder.swift */; };
+		A4DDBEEB274CABB5009199FC /* FormatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEEA274CABB5009199FC /* FormatListViewController.swift */; };
+		A4DDBEEE274D07B8009199FC /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = A4DDBEED274D07B8009199FC /* RxDataSources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,7 @@
 		A4A523F8274A0ABA006B22F9 /* CaptureButtonsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaptureButtonsView.xib; sourceTree = "<group>"; };
 		A4A523FA274A0AC8006B22F9 /* CaptureButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureButtonsView.swift; sourceTree = "<group>"; };
 		A4DDBEE8274B31F4009199FC /* CaptureEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureEncoder.swift; sourceTree = "<group>"; };
+		A4DDBEEA274CABB5009199FC /* FormatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,7 @@
 				A4A523EB27488947006B22F9 /* AVFoundation.framework in Frameworks */,
 				A4A523BE2747B68E006B22F9 /* RxSwift in Frameworks */,
 				A4A523BC2747B68E006B22F9 /* RxCocoa in Frameworks */,
+				A4DDBEEE274D07B8009199FC /* RxDataSources in Frameworks */,
 				A4A523BA2747B68E006B22F9 /* RxBlocking in Frameworks */,
 				A4A523ED27488B30006B22F9 /* UIKit.framework in Frameworks */,
 			);
@@ -207,6 +211,7 @@
 			children = (
 				A4A523DA2747CDB3006B22F9 /* ReposViewController.swift */,
 				A4A523E3274887CA006B22F9 /* VideoRecorderViewController.swift */,
+				A4DDBEEA274CABB5009199FC /* FormatListViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 				A4A523B92747B68E006B22F9 /* RxBlocking */,
 				A4A523BB2747B68E006B22F9 /* RxCocoa */,
 				A4A523BD2747B68E006B22F9 /* RxSwift */,
+				A4DDBEED274D07B8009199FC /* RxDataSources */,
 			);
 			productName = TeleprompterRecorder;
 			productReference = A4A523852747B33E006B22F9 /* TeleprompterRecorder.app */;
@@ -345,6 +351,7 @@
 			mainGroup = A4A5237C2747B33E006B22F9;
 			packageReferences = (
 				A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				A4DDBEEC274D07B8009199FC /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = A4A523862747B33E006B22F9 /* Products */;
 			projectDirPath = "";
@@ -395,6 +402,7 @@
 				A4DDBEE9274B31F4009199FC /* CaptureEncoder.swift in Sources */,
 				A4A523DC2747CDB3006B22F9 /* NetworkingApi.swift in Sources */,
 				A4A523E827488884006B22F9 /* VideoRecorderViewModel.swift in Sources */,
+				A4DDBEEB274CABB5009199FC /* FormatListViewController.swift in Sources */,
 				A4A523F42749D40F006B22F9 /* CameraPreview.swift in Sources */,
 				A4A523DD2747CDB3006B22F9 /* Repo.swift in Sources */,
 				A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */,
@@ -788,6 +796,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		A4DDBEEC274D07B8009199FC /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -805,6 +821,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		A4DDBEED274D07B8009199FC /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4DDBEEC274D07B8009199FC /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
