@@ -184,11 +184,9 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
             let samplerate = desc?.pointee.mSampleRate
             let channels = desc?.pointee.mChannelsPerFrame
             var videoSize = CGSize.init(width: 1280, height: 720)
-            switch captureSession.sessionPreset {
-            case .hd1920x1080:
-                videoSize = .init(width: 1920, height: 1080)
-            default:
-                break
+            if let currentFormatDescription = currentCamera?.activeFormat.formatDescription {
+                let dimensions = CMVideoFormatDescriptionGetDimensions(currentFormatDescription)
+                videoSize = .init(width: Int(dimensions.width), height: Int(dimensions.height))
             }
             recordEncoder = try? CaptureEncoder(path: getUploadFilePath(),
                                            videoSize: videoSize,
