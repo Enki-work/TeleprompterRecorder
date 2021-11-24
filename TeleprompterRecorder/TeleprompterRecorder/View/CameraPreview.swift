@@ -28,7 +28,7 @@ class CameraPreview: UIView {
         super.init(frame: UIScreen.main.bounds)
         captureButtonsView.frame = UIScreen.main.bounds
         // プレビューレイヤが、カメラのキャプチャーを縦横比を維持した状態で、表示するように設定
-        self.cameraPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.cameraPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspect
         // プレビューレイヤの表示の向きを設定
         self.cameraPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
         self.addSubview(captureButtonsView)

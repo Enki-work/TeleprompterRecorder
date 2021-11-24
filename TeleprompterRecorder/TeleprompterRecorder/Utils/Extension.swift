@@ -41,3 +41,24 @@ extension UIAlertController {
         }
     }
 }
+extension UIDeviceOrientation {
+    var AVCaptureVideoOrientation: AVCaptureVideoOrientation {
+        switch self {
+        default:
+            return .portrait
+        }
+    }
+}
+
+extension UIWindow {
+    static var orientation: UIInterfaceOrientation {
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.windows
+                .first?
+                .windowScene?
+                .interfaceOrientation ?? .portrait
+        } else {
+            return UIApplication.shared.statusBarOrientation
+        }
+    }
+}
