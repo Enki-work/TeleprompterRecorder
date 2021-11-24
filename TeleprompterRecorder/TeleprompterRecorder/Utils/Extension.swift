@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 extension UIViewController {
     static var rootViewController: UIViewController? = {

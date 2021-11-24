@@ -33,6 +33,7 @@ final class VideoRecorderViewModel: ViewModelType {
     
     private let dependencies: Dependencies
     private let disposeBag = DisposeBag()
+    private var backgroundTaskID = UIBackgroundTaskIdentifier(rawValue: 0)
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -83,6 +84,23 @@ final class VideoRecorderViewModel: ViewModelType {
             let result = (try? self.dependencies.captureManager.changeCamera()) ?? false
             return .just(result)
         })
+        
+        NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification).subscribe { [weak self] notification in
+            guard let self = self else {return}
+            if self.dependencies.captureManager.isCapturing {
+                self.backgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: {[weak self] in
+                    guard let self = self else {return}
+                    UIApplication.shared.endBackgroundTask((self.backgroundTaskID))
+                    self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
+                })
+                self.dependencies.captureManager.stopRecording {[weak self] in
+                    guard let self = self else {return}
+                    UIApplication.shared.endBackgroundTask((self.backgroundTaskID))
+                    self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
+                }
+            }
+            debugPrint("UIApplicationDidEnterBackgroundNotification")
+        }.disposed(by: disposeBag)
         
         return Output(requestAuthorizationFailed: requestAuthorizationFailed,
                       formats: formats,

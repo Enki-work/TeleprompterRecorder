@@ -22,8 +22,7 @@ class CaptureManager: NSObject {
     private var startTime = CMTime.zero
     private var currentRecordTime: Float64 = 0
     
-    
-    private var isCapturing = false
+    private(set) var isCapturing = false
     
     // メインカメラの管理オブジェクトの作成
     private var mainCamera: AVCaptureDevice?
@@ -153,7 +152,7 @@ class CaptureManager: NSObject {
         currentRecordTime = 0
     }
     
-    func stopRecording() {
+    func stopRecording(completion: @escaping (() -> Void) = {}) {
         isCapturing = false
         recordingQueue.async {
             guard let recordEncoder = self.recordEncoder else {return }
@@ -163,6 +162,7 @@ class CaptureManager: NSObject {
                 self.recordEncoder = nil
                 try? PHPhotoLibrary.shared().performChangesAndWait({
                     PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: recordEncoder.pathUrl)
+                    completion()
                 })
                 
             })
