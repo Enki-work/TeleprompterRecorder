@@ -82,4 +82,22 @@ class VideoRecorderViewController: UIViewController {
             formatListVC.selectedFormat.bind(to: sender.1).disposed(by: formatListVC.disposeBag)
         }
     }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return  UIInterfaceOrientationMask.portrait
+    }
+}
+
+extension UINavigationController {
+    open override var shouldAutorotate: Bool {
+        topViewController?.shouldAutorotate ?? true
+    }
+    
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        topViewController?.supportedInterfaceOrientations ?? .all
+    }
 }
