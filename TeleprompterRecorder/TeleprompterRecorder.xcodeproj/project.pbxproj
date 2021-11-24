@@ -40,6 +40,7 @@
 		A4DDBEEE274D07B8009199FC /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = A4DDBEED274D07B8009199FC /* RxDataSources */; };
 		A4DDBEF0274D37FD009199FC /* MySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEEF274D37FD009199FC /* MySection.swift */; };
 		A4DDBEF2274D38AE009199FC /* FormatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEF1274D38AE009199FC /* FormatListViewModel.swift */; };
+		A4DDBEF4274DCBF5009199FC /* LocalDeviceFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEF3274DCBF5009199FC /* LocalDeviceFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		A4DDBEEA274CABB5009199FC /* FormatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatListViewController.swift; sourceTree = "<group>"; };
 		A4DDBEEF274D37FD009199FC /* MySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySection.swift; sourceTree = "<group>"; };
 		A4DDBEF1274D38AE009199FC /* FormatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatListViewModel.swift; sourceTree = "<group>"; };
+		A4DDBEF3274DCBF5009199FC /* LocalDeviceFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeviceFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 			children = (
 				A4A523D42747CDB2006B22F9 /* Repo.swift */,
 				A4DDBEEF274D37FD009199FC /* MySection.swift */,
+				A4DDBEF3274DCBF5009199FC /* LocalDeviceFormat.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				A4A523F42749D40F006B22F9 /* CameraPreview.swift in Sources */,
 				A4A523DD2747CDB3006B22F9 /* Repo.swift in Sources */,
 				A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */,
+				A4DDBEF4274DCBF5009199FC /* LocalDeviceFormat.swift in Sources */,
 				A4A523E4274887CA006B22F9 /* VideoRecorderViewController.swift in Sources */,
 				A4A523DE2747CDB3006B22F9 /* ActivityIndicator.swift in Sources */,
 				A4DDBEF0274D37FD009199FC /* MySection.swift in Sources */,

@@ -12,7 +12,6 @@ import RxSwift
 import RxCocoa
 
 class CaptureManager: NSObject {
-    static let selectedFormatKey = "selectedFormatKey"
     
     let captureSession: AVCaptureSession
     private let recordingQueue = DispatchQueue.init(label: "CaptureManager")
@@ -41,10 +40,14 @@ class CaptureManager: NSObject {
     private var audioDataOutput: AVCaptureAudioDataOutput?
     
     lazy var selectedFormat: Binder<AVCaptureDevice.Format> = .init(self) { manager, format in
-        try? manager.currentCamera?.lockForConfiguration()
-        manager.currentCamera?.activeFormat = format
-        manager.currentCamera?.unlockForConfiguration()
-        UserDefaults.standard.set(format.debugDescription.identity, forKey: CaptureManager.selectedFormatKey)
+        guard let currentCamera = manager.currentCamera else {return}
+        try? currentCamera.lockForConfiguration()
+        currentCamera.activeFormat = format
+        currentCamera.unlockForConfiguration()
+        LocalDeviceFormat.addOrUpdateLocalDeviceFormatList(deviceFormat: .init(isDefaultCamera:
+                                                                                true,
+                                                                               selecedFormatIdentity: format.debugDescription.identity,
+                                                                               deviceUniqueID: currentCamera.uniqueID))
     }
     
     var currentCameraFormat: Driver<(activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])?> {
@@ -81,7 +84,7 @@ class CaptureManager: NSObject {
         currentAudio = audioDiscoverySession.devices.first;
         
         // 起動時のカメラを設定
-        currentCamera = mainCamera
+        currentCamera = getUserDefaultCamera() ?? mainCamera
         
         do {
             /*
@@ -140,12 +143,7 @@ class CaptureManager: NSObject {
         }
         
         self.captureSession.startRunning()
-        if let selectedFormatId = UserDefaults.standard.object(forKey: CaptureManager.selectedFormatKey) as? String,
-        let selectedFormat = currentCamera?.formats.first(where: {$0.debugDescription.identity == selectedFormatId}){
-            try? currentCamera?.lockForConfiguration()
-            currentCamera?.activeFormat = selectedFormat
-            currentCamera?.unlockForConfiguration()
-        }
+        selectUserDefaultFormat()
     }
     
     func startRecording() {
@@ -289,7 +287,36 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
             return false
         }
         captureSession.startRunning()
+        selectUserDefaultFormat(isSave: true)
+        
         return true
+    }
+    
+    func selectUserDefaultFormat(isSave: Bool = false) {
+        guard let currentCamera = self.currentCamera else {return}
+        
+        if let selectedFormatIdentity = LocalDeviceFormat.getLocalDeviceFormatList().first(where: {$0.deviceUniqueID == currentCamera.uniqueID})?.selecedFormatIdentity,
+        let selectedFormat = currentCamera.formats.first(where: {$0.debugDescription.identity == selectedFormatIdentity}) {
+            try? currentCamera.lockForConfiguration()
+            currentCamera.activeFormat = selectedFormat
+            currentCamera.unlockForConfiguration()
+        }
+        if isSave {
+            LocalDeviceFormat.addOrUpdateLocalDeviceFormatList(deviceFormat: .init(isDefaultCamera:
+                                                                                    true,
+                                                                                   selecedFormatIdentity: currentCamera.activeFormat.debugDescription.identity,
+                                                                                   deviceUniqueID: currentCamera.uniqueID))
+        }
+    }
+    
+    func getUserDefaultCamera() -> AVCaptureDevice? {
+        if let deviceUniqueID = LocalDeviceFormat.getLocalDeviceFormatList().first(where: {$0.isDefaultCamera})?.deviceUniqueID {
+            
+            let cameraDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera, .builtInTripleCamera, .builtInTelephotoCamera, .builtInDualWideCamera, .builtInDualWideCamera, .builtInUltraWideCamera, .builtInWideAngleCamera], mediaType: .video, position: .unspecified)
+            let camera = cameraDiscoverySession.devices.first(where: {$0.uniqueID == deviceUniqueID})
+            return camera
+        }
+        return nil
     }
 }
 
