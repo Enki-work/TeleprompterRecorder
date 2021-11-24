@@ -140,7 +140,7 @@ class CaptureManager: NSObject {
         } catch {
             debugPrint(error)
         }
-        
+        try? FileManager.default.removeItem(atPath: cachePath)
         self.captureSession.startRunning()
         selectUserDefaultFormat()
     }
@@ -216,7 +216,6 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         self.currentRecordTime = CMTimeGetSeconds(sub)
         
         _ = recordEncoder?.encodeFrame(buffer: sampleBuffer, isVideo: isVideo)
-        debugPrint(isVideo)
     }
     
     private func getUploadFilePath() -> String {
@@ -224,9 +223,6 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         formatter.dateFormat = "yyyyMMddHHmmss"
         let timeStr = formatter.string(from: .init())
         let fileName = "video\(timeStr).mp4"
-        let cachePath = (NSSearchPathForDirectoriesInDomains(.cachesDirectory,
-                                                                .userDomainMask,
-                                                            true).first! as String)
         var isDir: ObjCBool = false
         let existed = FileManager.default.fileExists(atPath: cachePath, isDirectory: &isDir)
         if !(isDir.boolValue && existed) {
@@ -235,6 +231,12 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
                                                 attributes: nil)
         }
         return cachePath + "/" + fileName
+    }
+    
+    private var cachePath: String {
+        (NSSearchPathForDirectoriesInDomains(.cachesDirectory,
+                                                                .userDomainMask,
+                                                            true).first! as String) + "/videos"
     }
     
     private func adjustTime(sample: CMSampleBuffer, offset: CMTime) -> CMSampleBuffer? {

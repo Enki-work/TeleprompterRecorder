@@ -99,7 +99,6 @@ final class VideoRecorderViewModel: ViewModelType {
                     self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
                 }
             }
-            debugPrint("UIApplicationDidEnterBackgroundNotification")
         }.disposed(by: disposeBag)
         
         return Output(requestAuthorizationFailed: requestAuthorizationFailed,
