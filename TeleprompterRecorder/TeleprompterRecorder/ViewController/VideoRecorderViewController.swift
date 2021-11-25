@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import AVFoundation
+import MediaPlayer
 
 class VideoRecorderViewController: UIViewController {
     let viewModel = VideoRecorderViewModel(dependencies: .init(captureManager: CaptureManager(captureSession: AVCaptureSession())))
@@ -27,6 +28,7 @@ class VideoRecorderViewController: UIViewController {
         super.viewDidLoad()
         bindViewModel()
         bindNotification()
+        hideVolumeView()
     }
     
     private func bindViewModel() {
@@ -73,13 +75,19 @@ class VideoRecorderViewController: UIViewController {
         }.disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification).take(until: self.rx.deallocated).subscribe { [weak self] notification in
-            self?.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIDevice.current.orientation.AVCaptureVideoOrientation
+            self?.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIWindow.orientation.AVCaptureVideoOrientation
         }.disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification")).skip(until: rx.viewDidAppear.asObservable()).take(until: self.rx.deallocated).subscribe { [weak self] notification in
-            print("AVSystemController_SystemVolumeDidChangeNotification\(notification)")
+            print("AVSystemController_SystemVolumeDidChangeNotification")
         }.disposed(by: disposeBag)
         
+    }
+    
+    private func hideVolumeView() {
+        let volumeView = MPVolumeView(frame: .zero)
+        volumeView.alpha = 0.01
+        self.view.addSubview(volumeView)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
