@@ -66,12 +66,16 @@ final class VideoRecorderViewModel: ViewModelType {
             }
             return Driver<Bool>.just($0.1)
         }
-        
+        var isStopping = false
         input.isVideoWillStart.drive(onNext: { isVideoWillStart in
+            guard !isStopping else {return}
             if (isVideoWillStart) {
                 self.dependencies.captureManager.startRecording()
             } else {
-                self.dependencies.captureManager.stopRecording()
+                isStopping = true
+                self.dependencies.captureManager.stopRecording {
+                    isStopping = false
+                }
             }
         }).disposed(by: disposeBag)
         
