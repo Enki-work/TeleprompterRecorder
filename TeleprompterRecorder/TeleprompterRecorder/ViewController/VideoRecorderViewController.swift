@@ -17,7 +17,7 @@ class VideoRecorderViewController: UIViewController {
         view as! CameraPreview
     }
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func loadView() {
         self.view = CameraPreview()
@@ -71,11 +71,6 @@ class VideoRecorderViewController: UIViewController {
         NotificationCenter.default.rx.notification(NSNotification.Name.AVCaptureSessionDidStartRunning).take(until: self.rx.deallocated).subscribe { notification in
             debugPrint("AVCaptureSessionDidStartRunning")
         }.disposed(by: disposeBag)
-        
-//        NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification).take(until: self.rx.deallocated).subscribe { [weak self] notification in
-//            self?.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIDevice.current.orientation.AVCaptureVideoOrientation
-//        }.disposed(by: disposeBag)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

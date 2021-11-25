@@ -184,7 +184,9 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
             var videoSize = CGSize.init(width: 1280, height: 720)
             if let currentFormatDescription = currentCamera?.activeFormat.formatDescription {
                 let dimensions = CMVideoFormatDescriptionGetDimensions(currentFormatDescription)
-                videoSize = .init(width: Int(dimensions.width), height: Int(dimensions.height))
+                
+                videoDataOutput?.connection(with: .video)?.videoOrientation = UIDevice.current.orientation.AVCaptureVideoOrientation
+                videoSize = UIDevice.current.orientation.isLandscape ? .init(width: Int(dimensions.width), height: Int(dimensions.height)) : .init(width: Int(dimensions.height), height: Int(dimensions.width))
             }
             recordEncoder = try? CaptureEncoder(path: getUploadFilePath(),
                                            videoSize: videoSize,
