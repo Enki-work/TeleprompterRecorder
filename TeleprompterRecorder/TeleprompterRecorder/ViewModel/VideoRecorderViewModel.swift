@@ -62,7 +62,6 @@ final class VideoRecorderViewModel: ViewModelType {
                 let cameraPreview = $0.0
                 cameraPreview.cameraPreviewLayer.session = self.dependencies.captureManager.captureSession
                 self.dependencies.captureManager.initSetting()
-//                cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIDevice.current.orientation.AVCaptureVideoOrientation
             }
             return Driver<Bool>.just($0.1)
         }
