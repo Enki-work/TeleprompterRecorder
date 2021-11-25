@@ -28,14 +28,24 @@ class CaptureButtonsView: UIView {
                     .startWith(())
                     .reduce(0) { acc, _ in acc + 1 }
             }
-            .map { min($0, 2) }.delaySubscription(.milliseconds(1000), scheduler: MainScheduler.instance).subscribe { [weak self] times in
-                print("!!!!!!\(times)")
-                guard let self = self,
-                !self.textView.isHidden,
-                self.textView.contentSize.height >= self.textView.contentOffset.y else {return}
+            .map { min($0, 2) }.delaySubscription(.milliseconds(1000), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] times in
+                let offset: CGFloat = 30
+                if (times == 1) {
+                    guard let self = self,
+                    !self.textView.isHidden,
+                    self.textView.contentSize.height >= self.textView.contentOffset.y else {return}
 
-                let shouldY = min(self.textView.contentOffset.y + self.textView.bounds.height , self.textView.contentSize.height - self.textView.bounds.height)
-                self.textView.contentOffset = .init(x: self.textView.contentOffset.x, y: shouldY)
-            }.disposed(by: disposeBag)
+                    let shouldY = min(self.textView.contentOffset.y + self.textView.bounds.height - offset , self.textView.contentSize.height - self.textView.bounds.height)
+                    self.textView.setContentOffset(.init(x: self.textView.contentOffset.x, y: shouldY), animated: true)
+                } else if times == 2 {
+                    guard let self = self,
+                    !self.textView.isHidden,
+                          self.textView.contentOffset.y >= 0 else {return}
+
+                    let shouldY = max(self.textView.contentOffset.y - self.textView.bounds.height + offset , 0)
+                    self.textView.setContentOffset(.init(x: self.textView.contentOffset.x, y: shouldY), animated: true)
+                }
+                
+            }).disposed(by: disposeBag)
     }
 }
