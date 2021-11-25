@@ -54,3 +54,29 @@ extension UIDeviceOrientation {
         }
     }
 }
+
+extension UIInterfaceOrientation {
+    var AVCaptureVideoOrientation: AVCaptureVideoOrientation {
+        switch self {
+        case .landscapeRight:
+            return .landscapeLeft
+        case .landscapeLeft:
+            return .landscapeRight
+        default:
+            return .portrait
+        }
+    }
+}
+
+extension UIWindow {
+    static var orientation: UIInterfaceOrientation {
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.windows
+                .first?
+                .windowScene?
+                .interfaceOrientation ?? .portrait
+        } else {
+            return UIApplication.shared.statusBarOrientation
+        }
+    }
+}
