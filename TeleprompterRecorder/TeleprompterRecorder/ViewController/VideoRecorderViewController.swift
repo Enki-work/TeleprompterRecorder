@@ -95,6 +95,10 @@ class VideoRecorderViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return  UIInterfaceOrientationMask.portrait
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        true
+    }
 }
 
 extension UINavigationController {
