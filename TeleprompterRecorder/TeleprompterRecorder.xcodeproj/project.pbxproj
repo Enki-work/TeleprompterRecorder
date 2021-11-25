@@ -41,7 +41,6 @@
 		A4DDBEF0274D37FD009199FC /* MySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEEF274D37FD009199FC /* MySection.swift */; };
 		A4DDBEF2274D38AE009199FC /* FormatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEF1274D38AE009199FC /* FormatListViewModel.swift */; };
 		A4DDBEF4274DCBF5009199FC /* LocalDeviceFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEF3274DCBF5009199FC /* LocalDeviceFormat.swift */; };
-		A4F2F808274F4C3600291618 /* TextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2F807274F4C3600291618 /* TextLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,7 +95,6 @@
 		A4DDBEEF274D37FD009199FC /* MySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySection.swift; sourceTree = "<group>"; };
 		A4DDBEF1274D38AE009199FC /* FormatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatListViewModel.swift; sourceTree = "<group>"; };
 		A4DDBEF3274DCBF5009199FC /* LocalDeviceFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeviceFormat.swift; sourceTree = "<group>"; };
-		A4F2F807274F4C3600291618 /* TextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,7 +251,6 @@
 				A4A523F32749D40F006B22F9 /* CameraPreview.swift */,
 				A4A523F8274A0ABA006B22F9 /* CaptureButtonsView.xib */,
 				A4A523FA274A0AC8006B22F9 /* CaptureButtonsView.swift */,
-				A4F2F807274F4C3600291618 /* TextLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -412,7 +409,6 @@
 				A4A523E12747CDB3006B22F9 /* ReposViewController.swift in Sources */,
 				A4A523FB274A0AC8006B22F9 /* CaptureButtonsView.swift in Sources */,
 				A4DDBEE9274B31F4009199FC /* CaptureEncoder.swift in Sources */,
-				A4F2F808274F4C3600291618 /* TextLabel.swift in Sources */,
 				A4A523DC2747CDB3006B22F9 /* NetworkingApi.swift in Sources */,
 				A4A523E827488884006B22F9 /* VideoRecorderViewModel.swift in Sources */,
 				A4DDBEEB274CABB5009199FC /* FormatListViewController.swift in Sources */,

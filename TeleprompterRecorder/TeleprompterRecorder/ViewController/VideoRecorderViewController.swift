@@ -77,11 +77,6 @@ class VideoRecorderViewController: UIViewController {
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification).take(until: self.rx.deallocated).subscribe { [weak self] notification in
             self?.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIWindow.orientation.AVCaptureVideoOrientation
         }.disposed(by: disposeBag)
-        
-        NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification")).skip(until: rx.viewDidAppear.asObservable()).take(until: self.rx.deallocated).subscribe { [weak self] notification in
-            print("AVSystemController_SystemVolumeDidChangeNotification")
-        }.disposed(by: disposeBag)
-        
     }
     
     private func hideVolumeView() {

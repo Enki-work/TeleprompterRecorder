@@ -15,15 +15,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUd-po-CTZ">
-                    <rect key="frame" x="8" y="877" width="122" height="31"/>
+                    <rect key="frame" x="8" y="877" width="74.333333333333329" height="31"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="changeCamera"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Camera"/>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-Ow-qRx" customClass="TextLabel" customModule="TeleprompterRecorder" customModuleProvider="target">
-                    <rect key="frame" x="130" y="0.0" width="995" height="916"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-Ow-qRx">
+                    <rect key="frame" x="82.333333333333371" y="0.0" width="1042.6666666666665" height="916"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-YC-ekz">
-                            <rect key="frame" x="0.0" y="0.0" width="995" height="916"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1042.6666666666667" height="916"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <mutableString key="text">Skip to content
 Search or jump to…
@@ -291,9 +291,9 @@ Loading complete</mutableString>
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udl-81-MuR">
-                    <rect key="frame" x="8" y="8" width="102" height="30"/>
+                    <rect key="frame" x="20.666666666666671" y="8" width="49" height="30"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="FormatChange"/>
+                    <state key="normal" title="Format"/>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="LOJ-Lb-BDy"/>
@@ -306,7 +306,6 @@ Loading complete</mutableString>
                 <constraint firstItem="I6U-Ow-qRx" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="M4V-wW-Eed"/>
                 <constraint firstItem="UUd-po-CTZ" firstAttribute="leading" secondItem="LOJ-Lb-BDy" secondAttribute="leading" constant="8" id="OjP-xo-Kze"/>
                 <constraint firstItem="I6U-Ow-qRx" firstAttribute="top" secondItem="LOJ-Lb-BDy" secondAttribute="top" id="Ro0-fM-NX4"/>
-                <constraint firstItem="Udl-81-MuR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="XFM-eX-lIs"/>
                 <constraint firstItem="S3v-zx-5hW" firstAttribute="top" secondItem="LOJ-Lb-BDy" secondAttribute="top" id="Y2V-RV-2JJ"/>
                 <constraint firstItem="UUd-po-CTZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="baq-rp-Uui"/>
                 <constraint firstItem="I6U-Ow-qRx" firstAttribute="top" secondItem="UUd-po-CTZ" secondAttribute="bottom" id="dq9-An-wMR"/>
@@ -321,6 +320,7 @@ Loading complete</mutableString>
                 <constraint firstAttribute="bottom" secondItem="S3v-zx-5hW" secondAttribute="bottom" id="n8b-6k-OCw"/>
                 <constraint firstItem="S3v-zx-5hW" firstAttribute="leading" secondItem="LOJ-Lb-BDy" secondAttribute="leading" id="qRZ-vG-7wF"/>
                 <constraint firstItem="Udl-81-MuR" firstAttribute="top" secondItem="LOJ-Lb-BDy" secondAttribute="top" id="qTZ-9d-NjQ"/>
+                <constraint firstItem="UUd-po-CTZ" firstAttribute="centerX" secondItem="Udl-81-MuR" secondAttribute="centerX" id="s0i-OS-Chh"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -328,10 +328,8 @@ Loading complete</mutableString>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="3Pa-Hs-6Vb"/>
-                    <exclude reference="XFM-eX-lIs"/>
                     <exclude reference="qTZ-9d-NjQ"/>
                     <exclude reference="eNZ-q5-aGD"/>
-                    <exclude reference="n8b-6k-OCw"/>
                     <exclude reference="0cG-3X-5yw"/>
                     <exclude reference="GZc-Lf-I4C"/>
                     <exclude reference="M4V-wW-Eed"/>
@@ -342,43 +340,45 @@ Loading complete</mutableString>
                     <exclude reference="baq-rp-Uui"/>
                     <exclude reference="i0p-hg-CQK"/>
                     <exclude reference="k1v-7p-ssF"/>
+                    <exclude reference="s0i-OS-Chh"/>
                     <exclude reference="3Ym-E9-Vp9"/>
                     <exclude reference="Y2V-RV-2JJ"/>
                     <exclude reference="fQ5-by-hwz"/>
                     <exclude reference="gZZ-WE-Zg8"/>
                     <exclude reference="gbb-kN-zwh"/>
                     <exclude reference="iVZ-CM-4WM"/>
+                    <exclude reference="n8b-6k-OCw"/>
                     <exclude reference="qRZ-vG-7wF"/>
                 </mask>
             </variation>
             <variation key="heightClass=compact-widthClass=compact">
                 <mask key="constraints">
                     <include reference="3Pa-Hs-6Vb"/>
-                    <include reference="XFM-eX-lIs"/>
-                    <include reference="n8b-6k-OCw"/>
                     <include reference="M4V-wW-Eed"/>
                     <include reference="Ro0-fM-NX4"/>
                     <include reference="iZC-C3-FNq"/>
                     <include reference="baq-rp-Uui"/>
                     <include reference="i0p-hg-CQK"/>
+                    <include reference="s0i-OS-Chh"/>
                     <include reference="Y2V-RV-2JJ"/>
                     <include reference="fQ5-by-hwz"/>
                     <include reference="gbb-kN-zwh"/>
+                    <include reference="n8b-6k-OCw"/>
                 </mask>
             </variation>
             <variation key="heightClass=compact-widthClass=regular">
                 <mask key="constraints">
                     <include reference="3Pa-Hs-6Vb"/>
-                    <include reference="XFM-eX-lIs"/>
-                    <include reference="n8b-6k-OCw"/>
                     <include reference="M4V-wW-Eed"/>
                     <include reference="Ro0-fM-NX4"/>
                     <include reference="iZC-C3-FNq"/>
                     <include reference="baq-rp-Uui"/>
                     <include reference="i0p-hg-CQK"/>
+                    <include reference="s0i-OS-Chh"/>
                     <include reference="Y2V-RV-2JJ"/>
                     <include reference="fQ5-by-hwz"/>
                     <include reference="gbb-kN-zwh"/>
+                    <include reference="n8b-6k-OCw"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -400,6 +400,7 @@ Loading complete</mutableString>
                 <outlet property="changeCameraBtn" destination="UUd-po-CTZ" id="3SO-fW-lA3"/>
                 <outlet property="formatChangeBtn" destination="Udl-81-MuR" id="j40-Q7-ny6"/>
                 <outlet property="recordBtn" destination="Ujm-3p-vMU" id="yy0-bO-tIB"/>
+                <outlet property="textView" destination="e3f-YC-ekz" id="psz-Tw-sPg"/>
             </connections>
             <point key="canvasLocation" x="-387.79620853080564" y="118.46153846153845"/>
         </view>

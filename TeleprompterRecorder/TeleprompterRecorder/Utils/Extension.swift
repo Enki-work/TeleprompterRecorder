@@ -59,9 +59,9 @@ extension UIInterfaceOrientation {
     var AVCaptureVideoOrientation: AVCaptureVideoOrientation {
         switch self {
         case .landscapeRight:
-            return .landscapeLeft
-        case .landscapeLeft:
             return .landscapeRight
+        case .landscapeLeft:
+            return .landscapeLeft
         default:
             return .portrait
         }
