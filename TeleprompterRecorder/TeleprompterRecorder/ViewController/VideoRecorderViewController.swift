@@ -95,12 +95,10 @@ class VideoRecorderViewController: UIViewController {
         }
     }
     
-    override var shouldAutorotate: Bool {
-        return true
-    }
+    override var prefersStatusBarHidden: Bool { true }
     
-    override var prefersStatusBarHidden: Bool {
-        true
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        cameraPreview.captureButtonsView.textView.contentOffset = .zero
     }
 }
 
