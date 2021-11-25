@@ -210,10 +210,10 @@ Loading complete</mutableString>
                     </constraints>
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
-                            <exclude reference="D9D-Yk-b8R"/>
-                            <exclude reference="etN-ge-oTm"/>
-                            <exclude reference="h0F-d6-m2h"/>
-                            <exclude reference="vqf-v9-t3O"/>
+                            <include reference="D9D-Yk-b8R"/>
+                            <include reference="etN-ge-oTm"/>
+                            <include reference="h0F-d6-m2h"/>
+                            <include reference="vqf-v9-t3O"/>
                         </mask>
                     </variation>
                 </view>

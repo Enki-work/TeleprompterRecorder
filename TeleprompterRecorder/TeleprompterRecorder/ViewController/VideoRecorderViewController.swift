@@ -72,11 +72,14 @@ class VideoRecorderViewController: UIViewController {
             debugPrint("AVCaptureSessionDidStartRunning")
         }.disposed(by: disposeBag)
         
-        // プレビューレイヤの表示の向きを設定
-        self.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIDevice.current.orientation.AVCaptureVideoOrientation
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification).take(until: self.rx.deallocated).subscribe { [weak self] notification in
             self?.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIDevice.current.orientation.AVCaptureVideoOrientation
         }.disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification")).skip(until: rx.viewDidAppear.asObservable()).take(until: self.rx.deallocated).subscribe { [weak self] notification in
+            print("AVSystemController_SystemVolumeDidChangeNotification\(notification)")
+        }.disposed(by: disposeBag)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
