@@ -84,11 +84,7 @@ class VideoRecorderViewController: UIViewController {
     }
     
     override var shouldAutorotate: Bool {
-        return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return  UIInterfaceOrientationMask.portrait
+        return true
     }
     
     override var prefersStatusBarHidden: Bool {

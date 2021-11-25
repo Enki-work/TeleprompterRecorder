@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -11,63 +11,397 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CaptureButtonsView" customModule="TeleprompterRecorder" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="1245" height="916"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3v-zx-5hW">
-                    <rect key="frame" x="0.0" y="776" width="414" height="120"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.30465449119100763" colorSpace="custom" customColorSpace="displayP3"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="MhX-6r-8TA"/>
-                    </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ujm-3p-vMU">
-                    <rect key="frame" x="172" y="806" width="70" height="70"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="KxW-lX-GmM"/>
-                        <constraint firstAttribute="height" constant="70" id="aNl-27-4cy"/>
-                    </constraints>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" image="videocam_circle">
-                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                    </state>
-                    <state key="selected" image="stop_circle_fill"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udl-81-MuR">
-                    <rect key="frame" x="304" y="44" width="102" height="30"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="FormatChange"/>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUd-po-CTZ">
-                    <rect key="frame" x="8" y="44" width="122" height="31"/>
+                    <rect key="frame" x="8" y="877" width="122" height="31"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="changeCamera"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-Ow-qRx" customClass="TextLabel" customModule="TeleprompterRecorder" customModuleProvider="target">
+                    <rect key="frame" x="130" y="0.0" width="995" height="916"/>
+                    <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-YC-ekz">
+                            <rect key="frame" x="0.0" y="0.0" width="995" height="916"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <mutableString key="text">Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@Enki-work 
+kongmingyang
+/
+-
+Public
+1
+11
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+-/ScrollLabelDemo/ScrollTextView.m
+@kongmingyang
+kongmingyang 上传demo
+Latest commit 61b6df8 on 28 Apr 2019
+ History
+ 1 contributor
+128 lines (105 sloc)  4.72 KB
+   
+//
+//  ScrollTextView.m
+//  ScrollLabelDemo
+//
+//  Created by 55it on 2019/4/26.
+//  Copyright © 2019年 55it. All rights reserved.
+//
+
+#import "ScrollTextView.h"
+@interface ScrollTextView()
+
+@property (nonatomic,strong) CATextLayer * textLayer;//文本layer
+@property (nonatomic,strong) CAGradientLayer *gradientLayer;//蒙板渐变layer
+
+@property (nonatomic,assign)CGFloat  textSeparateWidth;//文本分割宽度
+@property (nonatomic,assign)CGFloat  textWidth;//文本宽度
+@property (nonatomic,assign)CGFloat  textHeight;//文本高度
+@property (nonatomic,assign)CGRect   textLayerFrame;//文本layer的frame
+@property (nonatomic,assign)CGFloat translationX;//文字位置游标
+@end
+
+NSString *const kSeparateText = @"   ";
+@implementation ScrollTextView
+
+-(instancetype)initWithFrame:(CGRect)frame{
+    
+    self = [super initWithFrame:frame];
+    if (self) {
+
+        [self initLayer];
+    }
+    return self;
+}
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    CGFloat textLayerFrameY = CGRectGetHeight(self.bounds)/2 - CGRectGetHeight(self.textLayer.bounds)/2;
+    self.textLayer.frame = CGRectMake(0, textLayerFrameY, CGRectGetWidth(self.textLayerFrame), CGRectGetHeight(self.textLayerFrame));
+    self.gradientLayer.frame = self.bounds;
+    [CATransaction commit];
+    
+    
+}
+
+-(void)initLayer{
+    
+    //文本layer 1
+    if (self.textLayer == nil) {
+        self.textLayer = [[CATextLayer alloc]init];
+        
+    }
+    self.textLayer.alignmentMode = kCAAlignmentNatural;//自然对齐
+    self.textLayer.truncationMode = kCATruncationNone;//设置截断模式
+    self.textLayer.wrapped = NO;//是否折行
+    self.textLayer.contentsScale = [UIScreen mainScreen].scale;
+    if (self.textLayer.superlayer == nil) {
+        [self.layer addSublayer:self.textLayer];
+    }
+    
+    self.gradientLayer = [CAGradientLayer layer];
+    self.gradientLayer.shouldRasterize = YES;
+   //栅格化比例，默认1
+    self.gradientLayer.rasterizationScale = [UIScreen mainScreen].scale;
+    if (self.textLayer.superlayer == nil) {
+        [self.layer addSublayer:self.textLayer];
+    }
+    self.gradientLayer = [CAGradientLayer layer];
+    self.gradientLayer.shouldRasterize = YES;
+    self.gradientLayer.rasterizationScale = [UIScreen mainScreen].scale;
+    //开始和结束滚动设置，下面的设置是横向，开始为止改为(1.0f, 0.0f)为纵向;
+    self.gradientLayer.startPoint = CGPointMake(0.0f, 0.5f);
+    self.gradientLayer.endPoint = CGPointMake(1.0f, 0.5f);
+    id transparent = (id)[UIColor clearColor].CGColor;
+    id opaque = (id)[UIColor blackColor].CGColor;
+    self.gradientLayer.colors = @[transparent,opaque,opaque,transparent];
+    self.gradientLayer.locations = @[@0,@(self.fade),@(1-self.fade),@1];
+    self.layer.mask = self.gradientLayer;
+    
+    
+}
+//拼装文字
+-(void)drawTextLayer{
+    
+    self.textLayer.foregroundColor = self.textColor.CGColor;
+    CFStringRef fontName = (__bridge CFStringRef)self.font.fontName;
+    CGFontRef fontRef = CGFontCreateWithFontName(fontName);
+    self.textLayer.font = fontRef;
+    self.textLayer.fontSize = self.font.pointSize;
+    CGFontRelease(fontRef);
+    self.textLayer.string = [NSString stringWithFormat:@"%@%@%@",kSeparateText,self.text,kSeparateText];
+    
+    
+}
+
+//文本滚动动画
+-(void)startAnimation{
+    
+    if ([self.textLayer animationForKey:kCATransitionFromLeft]) {
+        [self.textLayer removeAnimationForKey:kCATransitionFromLeft];
+    }
+    CABasicAnimation *animation = [CABasicAnimation animation];
+    animation.keyPath = @"transform.translation.x";
+    animation.fromValue = @(self.bounds.origin.x);
+    animation.toValue = @(self.bounds.origin.x - self.translationX);
+    animation.duration = self.textWidth * 0.035f;
+    animation.repeatCount = MAXFLOAT;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    [self.textLayer addAnimation:animation forKey:kCATransitionFromLeft];
+}
+-(void)setText:(NSString *)text{
+    
+    _text = text;
+    NSDictionary *dic= @{NSFontAttributeName:self.font};
+       NSStringDrawingContext *dcontext = [[NSStringDrawingContext alloc] init];
+    CGSize size = [text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:dcontext].size;
+    self.textWidth = size.width;
+    self.textHeight = size.height;
+    self.textLayerFrame = CGRectMake(0, 0, self.textWidth*3+self.textSeparateWidth*2, self.textHeight);
+    self.translationX = self.textWidth+self.textSeparateWidth;
+    [self drawTextLayer];
+    [self startAnimation];
+    
+    
+}
+@end
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete</mutableString>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="e3f-YC-ekz" firstAttribute="top" secondItem="I6U-Ow-qRx" secondAttribute="top" id="D9D-Yk-b8R"/>
+                        <constraint firstAttribute="bottom" secondItem="e3f-YC-ekz" secondAttribute="bottom" id="etN-ge-oTm"/>
+                        <constraint firstItem="e3f-YC-ekz" firstAttribute="leading" secondItem="I6U-Ow-qRx" secondAttribute="leading" id="h0F-d6-m2h"/>
+                        <constraint firstAttribute="trailing" secondItem="e3f-YC-ekz" secondAttribute="trailing" id="vqf-v9-t3O"/>
+                    </constraints>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <exclude reference="D9D-Yk-b8R"/>
+                            <exclude reference="etN-ge-oTm"/>
+                            <exclude reference="h0F-d6-m2h"/>
+                            <exclude reference="vqf-v9-t3O"/>
+                        </mask>
+                    </variation>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3v-zx-5hW">
+                    <rect key="frame" x="1125" y="0.0" width="120" height="916"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ujm-3p-vMU">
+                            <rect key="frame" x="25" y="423" width="70" height="70"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="70" id="4lz-xK-Mb9"/>
+                                <constraint firstAttribute="width" constant="70" id="CfX-os-bZb"/>
+                                <constraint firstAttribute="width" constant="70" id="KxW-lX-GmM"/>
+                                <constraint firstAttribute="height" constant="70" id="aNl-27-4cy"/>
+                            </constraints>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="videocam_circle">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                            </state>
+                            <state key="selected" image="stop_circle_fill"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="KxW-lX-GmM"/>
+                                    <exclude reference="aNl-27-4cy"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="KxW-lX-GmM"/>
+                                    <include reference="aNl-27-4cy"/>
+                                </mask>
+                            </variation>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerY" secondItem="S3v-zx-5hW" secondAttribute="centerY" id="H8r-dw-oWl"/>
+                        <constraint firstAttribute="height" constant="120" id="MhX-6r-8TA"/>
+                        <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerY" secondItem="S3v-zx-5hW" secondAttribute="centerY" id="PaH-6i-GX6"/>
+                        <constraint firstAttribute="width" constant="120" id="kHk-6S-YDP"/>
+                        <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerX" secondItem="S3v-zx-5hW" secondAttribute="centerX" id="qTW-d3-bZy"/>
+                        <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerX" secondItem="S3v-zx-5hW" secondAttribute="centerX" id="tQQ-HY-r3O"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="MhX-6r-8TA"/>
+                            <exclude reference="kHk-6S-YDP"/>
+                            <exclude reference="H8r-dw-oWl"/>
+                            <exclude reference="PaH-6i-GX6"/>
+                            <exclude reference="qTW-d3-bZy"/>
+                            <exclude reference="tQQ-HY-r3O"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=compact-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="kHk-6S-YDP"/>
+                            <include reference="H8r-dw-oWl"/>
+                            <include reference="tQQ-HY-r3O"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=compact-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="kHk-6S-YDP"/>
+                            <include reference="H8r-dw-oWl"/>
+                            <include reference="tQQ-HY-r3O"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="MhX-6r-8TA"/>
+                            <include reference="PaH-6i-GX6"/>
+                            <include reference="qTW-d3-bZy"/>
+                        </mask>
+                    </variation>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udl-81-MuR">
+                    <rect key="frame" x="8" y="8" width="102" height="30"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="FormatChange"/>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="LOJ-Lb-BDy"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="I6U-Ow-qRx" firstAttribute="leading" secondItem="LOJ-Lb-BDy" secondAttribute="leading" id="0cG-3X-5yw"/>
+                <constraint firstItem="Udl-81-MuR" firstAttribute="top" secondItem="LOJ-Lb-BDy" secondAttribute="top" constant="8" id="3Pa-Hs-6Vb"/>
                 <constraint firstItem="S3v-zx-5hW" firstAttribute="trailing" secondItem="LOJ-Lb-BDy" secondAttribute="trailing" id="3Ym-E9-Vp9"/>
-                <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5Hd-7J-RXT"/>
+                <constraint firstAttribute="trailing" secondItem="I6U-Ow-qRx" secondAttribute="trailing" id="GZc-Lf-I4C"/>
+                <constraint firstItem="I6U-Ow-qRx" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="M4V-wW-Eed"/>
                 <constraint firstItem="UUd-po-CTZ" firstAttribute="leading" secondItem="LOJ-Lb-BDy" secondAttribute="leading" constant="8" id="OjP-xo-Kze"/>
-                <constraint firstItem="S3v-zx-5hW" firstAttribute="bottom" secondItem="Ujm-3p-vMU" secondAttribute="bottom" constant="20" id="Sdr-Q2-5XC"/>
+                <constraint firstItem="I6U-Ow-qRx" firstAttribute="top" secondItem="LOJ-Lb-BDy" secondAttribute="top" id="Ro0-fM-NX4"/>
+                <constraint firstItem="Udl-81-MuR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="XFM-eX-lIs"/>
+                <constraint firstItem="S3v-zx-5hW" firstAttribute="top" secondItem="LOJ-Lb-BDy" secondAttribute="top" id="Y2V-RV-2JJ"/>
+                <constraint firstItem="UUd-po-CTZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="baq-rp-Uui"/>
+                <constraint firstItem="I6U-Ow-qRx" firstAttribute="top" secondItem="UUd-po-CTZ" secondAttribute="bottom" id="dq9-An-wMR"/>
                 <constraint firstItem="LOJ-Lb-BDy" firstAttribute="trailing" secondItem="Udl-81-MuR" secondAttribute="trailing" constant="8" id="eNZ-q5-aGD"/>
+                <constraint firstAttribute="trailing" secondItem="S3v-zx-5hW" secondAttribute="trailing" id="fQ5-by-hwz"/>
+                <constraint firstItem="S3v-zx-5hW" firstAttribute="top" secondItem="I6U-Ow-qRx" secondAttribute="bottom" id="gZZ-WE-Zg8"/>
+                <constraint firstItem="S3v-zx-5hW" firstAttribute="leading" secondItem="I6U-Ow-qRx" secondAttribute="trailing" id="gbb-kN-zwh"/>
+                <constraint firstAttribute="bottom" secondItem="UUd-po-CTZ" secondAttribute="bottom" constant="8" id="i0p-hg-CQK"/>
                 <constraint firstAttribute="bottom" secondItem="S3v-zx-5hW" secondAttribute="bottom" id="iVZ-CM-4WM"/>
+                <constraint firstItem="I6U-Ow-qRx" firstAttribute="leading" secondItem="UUd-po-CTZ" secondAttribute="trailing" id="iZC-C3-FNq"/>
                 <constraint firstItem="UUd-po-CTZ" firstAttribute="top" secondItem="LOJ-Lb-BDy" secondAttribute="top" id="k1v-7p-ssF"/>
+                <constraint firstAttribute="bottom" secondItem="S3v-zx-5hW" secondAttribute="bottom" id="n8b-6k-OCw"/>
                 <constraint firstItem="S3v-zx-5hW" firstAttribute="leading" secondItem="LOJ-Lb-BDy" secondAttribute="leading" id="qRZ-vG-7wF"/>
                 <constraint firstItem="Udl-81-MuR" firstAttribute="top" secondItem="LOJ-Lb-BDy" secondAttribute="top" id="qTZ-9d-NjQ"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="3Pa-Hs-6Vb"/>
+                    <exclude reference="XFM-eX-lIs"/>
+                    <exclude reference="qTZ-9d-NjQ"/>
+                    <exclude reference="eNZ-q5-aGD"/>
+                    <exclude reference="n8b-6k-OCw"/>
+                    <exclude reference="0cG-3X-5yw"/>
+                    <exclude reference="GZc-Lf-I4C"/>
+                    <exclude reference="M4V-wW-Eed"/>
+                    <exclude reference="Ro0-fM-NX4"/>
+                    <exclude reference="dq9-An-wMR"/>
+                    <exclude reference="iZC-C3-FNq"/>
+                    <exclude reference="OjP-xo-Kze"/>
+                    <exclude reference="baq-rp-Uui"/>
+                    <exclude reference="i0p-hg-CQK"/>
+                    <exclude reference="k1v-7p-ssF"/>
+                    <exclude reference="3Ym-E9-Vp9"/>
+                    <exclude reference="Y2V-RV-2JJ"/>
+                    <exclude reference="fQ5-by-hwz"/>
+                    <exclude reference="gZZ-WE-Zg8"/>
+                    <exclude reference="gbb-kN-zwh"/>
+                    <exclude reference="iVZ-CM-4WM"/>
+                    <exclude reference="qRZ-vG-7wF"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="3Pa-Hs-6Vb"/>
+                    <include reference="XFM-eX-lIs"/>
+                    <include reference="n8b-6k-OCw"/>
+                    <include reference="M4V-wW-Eed"/>
+                    <include reference="Ro0-fM-NX4"/>
+                    <include reference="iZC-C3-FNq"/>
+                    <include reference="baq-rp-Uui"/>
+                    <include reference="i0p-hg-CQK"/>
+                    <include reference="Y2V-RV-2JJ"/>
+                    <include reference="fQ5-by-hwz"/>
+                    <include reference="gbb-kN-zwh"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="3Pa-Hs-6Vb"/>
+                    <include reference="XFM-eX-lIs"/>
+                    <include reference="n8b-6k-OCw"/>
+                    <include reference="M4V-wW-Eed"/>
+                    <include reference="Ro0-fM-NX4"/>
+                    <include reference="iZC-C3-FNq"/>
+                    <include reference="baq-rp-Uui"/>
+                    <include reference="i0p-hg-CQK"/>
+                    <include reference="Y2V-RV-2JJ"/>
+                    <include reference="fQ5-by-hwz"/>
+                    <include reference="gbb-kN-zwh"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="qTZ-9d-NjQ"/>
+                    <include reference="eNZ-q5-aGD"/>
+                    <include reference="0cG-3X-5yw"/>
+                    <include reference="GZc-Lf-I4C"/>
+                    <include reference="dq9-An-wMR"/>
+                    <include reference="OjP-xo-Kze"/>
+                    <include reference="k1v-7p-ssF"/>
+                    <include reference="3Ym-E9-Vp9"/>
+                    <include reference="gZZ-WE-Zg8"/>
+                    <include reference="iVZ-CM-4WM"/>
+                    <include reference="qRZ-vG-7wF"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="changeCameraBtn" destination="UUd-po-CTZ" id="3SO-fW-lA3"/>
                 <outlet property="formatChangeBtn" destination="Udl-81-MuR" id="j40-Q7-ny6"/>
                 <outlet property="recordBtn" destination="Ujm-3p-vMU" id="yy0-bO-tIB"/>
             </connections>
-            <point key="canvasLocation" x="-91.304347826086968" y="103.79464285714285"/>
+            <point key="canvasLocation" x="-387.79620853080564" y="118.46153846153845"/>
         </view>
     </objects>
     <resources>
