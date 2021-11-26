@@ -25,12 +25,20 @@ class CaptureButtonsView: UIView {
         prompterBtn.imageView?.contentMode = .scaleAspectFit
         recordBtn.rx.tap.map({[weak self] in self?.recordBtn.isSelected ?? true}).bind(to: formatChangeBtn.rx.isEnabled).disposed(by: disposeBag)
         recordBtn.rx.tap.map({[weak self] in self?.recordBtn.isSelected ?? true}).bind(to: changeCameraBtn.rx.isEnabled).disposed(by: disposeBag)
-        let obserable = NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification")).take(until: self.rx.deallocated).map { _ in}
+        
+        var notificationKey = ""
+        if #available(iOS 15.0, *) {
+            notificationKey = "SystemVolumeDidChange"
+        } else {
+            notificationKey = "AVSystemController_SystemVolumeDidChangeNotification"
+        }
+        
+        let obserable = NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: notificationKey)).take(until: self.rx.deallocated).map { _ in}
         
         obserable
             .flatMapFirst {_ in
                 obserable
-                    .take(until: obserable.startWith(()).debounce(.milliseconds(300), scheduler: MainScheduler.instance))
+                    .take(until: obserable.startWith(()).debounce(.milliseconds(500), scheduler: MainScheduler.instance))
                     .startWith(())
                     .reduce(0) { acc, _ in acc + 1 }
             }
