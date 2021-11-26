@@ -15,13 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="1245" height="916"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-Ow-qRx">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-Ow-qRx">
                     <rect key="frame" x="84" y="0.0" width="1041" height="916"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-YC-ekz">
                             <rect key="frame" x="0.0" y="0.0" width="1041" height="916"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <mutableString key="text">Skip to content
+                            <string key="text">Skip to content
 Search or jump to…
 Pull requests
 Issues
@@ -191,7 +191,7 @@ API
 Training
 Blog
 About
-Loading complete</mutableString>
+Loading complete</string>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -268,10 +268,10 @@ Loading complete</mutableString>
                     <rect key="frame" x="44" y="0.0" width="40" height="895"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nyi-Yr-Vvo">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="447.66666666666669"/>
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUd-po-CTZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="40" height="447.66666666666669"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="camera_rotate"/>
@@ -285,11 +285,30 @@ Loading complete</mutableString>
                                 <constraint firstItem="UUd-po-CTZ" firstAttribute="top" secondItem="Nyi-Yr-Vvo" secondAttribute="top" id="n4K-Rs-20S"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOz-hT-8sZ">
+                            <rect key="frame" x="0.0" y="298.33333333333337" width="40" height="298.33333333333337"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoV-QF-ucO">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="doc_plaintext"/>
+                                    <state key="selected" image="doc_plaintext_clear"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="RoV-QF-ucO" secondAttribute="bottom" id="Byf-3M-9aY"/>
+                                <constraint firstItem="RoV-QF-ucO" firstAttribute="leading" secondItem="KOz-hT-8sZ" secondAttribute="leading" id="JsX-dV-o8p"/>
+                                <constraint firstItem="RoV-QF-ucO" firstAttribute="top" secondItem="KOz-hT-8sZ" secondAttribute="top" id="Q86-e1-EjL"/>
+                                <constraint firstAttribute="trailing" secondItem="RoV-QF-ucO" secondAttribute="trailing" id="ufN-nz-zia"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNN-4M-W7X">
-                            <rect key="frame" x="0.0" y="447.66666666666674" width="40" height="447.33333333333326"/>
+                            <rect key="frame" x="0.0" y="596.66666666666663" width="40" height="298.33333333333337"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udl-81-MuR">
-                                    <rect key="frame" x="0.0" y="0.0" width="40" height="447.33333333333331"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -361,12 +380,12 @@ Loading complete</mutableString>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="org-wu-Jkj"/>
                     <exclude reference="Vgf-es-tME"/>
                     <exclude reference="k50-lV-cvT"/>
                     <exclude reference="tow-Am-ZhM"/>
                     <exclude reference="v6e-th-O4a"/>
                     <exclude reference="wAE-z7-Dnu"/>
-                    <exclude reference="org-wu-Jkj"/>
                     <exclude reference="0cG-3X-5yw"/>
                     <exclude reference="E6v-Yy-lLX"/>
                     <exclude reference="GZc-Lf-I4C"/>
@@ -385,9 +404,9 @@ Loading complete</mutableString>
             </variation>
             <variation key="heightClass=compact-widthClass=compact">
                 <mask key="constraints">
+                    <include reference="org-wu-Jkj"/>
                     <include reference="k50-lV-cvT"/>
                     <include reference="tow-Am-ZhM"/>
-                    <include reference="org-wu-Jkj"/>
                     <include reference="M4V-wW-Eed"/>
                     <include reference="Ro0-fM-NX4"/>
                     <include reference="fXe-zZ-Oa3"/>
@@ -399,9 +418,9 @@ Loading complete</mutableString>
             </variation>
             <variation key="heightClass=compact-widthClass=regular">
                 <mask key="constraints">
+                    <include reference="org-wu-Jkj"/>
                     <include reference="k50-lV-cvT"/>
                     <include reference="tow-Am-ZhM"/>
-                    <include reference="org-wu-Jkj"/>
                     <include reference="M4V-wW-Eed"/>
                     <include reference="Ro0-fM-NX4"/>
                     <include reference="fXe-zZ-Oa3"/>
@@ -428,14 +447,18 @@ Loading complete</mutableString>
             <connections>
                 <outlet property="changeCameraBtn" destination="UUd-po-CTZ" id="3SO-fW-lA3"/>
                 <outlet property="formatChangeBtn" destination="Udl-81-MuR" id="j40-Q7-ny6"/>
+                <outlet property="prompterBtn" destination="RoV-QF-ucO" id="oGz-4l-HJk"/>
                 <outlet property="recordBtn" destination="Ujm-3p-vMU" id="yy0-bO-tIB"/>
                 <outlet property="textView" destination="e3f-YC-ekz" id="psz-Tw-sPg"/>
+                <outlet property="textViewBg" destination="I6U-Ow-qRx" id="cVq-nO-gBL"/>
             </connections>
             <point key="canvasLocation" x="-387.79620853080564" y="118.46153846153845"/>
         </view>
     </objects>
     <resources>
         <image name="camera_rotate" width="100" height="100"/>
+        <image name="doc_plaintext" width="100" height="100"/>
+        <image name="doc_plaintext_clear" width="100" height="100"/>
         <image name="linked_camera" width="100" height="100"/>
         <image name="stop_circle_fill" width="100" height="100"/>
         <image name="videocam_circle" width="100" height="100"/>
