@@ -63,9 +63,12 @@ class CaptureButtonsView: UIView {
         
         let willPrompterBtnSelect = prompterBtn.rx.tap.asDriver().map({ [weak self] () -> Bool in
                 guard let self = self else {return false}
-            return !self.prompterBtn.isSelected
-        })
+            let flag = !self.prompterBtn.isSelected
+            UserDefaults.standard.setPrompterViewShow(value: flag)
+            return flag
+        }).startWith(UserDefaults.standard.isPrompterViewShow)
         willPrompterBtnSelect.asObservable().bind(to: prompterBtn.rx.isSelected).disposed(by: disposeBag)
         willPrompterBtnSelect.asObservable().bind(to: textViewBg.rx.isHidden).disposed(by: disposeBag)
+        
     }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import RxCocoa
 
 extension UIViewController {
     static var rootViewController: UIViewController? = {
@@ -78,5 +79,17 @@ extension UIWindow {
         } else {
             return UIApplication.shared.statusBarOrientation
         }
+    }
+}
+
+extension UserDefaults {
+    static let PrompterViewShowKey = "PrompterViewShowKey"
+    
+    var isPrompterViewShow: Bool {
+        UserDefaults.standard.bool(forKey:  UserDefaults.PrompterViewShowKey)
+    }
+    
+    func setPrompterViewShow(value: Bool) {
+        UserDefaults.standard.set(value, forKey: UserDefaults.PrompterViewShowKey)
     }
 }
