@@ -93,12 +93,10 @@ final class VideoRecorderViewModel: ViewModelType {
                 self.backgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: {[weak self] in
                     guard let self = self else {return}
                     UIApplication.shared.endBackgroundTask((self.backgroundTaskID))
-                    self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
                 })
                 self.dependencies.captureManager.stopRecording {[weak self] in
                     guard let self = self else {return}
                     UIApplication.shared.endBackgroundTask((self.backgroundTaskID))
-                    self.backgroundTaskID = UIBackgroundTaskIdentifier.invalid
                 }
             }
         }.disposed(by: disposeBag)

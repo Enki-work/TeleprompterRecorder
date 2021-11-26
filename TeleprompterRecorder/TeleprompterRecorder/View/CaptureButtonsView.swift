@@ -48,5 +48,12 @@ class CaptureButtonsView: UIView {
                 }
                 
             }).disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification).subscribe { [weak self] notification in
+            guard let self = self else {return}
+            self.recordBtn.isSelected = false
+            self.formatChangeBtn.isEnabled = true
+            self.changeCameraBtn.isEnabled = true
+        }.disposed(by: disposeBag)
     }
 }

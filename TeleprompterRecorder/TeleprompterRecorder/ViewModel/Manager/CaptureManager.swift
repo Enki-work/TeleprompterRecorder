@@ -160,10 +160,15 @@ class CaptureManager: NSObject {
                 guard let self = self else {return}
                 self.startTime = .zero
                 self.recordEncoder = nil
-                try? PHPhotoLibrary.shared().performChangesAndWait({
-                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: recordEncoder.pathUrl)
-                    completion()
-                })
+                do {
+                    try PHPhotoLibrary.shared().performChangesAndWait({
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: recordEncoder.pathUrl)
+                        completion()
+                    })
+                } catch {
+                    let e = error
+                    debugPrint(e)
+                }
                 
             })
         }
