@@ -35,7 +35,7 @@ class CaptureButtonsView: UIView {
         
         let obserable = NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: notificationKey)).take(until: self.rx.deallocated).map { _ in}
         
-        obserable
+        obserable.observe(on: MainScheduler.asyncInstance).subscribe(on: MainScheduler.asyncInstance)
             .flatMapFirst {_ in
                 obserable
                     .take(until: obserable.startWith(()).debounce(.milliseconds(500), scheduler: MainScheduler.instance))
