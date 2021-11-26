@@ -84,8 +84,7 @@ final class VideoRecorderViewModel: ViewModelType {
         
         let didChangeCamera: Driver<Bool> = input.changeCamera.flatMap({[weak self] in
             guard let self = self else {return .just(false)}
-            let result = (try? self.dependencies.captureManager.changeCamera()) ?? false
-            return .just(result)
+            return self.dependencies.captureManager.changeCamera()
         })
         
         NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification).subscribe { [weak self] notification in

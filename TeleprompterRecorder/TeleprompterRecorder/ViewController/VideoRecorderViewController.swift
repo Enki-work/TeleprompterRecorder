@@ -58,7 +58,10 @@ class VideoRecorderViewController: UIViewController {
             self?.performSegue(withIdentifier: "showformatlist", sender: (formats, output.selectedFormat))
         }).disposed(by: disposeBag)
         
-        output.didChangeCamera.drive(onNext: {_ in }).disposed(by: disposeBag)
+        output.didChangeCamera.drive(onNext: {[weak self]result in
+            guard result else {return}
+            self?.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIWindow.orientation.AVCaptureVideoOrientation
+        }).disposed(by: disposeBag)
     }
     
     private func bindNotification() {

@@ -124,8 +124,8 @@ class CaptureManager: NSObject {
             self.videoDataOutput = videoDataOutput
             
             let audioDataOutput = AVCaptureAudioDataOutput()
-                audioDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
-                self.captureSession.addOutput(audioDataOutput)
+            audioDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
+            self.captureSession.addOutput(audioDataOutput)
             self.audioDataOutput = audioDataOutput
             
             if captureSession.canAddOutput(videoDataOutput) {
@@ -189,9 +189,9 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
                 videoSize = UIDevice.current.orientation.isLandscape ? .init(width: Int(dimensions.width), height: Int(dimensions.height)) : .init(width: Int(dimensions.height), height: Int(dimensions.width))
             }
             recordEncoder = try? CaptureEncoder(path: getUploadFilePath(),
-                                           videoSize: videoSize,
-                                           channels: Int(channels ?? 1),
-                                           rate: samplerate ?? 44100)
+                                                videoSize: videoSize,
+                                                channels: Int(channels ?? 1),
+                                                rate: samplerate ?? 44100)
         }
         var sampleBuffer: CMSampleBuffer = sampleBuffer
         if timeOffset.value > 0, let buffer = adjustTime(sample: sampleBuffer, offset: timeOffset){
@@ -229,16 +229,16 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         let existed = FileManager.default.fileExists(atPath: cachePath, isDirectory: &isDir)
         if !(isDir.boolValue && existed) {
             try? FileManager.default.createDirectory(atPath: cachePath,
-                                                withIntermediateDirectories: true,
-                                                attributes: nil)
+                                                     withIntermediateDirectories: true,
+                                                     attributes: nil)
         }
         return cachePath + "/" + fileName
     }
     
     private var cachePath: String {
         (NSSearchPathForDirectoriesInDomains(.cachesDirectory,
-                                                                .userDomainMask,
-                                                            true).first! as String) + "/videos"
+                                             .userDomainMask,
+                                             true).first! as String) + "/videos"
     }
     
     private func adjustTime(sample: CMSampleBuffer, offset: CMTime) -> CMSampleBuffer? {
@@ -269,38 +269,62 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         return sout
     }
     
-    func changeCamera() throws -> Bool {
-        guard let currentCamera = self.currentCamera else {return false}
-        captureSession.stopRunning()
+    func changeCamera() -> Driver<Bool> {
+//        let willSetZoom = currentCamera!.videoZoomFactor + 0.3
+//        if willSetZoom < currentCamera!.activeFormat.videoMaxZoomFactor {
+//            try? currentCamera!.lockForConfiguration()
+//            currentCamera?.ramp(toVideoZoomFactor: willSetZoom, withRate: 1)
+//            currentCamera!.unlockForConfiguration()
+//        }
+//
+//        print("!!!!!!!!!\(currentCamera!.virtualDeviceSwitchOverVideoZoomFactors)")
         
-        let isFront = currentCamera == innerCamera
-        if let videoInput = captureSession.inputs.first(where: {($0 as? AVCaptureDeviceInput)?.device.hasMediaType(.video) ?? false}) {
-            captureSession.removeInput(videoInput)
-        }
-        var videoInput: AVCaptureDeviceInput?
-        if isFront {
-            videoInput = try AVCaptureDeviceInput(device: mainCamera!)
-            self.currentCamera = mainCamera
-        } else {
-            videoInput = try AVCaptureDeviceInput(device: innerCamera!)
-            self.currentCamera = innerCamera
-        }
-        if let videoInput = videoInput, captureSession.canAddInput(videoInput) {
-            captureSession.addInput(videoInput)
-        } else {
-            return false
-        }
-        captureSession.startRunning()
-        selectUserDefaultFormat(isSave: true)
-        
-        return true
+        return Observable<AVCaptureDevice>.create { observer in
+            let devices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInUltraWideCamera, .builtInTelephotoCamera], mediaType: .video, position: .unspecified).devices
+            
+            let alertController = UIAlertController(title: "カメラ選択",
+                                                    message: nil, preferredStyle: .actionSheet)
+            devices.enumerated().forEach { index, device in
+                let action = UIAlertAction(title: device.localizedName, style: .default) { _ in
+                    observer.onNext(devices[index])
+                    observer.onCompleted()
+                }
+                alertController.addAction(action)
+            }
+            alertController.addAction(.init(title: "cancel", style: .cancel, handler: nil))
+            UIViewController.rootViewController?.present(alertController, animated: true, completion: nil)
+            return Disposables.create { alertController.dismiss(animated: true, completion: nil) }
+        }.flatMap { device in
+            Observable<Bool>.create { [weak self] observer in
+                guard let self = self else {
+                    observer.onNext(false)
+                    return Disposables.create()}
+                self.captureSession.stopRunning()
+                if let videoInput = self.captureSession.inputs.first(where: {($0 as? AVCaptureDeviceInput)?.device.hasMediaType(.video) ?? false}) {
+                    self.captureSession.removeInput(videoInput)
+                }
+                do {
+                    let videoInput = try AVCaptureDeviceInput(device: device)
+                    self.currentCamera = device
+                    if self.captureSession.canAddInput(videoInput) {
+                        self.captureSession.addInput(videoInput)
+                    }
+                } catch {
+                    observer.onError(error)
+                }
+                self.captureSession.startRunning()
+                self.selectUserDefaultFormat(isSave: true)
+                observer.onNext(true)
+                return Disposables.create()
+            }
+        }.asDriver(onErrorJustReturn: false)
     }
     
     func selectUserDefaultFormat(isSave: Bool = false) {
         guard let currentCamera = self.currentCamera else {return}
         
         if let selectedFormatIdentity = LocalDeviceFormat.getLocalDeviceFormatList().first(where: {$0.deviceUniqueID == currentCamera.uniqueID})?.selecedFormatIdentity,
-        let selectedFormat = currentCamera.formats.first(where: {$0.debugDescription.identity == selectedFormatIdentity}) {
+           let selectedFormat = currentCamera.formats.first(where: {$0.debugDescription.identity == selectedFormatIdentity}) {
             try? currentCamera.lockForConfiguration()
             currentCamera.activeFormat = selectedFormat
             currentCamera.unlockForConfiguration()
@@ -316,7 +340,7 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
     func getUserDefaultCamera() -> AVCaptureDevice? {
         if let deviceUniqueID = LocalDeviceFormat.getLocalDeviceFormatList().first(where: {$0.isDefaultCamera})?.deviceUniqueID {
             
-            let cameraDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera, .builtInTripleCamera, .builtInTelephotoCamera, .builtInDualWideCamera, .builtInDualWideCamera, .builtInUltraWideCamera, .builtInWideAngleCamera], mediaType: .video, position: .unspecified)
+            let cameraDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera, .builtInTripleCamera, .builtInTelephotoCamera, .builtInDualWideCamera, .builtInUltraWideCamera, .builtInWideAngleCamera], mediaType: .video, position: .unspecified)
             let camera = cameraDiscoverySession.devices.first(where: {$0.uniqueID == deviceUniqueID})
             return camera
         }
