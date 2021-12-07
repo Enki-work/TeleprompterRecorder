@@ -35,15 +35,14 @@ class CaptureButtonsView: UIView {
         }
         
         let obserable = NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: notificationKey)).take(until: self.rx.deallocated).map { _ in}
-        
+        let manualTap = PublishSubject<Void>()
         obserable.observe(on: MainScheduler.asyncInstance).subscribe(on: MainScheduler.asyncInstance)
             .flatMapFirst {_ in
                 obserable
                     .take(until: obserable.startWith(()).debounce(.milliseconds(500), scheduler: MainScheduler.instance))
                     .startWith(())
                     .reduce(0) { acc, _ in acc + 1 }
-            }
-            .map { min($0, 2) }.delaySubscription(.milliseconds(1000), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] times in
+            }.delaySubscription(.milliseconds(1000), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] times in
                 let offset: CGFloat = 30
                 if (times == 1) {
                     guard let self = self,
@@ -59,6 +58,8 @@ class CaptureButtonsView: UIView {
 
                     let shouldY = max(self.textView.contentOffset.y - self.textView.bounds.height + offset , 0)
                     self.textView.setContentOffset(.init(x: self.textView.contentOffset.x, y: shouldY), animated: true)
+                } else {
+                    manualTap.onNext(())
                 }
                 
             }).disposed(by: disposeBag)
@@ -69,8 +70,8 @@ class CaptureButtonsView: UIView {
             self.formatChangeBtn.isEnabled = true
             self.changeCameraBtn.isEnabled = true
         }.disposed(by: disposeBag)
-        
-        let willPrompterBtnSelect = prompterBtn.rx.tap.asDriver().map({ [weak self] () -> Bool in
+        let repos = Driver.merge(manualTap.asDriver(onErrorJustReturn: ()), prompterBtn.rx.tap.asDriver())
+        let willPrompterBtnSelect = repos.map({ [weak self] () -> Bool in
                 guard let self = self else {return false}
             let flag = !self.prompterBtn.isSelected
             UserDefaults.standard.setPrompterViewShow(value: flag)
@@ -89,12 +90,6 @@ class CaptureButtonsView: UIView {
                 self.textView.resignFirstResponder()
             }
         }).disposed(by: disposeBag)
-//        Observable.of(textView.rx.didEndEditing, textView.rx.didBeginEditing)
-//            .merge().subscribe(onNext: { [weak self] in
-//                guard let self = self else {return}
-//                self.textViewEditButton.isSelected = self.textView.isEditable
-//                self.textView.isSelectable = self.textView.isEditable
-//            }).disposed(by: disposeBag)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
