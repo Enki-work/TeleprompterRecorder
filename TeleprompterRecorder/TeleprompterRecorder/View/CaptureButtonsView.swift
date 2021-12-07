@@ -16,6 +16,7 @@ class CaptureButtonsView: UIView {
     @IBOutlet weak var prompterBtn: UIButton!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var textViewBg: UIView!
+    @IBOutlet weak var textViewEditButton: UIButton!
     
     let disposeBag = DisposeBag()
     
@@ -77,6 +78,27 @@ class CaptureButtonsView: UIView {
         }).startWith(UserDefaults.standard.isPrompterViewShow)
         willPrompterBtnSelect.asObservable().bind(to: prompterBtn.rx.isSelected).disposed(by: disposeBag)
         willPrompterBtnSelect.asObservable().bind(to: textViewBg.rx.isHidden).disposed(by: disposeBag)
-        
+        textViewEditButton.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else {return}
+            self.textViewEditButton.isSelected = !self.textViewEditButton.isSelected
+            self.textView.isEditable = self.textViewEditButton.isSelected
+            self.textView.isSelectable = self.textViewEditButton.isSelected
+            if self.textViewEditButton.isSelected {
+                self.textView.becomeFirstResponder()
+            } else {
+                self.textView.resignFirstResponder()
+            }
+        }).disposed(by: disposeBag)
+//        Observable.of(textView.rx.didEndEditing, textView.rx.didBeginEditing)
+//            .merge().subscribe(onNext: { [weak self] in
+//                guard let self = self else {return}
+//                self.textViewEditButton.isSelected = self.textView.isEditable
+//                self.textView.isSelectable = self.textView.isEditable
+//            }).disposed(by: disposeBag)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.endEditing(true)
     }
 }
