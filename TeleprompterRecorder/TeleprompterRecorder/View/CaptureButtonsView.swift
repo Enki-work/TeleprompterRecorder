@@ -73,10 +73,9 @@ class CaptureButtonsView: UIView {
         let repos = Driver.merge(manualTap.asDriver(onErrorJustReturn: ()), prompterBtn.rx.tap.asDriver())
         let willPrompterBtnSelect = repos.map({ [weak self] () -> Bool in
                 guard let self = self else {return false}
-            let flag = !self.prompterBtn.isSelected
-            UserDefaults.standard.setPrompterViewShow(value: flag)
-            return flag
-        }).startWith(UserDefaults.standard.isPrompterViewShow)
+            UserDefaults.standard.setPrompterViewShow(value: !UserDefaults.standard.isPrompterViewShow)
+            return self.prompterBtn.isSelected
+        }).startWith(UserDefaults.standard.isPrompterViewShow).map({!$0})
         willPrompterBtnSelect.asObservable().bind(to: prompterBtn.rx.isSelected).disposed(by: disposeBag)
         willPrompterBtnSelect.asObservable().bind(to: textViewBg.rx.isHidden).disposed(by: disposeBag)
         textViewEditButton.rx.tap.subscribe(onNext: { [weak self] in

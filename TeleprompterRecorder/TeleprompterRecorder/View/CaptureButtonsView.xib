@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -16,55 +16,164 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-Ow-qRx">
-                    <rect key="frame" x="0.0" y="84" width="1245" height="712"/>
+                    <rect key="frame" x="84" y="0.0" width="1041" height="916"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-YC-ekz">
-                            <rect key="frame" x="0.0" y="0.0" width="1245" height="712"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-YC-ekz">
+                            <rect key="frame" x="0.0" y="0.0" width="1041" height="916"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <mutableString key="text">日本冰激凌的种类
+                            <attributedString key="attributedText">
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">こちらにセリフを入力してください。
 
-大家好，我是大旗哥
-本人也是重度冰激凌成瘾者，从国内的各种棒冰，到小布丁，伊利四个圈，和路雪的可爱多，梦龙之类的都非常喜欢。
-来日本以后也是家庭常备各种冰激凌。在了解了一些日本冰激凌的种类之后。发现和之前了解的日本啤酒一样有很多种类。
-随所以有可能你吃得冰激凌，也并不是真正的冰凌。如果想了解一下日本啤酒的种类可以翻看我之前的视频
-我们言归正传，冰激凌最让人欲罢不能的呢，就是浓郁的奶香，所以日本冰激凌大体可以分为四个种类，也全部是根据乳成分来区分的，
-几乎不含乳成分的类别会写作冰果，一般都是果汁，砂糖，香料结冰后的这么一种冷饮，有的可能也加一点儿奶油或者牛奶。基本上就是想我们国内的棒冰，沙冰，老冰棍之类的那种东西。
-而冰果类别属于是一般食品，含有乳成分的才能被归为冰激凌（アイスクリーム）的这类别。
-冰激凌大类别一共是有三个小类别，分别是ラクトアイス、アイスミルク、アイスクリーム
-他们区别的标准是在于配料中含有的固体乳成分（乳固形分），和乳脂肪成分（乳脂肪分）的含量
-固体乳成分指的是牛奶中去除掉水分之后留下的12％左右的固体成分
-这12％左右的固体乳成分中，含有不到4％的乳脂肪成分，去除乳脂肪成分后剩下的叫做无脂肪固体乳成分，就是营养表中的蛋白质，维生素，钙和碳水，乳糖等物质了。
-而我们吃东西的时候，感受到的奶味儿，主要来源于这个无脂肪固体乳成分，而口感是否顺滑好喝呢就主要来源于乳脂肪成分。
-这也就是为什么脱脂牛奶有奶味儿但是不好喝的原因。
-
-那么说回到冰激凌的种类。
-アイスクリーム类别要求配料中固体乳成分要在15％以上，并且这15％中要有8％以上乳脂肪成分。才能称得上是アイスクリーム。
-
-而アイスミルク需要固体乳成分在10％以上。乳脂肪成分在3％以上就可以了
-
-而ラクトアイス的话固体乳成分在3％以上就可以了，不要求乳脂肪成分。
-
-以上的标准可以看出来啊，最高标准的アイスクリーム要求最少有8％的乳脂肪成分，而乳脂肪成分呢，又是牛奶中比较贵的部分，一般黄油呢就是从牛奶中提炼乳脂肪成分加工而成的。
-所以アイスクリーム的成本本身就会更高，售价也会比较高。
-但是呢，并不代表ラクトアイス就不好吃，就像非常畅销的明治的スーパーカップ香草味冰激凌，就是ラクトアイス类别的冰激凌。我们从配料表里可以得知，除了ラクトアイス标准要求的固体乳脂肪成分之外，使用了植物油脂来提升的口感，味道也非常不错。
-但是植物油脂始终没有牛奶中的油脂动物油脂好，长期大量使用可能会有健康风险。毕竟牛奶是给小牛喝的，植物油脂是给小树喝的对吧。
-
-这些类别呢都会印在商品标签非常显眼的位置，可以一眼就能看到。
-
-我们实际去超市看一眼视频上常见的冰激凌都是什么类型。
-
-可以看到アイスクリーム类别价位都比较高，毕竟一分钱一分货。
-但是有的冰激凌为了追求风味，减少乳成分的情况。
-就比方说无印良品有一个酒糟冰激凌，虽然不是冰激凌类别，却也没有额外添加植物油脂，只是为了酒糟的风味加了很多酒糟进去，避免奶味盖过酒糟味从而适当减少了乳制品的含量。所以品质还是很高的。
-虽然也不用过分追求冰激凌的类别，但是作为消费者，在充分了解商品之后再做出选择才是合理的消费。
-那今天的视频就到这儿了，如果你觉得对你有帮助，希望你能给我点个赞然后订阅关注我，我们回头见。
-</mutableString>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+操作ヒント：</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HiraginoSans-W6"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="音量ボタンワンクリックでページダウン">
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HiraginoSans-W6"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">音量ボタンダブルクリックでページアップ
+音量ボタン長押しでプロンプター表示／非表示切り替えできます
+リモコンシャッターやキーボードも操作可能です</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HiraginoSans-W6"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="サンプル：">
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HiraginoSans-W6"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="  吾輩わがはいは猫である。名前はまだ無い。">
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HiraginoSans-W6"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <mutableString key="content">　どこで生れたかとんと見当けんとうがつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪どうあくな種族であったそうだ。この書生というのは時々我々を捕つかまえて煮にて食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌てのひらに載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始みはじめであろう。この時妙なものだと思った感じが今でも残っている。第一毛をもって装飾されべきはずの顔がつるつるしてまるで薬缶やかんだ。その後ご猫にもだいぶ逢あったがこんな片輪かたわには一度も出会でくわした事がない。のみならず顔の真中があまりに突起している。そうしてその穴の中から時々ぷうぷうと煙けむりを吹く。どうも咽むせぽくて実に弱った。これが人間の飲む煙草たばこというものである事はようやくこの頃知った。</mutableString>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HiraginoSans-W6"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">　この書生の掌の裏うちでしばらくはよい心持に坐っておったが、しばらくすると非常な速力で運転し始めた。書生が動くのか自分だけが動くのか分らないが無暗むやみに眼が廻る。胸が悪くなる。到底とうてい助からないと思っていると、どさりと音がして眼から火が出た。それまでは記憶しているがあとは何の事やらいくら考え出そうとしても分らない。</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HiraginoSans-W6"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                    <attributes>
+                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <font key="NSFont" size="22" name="HelveticaNeue-Bold"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ0-gL-orW">
-                            <rect key="frame" x="1177" y="8" width="60" height="40"/>
+                            <rect key="frame" x="973" y="8" width="60" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="k9o-x4-UbZ"/>
                                 <constraint firstAttribute="height" constant="40" id="trk-8n-ITN"/>
@@ -86,10 +195,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3v-zx-5hW">
-                    <rect key="frame" x="0.0" y="796" width="1245" height="120"/>
+                    <rect key="frame" x="1125" y="0.0" width="120" height="916"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ujm-3p-vMU">
-                            <rect key="frame" x="587.66666666666663" y="25" width="70" height="70"/>
+                            <rect key="frame" x="25" y="423" width="70" height="70"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="70" id="4lz-xK-Mb9"/>
@@ -145,13 +254,13 @@
                     </variation>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="P0N-wp-tWL">
-                    <rect key="frame" x="0.0" y="44" width="1245" height="40"/>
+                    <rect key="frame" x="44" y="0.0" width="40" height="895"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nyi-Yr-Vvo">
-                            <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUd-po-CTZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="camera_rotate"/>
@@ -166,10 +275,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOz-hT-8sZ">
-                            <rect key="frame" x="415" y="0.0" width="415" height="40"/>
+                            <rect key="frame" x="0.0" y="298.33333333333337" width="40" height="298.33333333333337"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoV-QF-ucO">
-                                    <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="doc_plaintext"/>
@@ -185,10 +294,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNN-4M-W7X">
-                            <rect key="frame" x="830" y="0.0" width="415" height="40"/>
+                            <rect key="frame" x="0.0" y="596.66666666666663" width="40" height="298.33333333333337"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udl-81-MuR">
-                                    <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>

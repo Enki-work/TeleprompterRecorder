@@ -85,6 +85,10 @@ extension UIWindow {
 extension UserDefaults {
     static let PrompterViewShowKey = "PrompterViewShowKey"
     
+    static func setDefaultValues() {
+        UserDefaults.standard.register(defaults: [PrompterViewShowKey : false])
+    }
+    
     var isPrompterViewShow: Bool {
         UserDefaults.standard.bool(forKey:  UserDefaults.PrompterViewShowKey)
     }
