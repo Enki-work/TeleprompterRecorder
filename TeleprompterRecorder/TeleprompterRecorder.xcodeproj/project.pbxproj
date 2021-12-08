@@ -152,6 +152,7 @@
 		A4A523872747B33E006B22F9 /* TeleprompterRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				A4F2F809275F87E800291618 /* Resource */,
 				A4A523F22749D3F1006B22F9 /* View */,
 				A4A523E62748884B006B22F9 /* ViewModel */,
 				A4A523E52748883B006B22F9 /* ViewController */,
@@ -160,8 +161,6 @@
 				A4A523882747B33E006B22F9 /* AppDelegate.swift */,
 				A4A5238A2747B33E006B22F9 /* SceneDelegate.swift */,
 				A4A5238E2747B33E006B22F9 /* Main.storyboard */,
-				A4A523912747B343006B22F9 /* Assets.xcassets */,
-				A4A523932747B343006B22F9 /* LaunchScreen.storyboard */,
 				A4A523962747B343006B22F9 /* Info.plist */,
 			);
 			path = TeleprompterRecorder;
@@ -262,6 +261,15 @@
 				A4DDBEE8274B31F4009199FC /* CaptureEncoder.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		A4F2F809275F87E800291618 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A4A523912747B343006B22F9 /* Assets.xcassets */,
+				A4A523932747B343006B22F9 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

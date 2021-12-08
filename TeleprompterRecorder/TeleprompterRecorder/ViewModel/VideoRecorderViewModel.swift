@@ -10,6 +10,7 @@ import RxCocoa
 import UIKit
 import AVFoundation
 import Photos
+import AudioToolbox
 
 final class VideoRecorderViewModel: ViewModelType {
     
@@ -70,11 +71,13 @@ final class VideoRecorderViewModel: ViewModelType {
             guard !isStopping else {return}
             if (isVideoWillStart) {
                 self.dependencies.captureManager.startRecording()
+                self.sound(id: 1113)
             } else {
                 isStopping = true
                 self.dependencies.captureManager.stopRecording {
                     isStopping = false
                 }
+                self.sound(id: 1114)
             }
         }).disposed(by: disposeBag)
         
@@ -105,5 +108,13 @@ final class VideoRecorderViewModel: ViewModelType {
                       formats: formats,
                       selectedFormat: dependencies.captureManager.selectedFormat,
                       didChangeCamera: didChangeCamera)
+    }
+    
+    private func sound(id: SystemSoundID) {
+        var id = id
+        if let soundUrl = CFBundleCopyResourceURL(CFBundleGetMainBundle(), nil, nil, nil) {
+            AudioServicesCreateSystemSoundID(soundUrl, &id)
+            AudioServicesPlaySystemSound(id)
+        }
     }
 }
