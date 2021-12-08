@@ -34,7 +34,19 @@ class CaptureButtonsView: UIView {
             notificationKey = "AVSystemController_SystemVolumeDidChangeNotification"
         }
         
-        let obserable = NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: notificationKey)).take(until: self.rx.deallocated).map { _ in}
+        let obserable = NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: notificationKey)).take(until: self.rx.deallocated).distinctUntilChanged({ a, b in
+            guard let aSequenceNumber = a.userInfo?["SequenceNumber"] as? Int,
+                  let bSequenceNumber = b.userInfo?["SequenceNumber"] as? Int,
+                  let aVolume = a.userInfo?["Volume"] as? Float,
+                  let bVolume = b.userInfo?["Volume"] as? Float else {
+                      return false
+                  }
+            if (aVolume == 1 && bVolume == 1) || (aVolume == 0 && bVolume == 0) {
+                return aSequenceNumber == bSequenceNumber
+            } else {
+                return aSequenceNumber == bSequenceNumber || aVolume == bVolume
+            }
+        }).map { _ in}
         let manualTap = PublishSubject<Void>()
         obserable.observe(on: MainScheduler.asyncInstance).subscribe(on: MainScheduler.asyncInstance)
             .flatMapFirst {_ in
