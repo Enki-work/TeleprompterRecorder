@@ -15,8 +15,12 @@ class FormatListViewController: UIViewController {
 
     @IBOutlet weak var naviBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var isHDRSwitch: UISwitch!
+    @IBOutlet weak var isHDRBtn: UIBarButtonItem!
     
     let disposeBag = DisposeBag()
+    var tableViewDisposable: Disposable?
+    
     let selectedFormat = PublishSubject<AVCaptureDevice.Format>()
     let viewModel = FormatListViewModel()
     
@@ -55,15 +59,34 @@ class FormatListViewController: UIViewController {
             self?.dismiss(animated: true)
         }).disposed(by: disposeBag)
         
-        bindViewModel()
+        
+        isHDRSwitch.rx.value.subscribe(onNext: { [weak self] value in
+            guard let self = self else {return}
+            self.bindViewModel(value: value)
+        }).disposed(by: disposeBag)
+        
     }
     
-    private func bindViewModel() {
-        let input = FormatListViewModel.Input(formats: .just(formats))
-
-        let output = viewModel.transform(input: input)
-        
-        output.datas.asObservable().bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+    private func bindViewModel(value: Bool) {
+        tableView.delegate = nil
+        tableView.dataSource = nil
+        tableViewDisposable?.dispose()
+        if value {
+            if #available(iOS 14.1, *) {
+                let HDRFormats = formats.supportFormats.filter({$0.supportedColorSpaces.contains(where: {$0 == .HLG_BT2020})})
+                let input = FormatListViewModel.Input(formats: .just((activeFormat: formats.activeFormat,
+                                                                      supportFormats: HDRFormats)))
+                let output = viewModel.transform(input: input)
+                tableViewDisposable = output.datas.asObservable().bind(to: tableView.rx.items(dataSource: dataSource))
+            } else {
+                isHDRSwitch.setOn(false, animated: true)
+            }
+        } else {
+            let SDRFormats = formats.supportFormats.filter({$0.supportedColorSpaces.contains(where: {$0 == .P3_D65 || $0 == .sRGB})})
+            let input = FormatListViewModel.Input(formats: .just((activeFormat: formats.activeFormat,
+                                                                  supportFormats: SDRFormats)))
+            let output = viewModel.transform(input: input)
+            tableViewDisposable = output.datas.asObservable().bind(to: tableView.rx.items(dataSource: dataSource))
+        }
     }
 }

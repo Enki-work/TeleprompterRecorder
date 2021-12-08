@@ -20,7 +20,17 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DAX-Rq-uKM">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
-                                    <navigationItem title="Title" id="Dh2-65-UPo"/>
+                                    <navigationItem title="Title" id="Dh2-65-UPo">
+                                        <rightBarButtonItems>
+                                            <barButtonItem style="plain" id="Ril-j8-7kv">
+                                                <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="8oK-eS-aaF">
+                                                    <rect key="frame" x="343" y="12.5" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </switch>
+                                            </barButtonItem>
+                                            <barButtonItem title="HDR" id="QAn-ud-fIP"/>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BGR-h9-fct">
@@ -41,6 +51,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="isHDRBtn" destination="QAn-ud-fIP" id="vKW-xh-zYB"/>
+                        <outlet property="isHDRSwitch" destination="8oK-eS-aaF" id="tEi-xu-Bk1"/>
                         <outlet property="naviBar" destination="DAX-Rq-uKM" id="UAP-06-7L4"/>
                         <outlet property="tableView" destination="BGR-h9-fct" id="pb5-th-05q"/>
                     </connections>
