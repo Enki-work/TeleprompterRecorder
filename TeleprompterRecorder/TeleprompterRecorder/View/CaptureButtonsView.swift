@@ -14,7 +14,13 @@ class CaptureButtonsView: UIView {
     @IBOutlet weak var formatChangeBtn: UIButton!
     @IBOutlet weak var changeCameraBtn: UIButton!
     @IBOutlet weak var prompterBtn: UIButton!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: UITextView! {
+        didSet {
+            if let attributedText = UserDefaults.standard.prompterText {
+                textView.attributedText = attributedText
+            }
+        }
+    }
     @IBOutlet weak var textViewBg: UIView!
     @IBOutlet weak var textViewEditButton: UIButton!
     
@@ -26,6 +32,7 @@ class CaptureButtonsView: UIView {
         prompterBtn.imageView?.contentMode = .scaleAspectFit
         recordBtn.rx.tap.map({[weak self] in self?.recordBtn.isSelected ?? true}).bind(to: formatChangeBtn.rx.isEnabled).disposed(by: disposeBag)
         recordBtn.rx.tap.map({[weak self] in self?.recordBtn.isSelected ?? true}).bind(to: changeCameraBtn.rx.isEnabled).disposed(by: disposeBag)
+        
         
         var notificationKey = ""
         if #available(iOS 15.0, *) {
@@ -113,6 +120,11 @@ class CaptureButtonsView: UIView {
                 self.textView.resignFirstResponder()
             }
         }).disposed(by: disposeBag)
+        textView.rx.didEndEditing.subscribe(onNext: { [weak self] in
+            guard let self = self else {return}
+            UserDefaults.standard.setPrompterText(text: self.textView.attributedText)
+        }).disposed(by: disposeBag)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

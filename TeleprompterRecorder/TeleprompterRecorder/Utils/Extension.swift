@@ -84,6 +84,7 @@ extension UIWindow {
 
 extension UserDefaults {
     static let PrompterViewShowKey = "PrompterViewShowKey"
+    static let PrompterTextKey = "PrompterTextKey"
     static let isHDRSwitchKey = "isHDRSwitchKey"
     
     static func setDefaultValues() {
@@ -105,5 +106,18 @@ extension UserDefaults {
     
     func setHDRSwitchKey(value: Bool) {
         UserDefaults.standard.set(value, forKey: UserDefaults.isHDRSwitchKey)
+    }
+    
+    var prompterText: NSAttributedString? {
+        guard let strData = UserDefaults.standard.object(forKey:  UserDefaults.PrompterTextKey) as? Data else {
+            return nil
+        }
+        return try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(strData) as? NSAttributedString
+    }
+    
+    func setPrompterText(text: NSAttributedString) {
+        if let strData = try? NSKeyedArchiver.archivedData(withRootObject: text, requiringSecureCoding: true) {
+            UserDefaults.standard.set(strData, forKey: UserDefaults.PrompterTextKey)
+        }
     }
 }
