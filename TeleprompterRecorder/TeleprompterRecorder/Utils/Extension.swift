@@ -84,9 +84,11 @@ extension UIWindow {
 
 extension UserDefaults {
     static let PrompterViewShowKey = "PrompterViewShowKey"
+    static let isHDRSwitchKey = "isHDRSwitchKey"
     
     static func setDefaultValues() {
         UserDefaults.standard.register(defaults: [PrompterViewShowKey : false])
+        UserDefaults.standard.register(defaults: [isHDRSwitchKey : false])
     }
     
     var isPrompterViewShow: Bool {
@@ -95,5 +97,13 @@ extension UserDefaults {
     
     func setPrompterViewShow(value: Bool) {
         UserDefaults.standard.set(value, forKey: UserDefaults.PrompterViewShowKey)
+    }
+    
+    var isHDRSwitchKey: Bool {
+        UserDefaults.standard.bool(forKey:  UserDefaults.isHDRSwitchKey)
+    }
+    
+    func setHDRSwitchKey(value: Bool) {
+        UserDefaults.standard.set(value, forKey: UserDefaults.isHDRSwitchKey)
     }
 }
