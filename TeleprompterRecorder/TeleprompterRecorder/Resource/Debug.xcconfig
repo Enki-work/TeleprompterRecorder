@@ -1,0 +1,15 @@
+//
+//  Debug.xcconfig
+//  TeleprompterRecorder
+//
+//  Created by YanQi on 2021/12/10.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+APP_OPEN_AD_ID = @"ca-app-pub-3940256099942544/3419835294"
+APP_REWARDED_AD_ID = @"ca-app-pub-3940256099942544/5224354917"
+APP_BANNER_AD_ID = @"ca-app-pub-3940256099942544/6300978111"
+APP_AD_ID = ca-app-pub-3940256099942544~1458002511
+#include "Common.xcconfig"

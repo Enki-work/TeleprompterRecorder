@@ -103,6 +103,9 @@
 		A4F2F81627609BE500291618 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A4F2F8202760E31900291618 /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMobileAds.xcframework; sourceTree = "<group>"; };
 		A4F2F82227631A4300291618 /* TeleprompterRecorder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeleprompterRecorder.entitlements; sourceTree = "<group>"; };
+		A4F2F82327633ED400291618 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		A4F2F82427633EF500291618 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		A4F2F82527633F0C00291618 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +286,9 @@
 				A4F2F8202760E31900291618 /* GoogleMobileAds.xcframework */,
 				A4A523912747B343006B22F9 /* Assets.xcassets */,
 				A4A523932747B343006B22F9 /* LaunchScreen.storyboard */,
+				A4F2F82327633ED400291618 /* Common.xcconfig */,
+				A4F2F82427633EF500291618 /* Debug.xcconfig */,
+				A4F2F82527633F0C00291618 /* Release.xcconfig */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -537,6 +543,7 @@
 /* Begin XCBuildConfiguration section */
 		A4A523AD2747B344006B22F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4F2F82327633ED400291618 /* Common.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -598,6 +605,7 @@
 		};
 		A4A523AE2747B344006B22F9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4F2F82327633ED400291618 /* Common.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -653,6 +661,7 @@
 		};
 		A4A523B02747B344006B22F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4F2F82427633EF500291618 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -689,6 +698,7 @@
 		};
 		A4A523B12747B344006B22F9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4F2F82527633F0C00291618 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
