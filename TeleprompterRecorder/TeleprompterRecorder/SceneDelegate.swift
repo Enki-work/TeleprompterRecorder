@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AppTrackingTransparency
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -27,8 +28,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        
+        if let currentVC = window?.rootViewController {
+            if #available(iOS 14, *) {
+                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                    appDelegate.showAdIfAvailable(viewController: currentVC)
+                })
+            } else {
+                appDelegate.showAdIfAvailable(viewController: currentVC)
+            }
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
