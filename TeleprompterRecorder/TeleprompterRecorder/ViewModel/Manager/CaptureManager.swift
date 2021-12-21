@@ -140,7 +140,6 @@ class CaptureManager: NSObject {
         } catch {
             debugPrint(error)
         }
-        try? FileManager.default.removeItem(atPath: cachePath)
         self.captureSession.startRunning()
         selectUserDefaultFormat()
     }
@@ -240,10 +239,14 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         return cachePath + "/" + fileName
     }
     
-    private var cachePath: String {
+    static var cachePath: String {
         (NSSearchPathForDirectoriesInDomains(.cachesDirectory,
                                              .userDomainMask,
                                              true).first! as String) + "/videos"
+    }
+    
+    private var cachePath: String {
+        CaptureManager.cachePath
     }
     
     private func adjustTime(sample: CMSampleBuffer, offset: CMTime) -> CMSampleBuffer? {
