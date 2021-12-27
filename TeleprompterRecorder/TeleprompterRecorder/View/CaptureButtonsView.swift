@@ -14,6 +14,7 @@ class CaptureButtonsView: UIView {
     @IBOutlet weak var formatChangeBtn: UIButton!
     @IBOutlet weak var changeCameraBtn: UIButton!
     @IBOutlet weak var prompterBtn: UIButton!
+    @IBOutlet weak var textViewEditButton: UIButton!
     @IBOutlet weak var textView: UITextView! {
         didSet {
             if let attributedText = UserDefaults.standard.prompterText {
@@ -22,7 +23,6 @@ class CaptureButtonsView: UIView {
         }
     }
     @IBOutlet weak var textViewBg: UIView!
-    @IBOutlet weak var textViewEditButton: UIButton!
     
     let disposeBag = DisposeBag()
     

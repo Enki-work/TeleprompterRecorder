@@ -17,7 +17,7 @@ class FormatListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var isHDRSwitch: UISwitch! {
         didSet {
-            isHDRSwitch.isOn = UserDefaults.standard.isHDRSwitchKey
+            isHDRSwitch.isOn = UserDefaults.standard.isHDRSwitch
         }
     }
     @IBOutlet weak var isHDRBtn: UIBarButtonItem!
@@ -67,7 +67,7 @@ class FormatListViewController: UIViewController {
         isHDRSwitch.rx.value.subscribe(onNext: { [weak self] value in
             guard let self = self else {return}
             self.bindViewModel(value: value)
-            UserDefaults.standard.setHDRSwitchKey(value: value)
+            UserDefaults.standard.setHDRSwitch(value: value)
         }).disposed(by: disposeBag)
         
     }

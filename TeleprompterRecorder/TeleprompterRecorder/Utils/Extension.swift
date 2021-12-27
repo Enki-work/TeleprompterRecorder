@@ -109,11 +109,11 @@ extension UserDefaults {
         UserDefaults.standard.set(value, forKey: UserDefaults.PrompterViewShowKey)
     }
     
-    var isHDRSwitchKey: Bool {
+    var isHDRSwitch: Bool {
         UserDefaults.standard.bool(forKey:  UserDefaults.isHDRSwitchKey)
     }
     
-    func setHDRSwitchKey(value: Bool) {
+    func setHDRSwitch(value: Bool) {
         UserDefaults.standard.set(value, forKey: UserDefaults.isHDRSwitchKey)
     }
     
