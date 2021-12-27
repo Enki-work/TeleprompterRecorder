@@ -109,17 +109,6 @@ class CaptureButtonsView: UIView {
         }).startWith(UserDefaults.standard.isPrompterViewShow).map({!$0})
         willPrompterBtnSelect.asObservable().bind(to: prompterBtn.rx.isSelected).disposed(by: disposeBag)
         willPrompterBtnSelect.asObservable().bind(to: textViewBg.rx.isHidden).disposed(by: disposeBag)
-        textViewEditButton.rx.tap.subscribe(onNext: { [weak self] in
-            guard let self = self else {return}
-            self.textViewEditButton.isSelected = !self.textViewEditButton.isSelected
-            self.textView.isEditable = self.textViewEditButton.isSelected
-            self.textView.isSelectable = self.textViewEditButton.isSelected
-            if self.textViewEditButton.isSelected {
-                self.textView.becomeFirstResponder()
-            } else {
-                self.textView.resignFirstResponder()
-            }
-        }).disposed(by: disposeBag)
         textView.rx.didEndEditing.subscribe(onNext: { [weak self] in
             guard let self = self else {return}
             UserDefaults.standard.setPrompterText(text: self.textView.attributedText)

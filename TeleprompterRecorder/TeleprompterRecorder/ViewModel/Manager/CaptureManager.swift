@@ -60,7 +60,9 @@ class CaptureManager: NSObject {
     }
     
     func initSetting() {
-        
+        guard !self.captureSession.isRunning else {
+            return
+        }
         captureSession.beginConfiguration()
         if (captureSession.canSetSessionPreset(.high)) {
             captureSession.sessionPreset = .high

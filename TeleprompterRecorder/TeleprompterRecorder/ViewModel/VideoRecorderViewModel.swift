@@ -19,6 +19,7 @@ final class VideoRecorderViewModel: ViewModelType {
         let isVideoWillStart: Driver<Bool>
         let formats: Driver<Void>
         let changeCamera: Driver<Void>
+        let prompterTextEditBtnClick: Driver<UIButton?>
     }
     
     struct Output {
@@ -80,6 +81,28 @@ final class VideoRecorderViewModel: ViewModelType {
                 self.sound(id: 1114)
             }
         }).disposed(by: disposeBag)
+        
+        input.prompterTextEditBtnClick.drive(onNext: { [weak self] btn in
+            guard let self = self, let btn = btn else {return}
+            btn.isUserInteractionEnabled = false
+            let rewardedVideoManager = RewardedVideoManager()
+            rewardedVideoManager.showRewardedVideoAd {[weak self] result  in
+                guard let self = self, result else {return}
+                btn.isUserInteractionEnabled = true
+            }
+            
+            //            self.textViewEditButton.isSelected = !self.textViewEditButton.isSelected
+            //            self.textView.isEditable = self.textViewEditButton.isSelected
+            //            self.textView.isSelectable = self.textViewEditButton.isSelected
+            //            if self.textViewEditButton.isSelected {
+            //                self.textView.becomeFirstResponder()
+            //            } else {
+            //                self.textView.resignFirstResponder()
+            //            }
+            
+            
+        }).disposed(by: disposeBag)
+        
         
         let formats: Driver<(activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format])?> = input.formats.flatMap { _ in
             return self.dependencies.captureManager.currentCameraFormat

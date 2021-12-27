@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4A45E9E2775C557004D7D4E /* RewardedVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A45E9D2775C557004D7D4E /* RewardedVideoManager.swift */; };
 		A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523882747B33E006B22F9 /* AppDelegate.swift */; };
 		A4A5238B2747B33E006B22F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5238A2747B33E006B22F9 /* SceneDelegate.swift */; };
 		A4A523902747B33E006B22F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4A5238E2747B33E006B22F9 /* Main.storyboard */; };
@@ -66,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A4A45E9D2775C557004D7D4E /* RewardedVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideoManager.swift; sourceTree = "<group>"; };
 		A4A523852747B33E006B22F9 /* TeleprompterRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeleprompterRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A523882747B33E006B22F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4A5238A2747B33E006B22F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 		A4A523F5274A0297006B22F9 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				A4A45E9D2775C557004D7D4E /* RewardedVideoManager.swift */,
 				A4A523F6274A02C2006B22F9 /* CaptureManager.swift */,
 				A4DDBEE8274B31F4009199FC /* CaptureEncoder.swift */,
 			);
@@ -477,6 +480,7 @@
 				A4DDBEF4274DCBF5009199FC /* LocalDeviceFormat.swift in Sources */,
 				A4A523E4274887CA006B22F9 /* VideoRecorderViewController.swift in Sources */,
 				A4A523DE2747CDB3006B22F9 /* ActivityIndicator.swift in Sources */,
+				A4A45E9E2775C557004D7D4E /* RewardedVideoManager.swift in Sources */,
 				A4DDBEF0274D37FD009199FC /* MySection.swift in Sources */,
 				A4A523EF2748A483006B22F9 /* RxExtension.swift in Sources */,
 				A4DDBEF2274D38AE009199FC /* FormatListViewModel.swift in Sources */,

@@ -17,10 +17,12 @@ extension UIViewController {
 
 extension UIAlertController {
     
-    static func showCancelAlert(title: String, message: String? = nil, cancelBtnTitle: String = "OK") {
+    static func showCancelAlert(title: String, message: String? = nil,
+                                cancelBtnTitle: String = "OK",
+                                handler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title,
                                                 message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: cancelBtnTitle, style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: cancelBtnTitle, style: .cancel, handler: handler)
         alertController.addAction(cancelAction)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             UIViewController.rootViewController?.present(alertController, animated: true, completion: nil)
