@@ -82,17 +82,22 @@ final class VideoRecorderViewModel: ViewModelType {
             }
         }).disposed(by: disposeBag)
         
-        input.prompterTextEditBtnClick.drive(onNext: { [weak self] captureButtonsView in
+        input.prompterTextEditBtnClick.drive(onNext: {captureButtonsView in
             guard let captureButtonsView = captureButtonsView else {return}
             
             if UserDefaults.standard.isPrompterAdsShow && !captureButtonsView.textViewEditButton.isSelected {
                 
-                captureButtonsView.isUserInteractionEnabled = false
-                let rewardedVideoManager = RewardedVideoManager()
-                rewardedVideoManager.showRewardedVideoAd {result in
-                    guard result else {return}
-                    captureButtonsView.isUserInteractionEnabled = true
-                    UserDefaults.standard.setPrompterAdsDate(value: .init())
+                UIAlertController.showTwoBtnAlert(title: "リワード広告見たら\n24時間プロンプター自由に編集可能となります",
+                                                  message: nil,
+                                                  cancelBtnTitle: "キャンセル",
+                                                  secondBtnTitle: "広告表示する") { action in
+                    captureButtonsView.isUserInteractionEnabled = false
+                    let rewardedVideoManager = RewardedVideoManager()
+                    rewardedVideoManager.showRewardedVideoAd {result in
+                        guard result else {return}
+                        captureButtonsView.isUserInteractionEnabled = true
+                        UserDefaults.standard.setPrompterAdsDate(value: .init())
+                    }
                 }
             } else {
                 
