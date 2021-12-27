@@ -88,6 +88,13 @@ extension UserDefaults {
     static let PrompterViewShowKey = "PrompterViewShowKey"
     static let PrompterTextKey = "PrompterTextKey"
     static let isHDRSwitchKey = "isHDRSwitchKey"
+    static let isPrompterAdsShowKey = "isPrompterAdsShowKey"
+    
+#if DEBUG
+    private static let isPrompterAdsInterval: CGFloat = 60
+#else
+    private static let isPrompterAdsInterval: CGFloat = 60 * 60 * 24
+#endif
     
     static func setDefaultValues() {
         UserDefaults.standard.register(defaults: [PrompterViewShowKey : false])
@@ -108,6 +115,17 @@ extension UserDefaults {
     
     func setHDRSwitchKey(value: Bool) {
         UserDefaults.standard.set(value, forKey: UserDefaults.isHDRSwitchKey)
+    }
+    
+    var isPrompterAdsShow: Bool {
+        guard let showedDate = UserDefaults.standard.object(forKey: UserDefaults.isPrompterAdsShowKey) as? Date else {
+            return true
+        }
+        return Date().timeIntervalSince(showedDate) > UserDefaults.isPrompterAdsInterval
+    }
+    
+    func setPrompterAdsDate(value: Date) {
+        UserDefaults.standard.set(value, forKey: UserDefaults.isPrompterAdsShowKey)
     }
     
     var prompterText: NSAttributedString? {

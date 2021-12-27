@@ -19,7 +19,7 @@ final class VideoRecorderViewModel: ViewModelType {
         let isVideoWillStart: Driver<Bool>
         let formats: Driver<Void>
         let changeCamera: Driver<Void>
-        let prompterTextEditBtnClick: Driver<UIButton?>
+        let prompterTextEditBtnClick: Driver<CaptureButtonsView?>
     }
     
     struct Output {
@@ -82,23 +82,29 @@ final class VideoRecorderViewModel: ViewModelType {
             }
         }).disposed(by: disposeBag)
         
-        input.prompterTextEditBtnClick.drive(onNext: { [weak self] btn in
-            guard let self = self, let btn = btn else {return}
-            btn.isUserInteractionEnabled = false
-            let rewardedVideoManager = RewardedVideoManager()
-            rewardedVideoManager.showRewardedVideoAd {[weak self] result  in
-                guard let self = self, result else {return}
-                btn.isUserInteractionEnabled = true
-            }
+        input.prompterTextEditBtnClick.drive(onNext: { [weak self] captureButtonsView in
+            guard let captureButtonsView = captureButtonsView else {return}
             
-            //            self.textViewEditButton.isSelected = !self.textViewEditButton.isSelected
-            //            self.textView.isEditable = self.textViewEditButton.isSelected
-            //            self.textView.isSelectable = self.textViewEditButton.isSelected
-            //            if self.textViewEditButton.isSelected {
-            //                self.textView.becomeFirstResponder()
-            //            } else {
-            //                self.textView.resignFirstResponder()
-            //            }
+            if UserDefaults.standard.isPrompterAdsShow && !captureButtonsView.textViewEditButton.isSelected {
+                
+                captureButtonsView.isUserInteractionEnabled = false
+                let rewardedVideoManager = RewardedVideoManager()
+                rewardedVideoManager.showRewardedVideoAd {result in
+                    guard result else {return}
+                    captureButtonsView.isUserInteractionEnabled = true
+                    UserDefaults.standard.setPrompterAdsDate(value: .init())
+                }
+            } else {
+                
+                captureButtonsView.textViewEditButton.isSelected = !captureButtonsView.textViewEditButton.isSelected
+                captureButtonsView.textView.isEditable = captureButtonsView.textViewEditButton.isSelected
+                captureButtonsView.textView.isSelectable = captureButtonsView.textViewEditButton.isSelected
+                if captureButtonsView.textViewEditButton.isSelected {
+                    captureButtonsView.textView.becomeFirstResponder()
+                } else {
+                    captureButtonsView.textView.resignFirstResponder()
+                }
+            }
             
             
         }).disposed(by: disposeBag)
