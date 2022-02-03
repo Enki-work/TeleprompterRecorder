@@ -23,6 +23,8 @@ class CaptureButtonsView: UIView {
         }
     }
     @IBOutlet weak var textViewBg: UIView!
+    @IBOutlet weak var openPhotoBtn: UIButton!
+    @IBOutlet weak var openMenuBtn: UIButton!
     
     let disposeBag = DisposeBag()
     

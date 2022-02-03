@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_0" orientation="landscape" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -16,10 +16,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-Ow-qRx">
-                    <rect key="frame" x="84" y="0.0" width="1041" height="916"/>
+                    <rect key="frame" x="0.0" y="84" width="1245" height="712"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-YC-ekz">
-                            <rect key="frame" x="0.0" y="0.0" width="1041" height="916"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1245" height="712"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <attributedString key="attributedText">
                                 <fragment>
@@ -134,7 +134,7 @@ Cg
                                     </attributes>
                                 </fragment>
                                 <fragment>
-                                    <mutableString key="content">　どこで生れたかとんと見当けんとうがつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪どうあくな種族であったそうだ。この書生というのは時々我々を捕つかまえて煮にて食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌てのひらに載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始みはじめであろう。この時妙なものだと思った感じが今でも残っている。第一毛をもって装飾されべきはずの顔がつるつるしてまるで薬缶やかんだ。その後ご猫にもだいぶ逢あったがこんな片輪かたわには一度も出会でくわした事がない。のみならず顔の真中があまりに突起している。そうしてその穴の中から時々ぷうぷうと煙けむりを吹く。どうも咽むせぽくて実に弱った。これが人間の飲む煙草たばこというものである事はようやくこの頃知った。</mutableString>
+                                    <string key="content">　どこで生れたかとんと見当けんとうがつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪どうあくな種族であったそうだ。この書生というのは時々我々を捕つかまえて煮にて食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌てのひらに載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始みはじめであろう。この時妙なものだと思った感じが今でも残っている。第一毛をもって装飾されべきはずの顔がつるつるしてまるで薬缶やかんだ。その後ご猫にもだいぶ逢あったがこんな片輪かたわには一度も出会でくわした事がない。のみならず顔の真中があまりに突起している。そうしてその穴の中から時々ぷうぷうと煙けむりを吹く。どうも咽むせぽくて実に弱った。これが人間の飲む煙草たばこというものである事はようやくこの頃知った。</string>
                                     <attributes>
                                         <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <font key="NSFont" size="22" name="HiraginoSans-W6"/>
@@ -173,7 +173,7 @@ Cg
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ0-gL-orW">
-                            <rect key="frame" x="973" y="8" width="60" height="40"/>
+                            <rect key="frame" x="1177" y="8" width="60" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="k9o-x4-UbZ"/>
                                 <constraint firstAttribute="height" constant="40" id="trk-8n-ITN"/>
@@ -195,10 +195,10 @@ Cg
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3v-zx-5hW">
-                    <rect key="frame" x="1125" y="0.0" width="120" height="916"/>
+                    <rect key="frame" x="0.0" y="796" width="1245" height="120"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ujm-3p-vMU">
-                            <rect key="frame" x="25" y="423" width="70" height="70"/>
+                            <rect key="frame" x="587.66666666666663" y="25" width="70" height="70"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="70" id="4lz-xK-Mb9"/>
@@ -211,15 +211,37 @@ Cg
                             </state>
                             <state key="selected" image="stop_circle_fill"/>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqC-4N-Ba3">
+                            <rect key="frame" x="1163" y="35" width="70" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="ItN-Yg-YOw"/>
+                                <constraint firstAttribute="width" constant="70" id="xN5-98-CKR"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="menu"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUV-Wd-qwe">
+                            <rect key="frame" x="12" y="35" width="70" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="fbM-1b-Bwm"/>
+                                <constraint firstAttribute="height" constant="50" id="u6i-x7-ub6"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="photo"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="CqC-4N-Ba3" secondAttribute="trailing" constant="12" id="CwB-MF-WKl"/>
                         <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerY" secondItem="S3v-zx-5hW" secondAttribute="centerY" id="H8r-dw-oWl"/>
                         <constraint firstAttribute="height" constant="120" id="MhX-6r-8TA"/>
                         <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerY" secondItem="S3v-zx-5hW" secondAttribute="centerY" id="PaH-6i-GX6"/>
+                        <constraint firstItem="CqC-4N-Ba3" firstAttribute="centerY" secondItem="S3v-zx-5hW" secondAttribute="centerY" id="Wy7-de-ZCf"/>
                         <constraint firstAttribute="width" constant="120" id="kHk-6S-YDP"/>
+                        <constraint firstItem="UUV-Wd-qwe" firstAttribute="leading" secondItem="S3v-zx-5hW" secondAttribute="leading" constant="12" id="om6-9P-beC"/>
                         <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerX" secondItem="S3v-zx-5hW" secondAttribute="centerX" id="qTW-d3-bZy"/>
                         <constraint firstItem="Ujm-3p-vMU" firstAttribute="centerX" secondItem="S3v-zx-5hW" secondAttribute="centerX" id="tQQ-HY-r3O"/>
+                        <constraint firstItem="UUV-Wd-qwe" firstAttribute="centerY" secondItem="S3v-zx-5hW" secondAttribute="centerY" id="u1z-bw-N0H"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -254,13 +276,13 @@ Cg
                     </variation>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="P0N-wp-tWL">
-                    <rect key="frame" x="44" y="0.0" width="40" height="895"/>
+                    <rect key="frame" x="0.0" y="44" width="1245" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nyi-Yr-Vvo">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
+                            <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUd-po-CTZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="camera_rotate"/>
@@ -275,10 +297,10 @@ Cg
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOz-hT-8sZ">
-                            <rect key="frame" x="0.0" y="298.33333333333337" width="40" height="298.33333333333337"/>
+                            <rect key="frame" x="415" y="0.0" width="415" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoV-QF-ucO">
-                                    <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="doc_plaintext"/>
@@ -294,10 +316,10 @@ Cg
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNN-4M-W7X">
-                            <rect key="frame" x="0.0" y="596.66666666666663" width="40" height="298.33333333333337"/>
+                            <rect key="frame" x="830" y="0.0" width="415" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udl-81-MuR">
-                                    <rect key="frame" x="0.0" y="0.0" width="40" height="298.33333333333331"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -436,6 +458,8 @@ Cg
             <connections>
                 <outlet property="changeCameraBtn" destination="UUd-po-CTZ" id="3SO-fW-lA3"/>
                 <outlet property="formatChangeBtn" destination="Udl-81-MuR" id="j40-Q7-ny6"/>
+                <outlet property="openMenuBtn" destination="CqC-4N-Ba3" id="wcc-Ku-2FB"/>
+                <outlet property="openPhotoBtn" destination="UUV-Wd-qwe" id="9k4-vZ-sGs"/>
                 <outlet property="prompterBtn" destination="RoV-QF-ucO" id="oGz-4l-HJk"/>
                 <outlet property="recordBtn" destination="Ujm-3p-vMU" id="yy0-bO-tIB"/>
                 <outlet property="textView" destination="e3f-YC-ekz" id="psz-Tw-sPg"/>
@@ -450,6 +474,8 @@ Cg
         <image name="doc_plaintext" width="100" height="100"/>
         <image name="doc_plaintext_clear" width="100" height="100"/>
         <image name="linked_camera" width="100" height="100"/>
+        <image name="menu" width="48" height="48"/>
+        <image name="photo" width="48" height="48"/>
         <image name="stop_circle_fill" width="100" height="100"/>
         <image name="videocam_circle" width="100" height="100"/>
         <systemColor name="systemRedColor">

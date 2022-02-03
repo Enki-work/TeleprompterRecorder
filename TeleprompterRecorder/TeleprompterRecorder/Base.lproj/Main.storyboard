@@ -88,11 +88,57 @@
                     <navigationItem key="navigationItem" id="oZG-jw-XVt"/>
                     <connections>
                         <segue destination="I3z-uY-eUI" kind="presentation" identifier="showformatlist" id="u5J-7X-D4K"/>
+                        <segue destination="Rmd-4F-gS4" kind="presentation" identifier="showMenu" id="Wf0-AG-Oaa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQh-l7-e1q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-74" y="89"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="ZCs-Vj-8ex">
+            <objects>
+                <tableViewController id="IMi-mq-Og7" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="nY6-zc-6bz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="aKx-ey-ajT">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aKx-ey-ajT" id="3NV-Hg-pZo">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IMi-mq-Og7" id="vox-CD-3dO"/>
+                            <outlet property="delegate" destination="IMi-mq-Og7" id="WJu-EV-sVl"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="iz8-ka-aDG"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cWW-S2-Q4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="814" y="848"/>
+        </scene>
+        <!--Side Menu Navigation Controller-->
+        <scene sceneID="9b8-L9-hwZ">
+            <objects>
+                <navigationController id="Rmd-4F-gS4" customClass="SideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XqO-Dr-lP7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="IMi-mq-Og7" kind="relationship" relationship="rootViewController" id="dDT-kA-wEz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hQI-tU-GW7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-75" y="848"/>
         </scene>
     </scenes>
     <resources>
