@@ -84,10 +84,16 @@ class FormatListViewController: UIViewController {
                 let output = viewModel.transform(input: input)
                 tableViewDisposable = output.datas.asObservable().bind(to: tableView.rx.items(dataSource: dataSource))
             } else {
-                isHDRSwitch.setOn(false, animated: true)
+                tableViewDisposable = Observable<[MySection]>.just([]).bind(to: tableView.rx.items(dataSource: dataSource))
             }
         } else {
-            let SDRFormats = formats.supportFormats.filter({$0.supportedColorSpaces.contains(where: {$0 == .P3_D65 || $0 == .sRGB})})
+            var SDRFormats: [AVCaptureDevice.Format] = []
+            if #available(iOS 14.1, *) {
+                SDRFormats = formats.supportFormats.filter({$0.supportedColorSpaces.contains(where: {($0 == .P3_D65 || $0 == .sRGB) && $0 != .HLG_BT2020})})
+            } else {
+                
+                SDRFormats = formats.supportFormats.filter({$0.supportedColorSpaces.contains(where: {$0 == .P3_D65 || $0 == .sRGB})})
+            }
             let input = FormatListViewModel.Input(formats: .just((activeFormat: formats.activeFormat,
                                                                   supportFormats: SDRFormats)))
             let output = viewModel.transform(input: input)
