@@ -31,6 +31,7 @@ final class VideoRecorderViewModel: ViewModelType {
     
     struct Dependencies {
         let captureManager: CaptureManager
+        let videoRecorderVC: VideoRecorderViewController
     }
     
     private let dependencies: Dependencies
@@ -138,6 +139,87 @@ final class VideoRecorderViewModel: ViewModelType {
             }
         }.disposed(by: disposeBag)
         
+        var notificationKey = ""
+        if #available(iOS 15.0, *) {
+            notificationKey = "SystemVolumeDidChange"
+        } else {
+            notificationKey = "AVSystemController_SystemVolumeDidChangeNotification"
+        }
+        
+        let obserable = NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: notificationKey)).take(until: dependencies.videoRecorderVC.rx.deallocated).distinctUntilChanged({ a, b in
+            if #available(iOS 15.0, *) {
+                guard let aSequenceNumber = a.userInfo?["SequenceNumber"] as? Int,
+                      let bSequenceNumber = b.userInfo?["SequenceNumber"] as? Int,
+                      let aVolume = a.userInfo?["Volume"] as? Float,
+                      let bVolume = b.userInfo?["Volume"] as? Float else {
+                          return false
+                      }
+                if (aVolume == 1 && bVolume == 1) || (aVolume == 0 && bVolume == 0) {
+                    return aSequenceNumber == bSequenceNumber
+                } else {
+                    return aSequenceNumber == bSequenceNumber || aVolume == bVolume
+                }
+            } else {
+                guard let aVolume = a.userInfo?["AVSystemController_AudioVolumeNotificationParameter"] as? Float,
+                      let bVolume = b.userInfo?["AVSystemController_AudioVolumeNotificationParameter"] as? Float else {
+                          return false
+                      }
+                if (aVolume == 1 && bVolume == 1) || (aVolume == 0 && bVolume == 0) {
+                    return false
+                } else {
+                    return aVolume == bVolume
+                }
+            }
+        }).map { _ in}
+        let manualTap = PublishSubject<Void>()
+        obserable.observe(on: MainScheduler.asyncInstance).subscribe(on: MainScheduler.asyncInstance)
+            .flatMapFirst {_ in
+                obserable
+                    .take(until: obserable.startWith(()).debounce(.milliseconds(500), scheduler: MainScheduler.instance))
+                    .startWith(())
+                    .reduce(0) { acc, _ in acc + 1 }
+            }.delaySubscription(.milliseconds(1000), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] times in
+                let offset: CGFloat = 30
+                if (times == 1) {
+                    guard let self = self,
+                          !self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.isHidden,
+                          self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.contentSize.height >= self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.contentOffset.y else {return}
+
+                    let shouldY = min(self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.contentOffset.y + self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.bounds.height - offset , self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.contentSize.height - self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.bounds.height)
+                    self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.setContentOffset(.init(x: self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.contentOffset.x, y: shouldY), animated: true)
+                } else if times == 2 {
+                    guard let self = self,
+                    !self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.isHidden,
+                          self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.contentOffset.y >= 0 else {return}
+
+                    let shouldY = max(self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.contentOffset.y - self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.bounds.height + offset , 0)
+                    self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.setContentOffset(.init(x: self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.contentOffset.x, y: shouldY), animated: true)
+                } else {
+                    manualTap.onNext(())
+                }
+                
+            }).disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification).subscribe { [weak self] notification in
+            guard let self = self else {return}
+            self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.recordBtn.isSelected = false
+            self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.formatChangeBtn.isEnabled = true
+            self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.changeCameraBtn.isEnabled = true
+        }.disposed(by: disposeBag)
+        let repos = Driver.merge(manualTap.asDriver(onErrorJustReturn: ()), self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.prompterBtn.rx.tap.asDriver())
+        let willPrompterBtnSelect = repos.map({ [weak self] () -> Bool in
+                guard let self = self else {return false}
+            UserDefaults.standard.setPrompterViewShow(value: !UserDefaults.standard.isPrompterViewShow)
+            return self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.prompterBtn.isSelected
+        }).startWith(UserDefaults.standard.isPrompterViewShow).map({!$0})
+        willPrompterBtnSelect.asObservable().bind(to: self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.prompterBtn.rx.isSelected).disposed(by: disposeBag)
+        willPrompterBtnSelect.asObservable().bind(to: self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textViewBg.rx.isHidden).disposed(by: disposeBag)
+        self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.rx.didEndEditing.subscribe(onNext: { [weak self] in
+            guard let self = self else {return}
+            UserDefaults.standard.setPrompterText(text: self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.attributedText)
+        }).disposed(by: disposeBag)
+        
+
         return Output(requestAuthorizationFailed: requestAuthorizationFailed,
                       formats: formats,
                       selectedFormat: dependencies.captureManager.selectedFormat,

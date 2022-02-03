@@ -12,7 +12,9 @@ import AVFoundation
 import MediaPlayer
 
 class VideoRecorderViewController: UIViewController {
-    let viewModel = VideoRecorderViewModel(dependencies: .init(captureManager: CaptureManager(captureSession: AVCaptureSession())))
+    lazy var viewModel = VideoRecorderViewModel(dependencies:
+                                                .init(captureManager: CaptureManager(captureSession: AVCaptureSession()),
+                                                      videoRecorderVC: self))
     // プレビュー
     var cameraPreview : CameraPreview {
         view as! CameraPreview
