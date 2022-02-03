@@ -43,7 +43,7 @@ class VideoRecorderViewController: UIViewController {
         }),
                                                  formats: cameraPreview.captureButtonsView.formatChangeBtn.rx.tap.asDriver(),
                                                  changeCamera: cameraPreview.captureButtonsView.changeCameraBtn.rx.tap.asDriver(),
-                                                 prompterTextEditBtnClick: cameraPreview.captureButtonsView.textViewEditButton.rx.tap.map({self.cameraPreview.captureButtonsView}).asDriver(onErrorJustReturn: nil))
+                                                 prompterTextEditBtnClick: cameraPreview.captureButtonsView.textViewEditButton.rx.tap.map({self.cameraPreview.captureButtonsView}).asDriver(onErrorJustReturn: nil), openPhotoBtnClick: cameraPreview.captureButtonsView.openPhotoBtn.rx.tap.asDriver())
         
         let output = viewModel.transform(input: input)
         

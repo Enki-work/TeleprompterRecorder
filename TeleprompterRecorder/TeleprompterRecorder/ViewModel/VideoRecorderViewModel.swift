@@ -20,6 +20,7 @@ final class VideoRecorderViewModel: ViewModelType {
         let formats: Driver<Void>
         let changeCamera: Driver<Void>
         let prompterTextEditBtnClick: Driver<CaptureButtonsView?>
+        let openPhotoBtnClick: Driver<Void>
     }
     
     struct Output {
@@ -234,6 +235,16 @@ final class VideoRecorderViewModel: ViewModelType {
             UserDefaults.standard.setPrompterText(text: self.dependencies.videoRecorderVC.cameraPreview.captureButtonsView.textView.attributedText)
         }).disposed(by: disposeBag)
         
+        input.openPhotoBtnClick.drive(onNext: {captureButtonsView in
+            let urlStr = "cGhvdG9zLXJlZGlyZWN0Oi8v".decodeFromBase64()
+            
+            if let url = URL(string:urlStr) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: Dictionary(), completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }}).disposed(by: disposeBag)
 
         return Output(requestAuthorizationFailed: requestAuthorizationFailed,
                       formats: formats,

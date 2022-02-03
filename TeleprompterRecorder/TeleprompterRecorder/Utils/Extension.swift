@@ -141,3 +141,15 @@ extension UserDefaults {
         }
     }
 }
+
+extension String {
+    func decodeFromBase64() -> String {
+        
+        let data = Data(base64Encoded: self, options: [])
+        
+        let decodedStr = String(data: data ?? Data(), encoding: .utf8)
+        
+        return decodedStr ?? ""
+        
+    }
+}
