@@ -125,8 +125,10 @@ final class VideoRecorderViewModel: ViewModelType {
             return self.dependencies.captureManager.changeCamera()
         })
         
+        var isVCShowing = true
         NotificationCenter.default.rx.notification(UIApplication.didEnterBackgroundNotification).subscribe { [weak self] notification in
             guard let self = self else {return}
+            isVCShowing = false
             if self.dependencies.captureManager.isCapturing {
                 self.backgroundTaskID = UIApplication.shared.beginBackgroundTask(expirationHandler: {[weak self] in
                     guard let self = self else {return}
@@ -138,6 +140,16 @@ final class VideoRecorderViewModel: ViewModelType {
                 }
             }
         }.disposed(by: disposeBag)
+        NotificationCenter.default.rx.notification(UIApplication.didBecomeActiveNotification).subscribe { _ in
+            isVCShowing = true
+        }.disposed(by: disposeBag)
+        
+        dependencies.videoRecorderVC.rx.viewWillDisappear.subscribe(onNext: {_ in
+            isVCShowing = false
+        }).disposed(by: disposeBag)
+        dependencies.videoRecorderVC.rx.viewDidAppear.subscribe(onNext: {_ in
+            isVCShowing = true
+        }).disposed(by: disposeBag)
         
         var notificationKey = ""
         if #available(iOS 15.0, *) {
@@ -179,6 +191,9 @@ final class VideoRecorderViewModel: ViewModelType {
                     .startWith(())
                     .reduce(0) { acc, _ in acc + 1 }
             }.delaySubscription(.milliseconds(1000), scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] times in
+                guard isVCShowing else {
+                    return
+                }
                 let offset: CGFloat = 30
                 if (times == 1) {
                     guard let self = self,
