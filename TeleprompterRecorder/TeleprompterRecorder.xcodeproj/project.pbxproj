@@ -696,6 +696,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真ライブラリへのアクセスの許可を求める";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」するとお客様に最適化された広告が表示されます";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -734,6 +735,7 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真ライブラリへのアクセスの許可を求める";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」するとお客様に最適化された広告が表示されます";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
