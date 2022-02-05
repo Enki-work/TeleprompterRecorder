@@ -72,6 +72,11 @@ class FormatListViewController: UIViewController {
         
     }
     
+    @IBAction func backBtnClick(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     private func bindViewModel(value: Bool) {
         tableView.delegate = nil
         tableView.dataSource = nil
