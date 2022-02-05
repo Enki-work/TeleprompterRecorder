@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A420D03527ABC2AB00366487 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A420D03427ABC2AB00366487 /* MenuViewController.swift */; };
 		A420D03727ABCC9200366487 /* ContactMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A420D03627ABCC9200366487 /* ContactMeViewController.swift */; };
+		A420D03927AE304300366487 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A420D03827AE304300366487 /* Settings.bundle */; };
 		A4A45E9E2775C557004D7D4E /* RewardedVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A45E9D2775C557004D7D4E /* RewardedVideoManager.swift */; };
 		A4A45EA4277AD9A3004D7D4E /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = A4A45EA3277AD9A3004D7D4E /* SideMenu */; };
 		A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523882747B33E006B22F9 /* AppDelegate.swift */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		A420D03427ABC2AB00366487 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		A420D03627ABCC9200366487 /* ContactMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMeViewController.swift; sourceTree = "<group>"; };
+		A420D03827AE304300366487 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A4A45E9D2775C557004D7D4E /* RewardedVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideoManager.swift; sourceTree = "<group>"; };
 		A4A523852747B33E006B22F9 /* TeleprompterRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeleprompterRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A523882747B33E006B22F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		A4F2F809275F87E800291618 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				A420D03827AE304300366487 /* Settings.bundle */,
 				A4F2F8202760E31900291618 /* GoogleMobileAds.xcframework */,
 				A4A523912747B343006B22F9 /* Assets.xcassets */,
 				A4A523932747B343006B22F9 /* LaunchScreen.storyboard */,
@@ -429,6 +432,7 @@
 				A4A523F9274A0ABA006B22F9 /* CaptureButtonsView.xib in Resources */,
 				A4F2F81727609BE600291618 /* GoogleService-Info.plist in Resources */,
 				A4A523922747B343006B22F9 /* Assets.xcassets in Resources */,
+				A420D03927AE304300366487 /* Settings.bundle in Resources */,
 				A4A523902747B33E006B22F9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
