@@ -18,7 +18,7 @@ final class VideoRecorderViewModel: ViewModelType {
         let ready: Driver<CameraPreview>
         let isVideoWillStart: Driver<Bool>
         let formats: Driver<Void>
-        let changeCamera: Driver<Void>
+        let changeCamera: Driver<UIView?>
         let prompterTextEditBtnClick: Driver<CaptureButtonsView?>
         let openPhotoBtnClick: Driver<Void>
     }
@@ -121,9 +121,9 @@ final class VideoRecorderViewModel: ViewModelType {
             return self.dependencies.captureManager.currentCameraFormat
         }
         
-        let didChangeCamera: Driver<Bool> = input.changeCamera.flatMap({[weak self] in
+        let didChangeCamera: Driver<Bool> = input.changeCamera.flatMap({ [weak self] sourceView in
             guard let self = self else {return .just(false)}
-            return self.dependencies.captureManager.changeCamera()
+            return self.dependencies.captureManager.changeCamera(sourceView: sourceView)
         })
         
         var isVCShowing = true

@@ -279,7 +279,7 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         return sout
     }
     
-    func changeCamera() -> Driver<Bool> {
+    func changeCamera(sourceView: UIView?) -> Driver<Bool> {
 //        let willSetZoom = currentCamera!.videoZoomFactor + 0.3
 //        if willSetZoom < currentCamera!.activeFormat.videoMaxZoomFactor {
 //            try? currentCamera!.lockForConfiguration()
@@ -302,6 +302,7 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
                 alertController.addAction(action)
             }
             alertController.addAction(.init(title: "cancel", style: .cancel, handler: nil))
+            alertController.popoverPresentationController?.sourceView = sourceView
             UIViewController.rootViewController?.present(alertController, animated: true, completion: nil)
             return Disposables.create { alertController.dismiss(animated: true, completion: nil) }
         }.flatMap { device in
