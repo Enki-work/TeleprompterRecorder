@@ -13,10 +13,13 @@ import SideMenu
 class MenuViewController: UITableViewController {
     
     let disposeBag = DisposeBag()
+    @IBOutlet weak var versionLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        versionLabel.text = appVersion
+        
         tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
             guard let self = self else {
                 return

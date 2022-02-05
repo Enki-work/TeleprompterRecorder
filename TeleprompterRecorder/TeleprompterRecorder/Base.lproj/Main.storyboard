@@ -22,7 +22,7 @@
                                 <items>
                                     <navigationItem title="Title" id="Dh2-65-UPo">
                                         <barButtonItem key="leftBarButtonItem" style="plain" id="duY-SV-V4M">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Wr4-oj-dnI">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Wr4-oj-dnI">
                                                 <rect key="frame" x="20" y="11" width="73.5" height="34.5"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
@@ -239,6 +239,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="iz8-ka-aDG"/>
+                    <connections>
+                        <outlet property="versionLabel" destination="HSg-Q3-OeH" id="p6U-Hx-36N"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cWW-S2-Q4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
