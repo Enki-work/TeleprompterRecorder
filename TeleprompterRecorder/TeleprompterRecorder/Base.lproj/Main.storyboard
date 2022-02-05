@@ -85,7 +85,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="oa0-XE-8a1"/>
                     </view>
-                    <navigationItem key="navigationItem" id="oZG-jw-XVt"/>
+                    <navigationItem key="navigationItem" id="oZG-jw-XVt">
+                        <barButtonItem key="backBarButtonItem" title=" " id="FK4-HP-aLp"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="I3z-uY-eUI" kind="presentation" identifier="showformatlist" id="u5J-7X-D4K"/>
                         <segue destination="Rmd-4F-gS4" kind="presentation" identifier="showMenu" id="Wf0-AG-Oaa"/>
