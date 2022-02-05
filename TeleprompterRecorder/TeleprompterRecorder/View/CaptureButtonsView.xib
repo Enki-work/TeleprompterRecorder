@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -15,11 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="1245" height="916"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-Ow-qRx">
-                    <rect key="frame" x="84" y="0.0" width="1041" height="916"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-Ow-qRx">
+                    <rect key="frame" x="0.0" y="64" width="1245" height="732"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-YC-ekz">
-                            <rect key="frame" x="0.0" y="0.0" width="1041" height="916"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-YC-ekz">
+                            <rect key="frame" x="0.0" y="0.0" width="1245" height="732"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <attributedString key="attributedText">
                                 <fragment>
@@ -172,8 +172,8 @@ Cg
                             </attributedString>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ0-gL-orW">
-                            <rect key="frame" x="973" y="8" width="60" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ0-gL-orW">
+                            <rect key="frame" x="1177" y="8" width="60" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="k9o-x4-UbZ"/>
                                 <constraint firstAttribute="height" constant="40" id="trk-8n-ITN"/>
@@ -194,11 +194,11 @@ Cg
                         <constraint firstAttribute="trailing" secondItem="e3f-YC-ekz" secondAttribute="trailing" id="vqf-v9-t3O"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S3v-zx-5hW">
-                    <rect key="frame" x="1125" y="0.0" width="120" height="916"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3v-zx-5hW">
+                    <rect key="frame" x="0.0" y="796" width="1245" height="120"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ujm-3p-vMU">
-                            <rect key="frame" x="25" y="423" width="70" height="70"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ujm-3p-vMU">
+                            <rect key="frame" x="587.5" y="25" width="70" height="70"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="70" id="4lz-xK-Mb9"/>
@@ -211,8 +211,8 @@ Cg
                             </state>
                             <state key="selected" image="stop_circle_fill"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqC-4N-Ba3">
-                            <rect key="frame" x="25" y="12" width="70" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqC-4N-Ba3">
+                            <rect key="frame" x="1163" y="35" width="70" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="ItN-Yg-YOw"/>
                                 <constraint firstAttribute="width" constant="70" id="xN5-98-CKR"/>
@@ -220,8 +220,8 @@ Cg
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="menu"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUV-Wd-qwe">
-                            <rect key="frame" x="25" y="854" width="70" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUV-Wd-qwe">
+                            <rect key="frame" x="12" y="35" width="70" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="fbM-1b-Bwm"/>
                                 <constraint firstAttribute="height" constant="50" id="u6i-x7-ub6"/>
@@ -306,15 +306,26 @@ Cg
                             <include reference="u1z-bw-N0H"/>
                         </mask>
                     </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="MhX-6r-8TA"/>
+                            <include reference="CwB-MF-WKl"/>
+                            <include reference="Wy7-de-ZCf"/>
+                            <include reference="PaH-6i-GX6"/>
+                            <include reference="qTW-d3-bZy"/>
+                            <include reference="om6-9P-beC"/>
+                            <include reference="u1z-bw-N0H"/>
+                        </mask>
+                    </variation>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="P0N-wp-tWL">
-                    <rect key="frame" x="44" y="0.0" width="300" height="298.5"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="P0N-wp-tWL">
+                    <rect key="frame" x="0.0" y="24" width="1245" height="40"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nyi-Yr-Vvo">
-                            <rect key="frame" x="0.0" y="0.0" width="100" height="298.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUd-po-CTZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="298.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="camera_rotate"/>
@@ -329,10 +340,10 @@ Cg
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOz-hT-8sZ">
-                            <rect key="frame" x="100" y="0.0" width="100" height="298.5"/>
+                            <rect key="frame" x="415" y="0.0" width="415" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoV-QF-ucO">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="298.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="doc_plaintext"/>
@@ -348,10 +359,10 @@ Cg
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNN-4M-W7X">
-                            <rect key="frame" x="200" y="0.0" width="100" height="298.5"/>
+                            <rect key="frame" x="830" y="0.0" width="415" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udl-81-MuR">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="298.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="415" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -388,6 +399,11 @@ Cg
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact" axis="horizontal">
+                        <mask key="constraints">
+                            <include reference="4dC-xP-fwG"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
                         <mask key="constraints">
                             <include reference="4dC-xP-fwG"/>
                         </mask>
@@ -474,6 +490,20 @@ Cg
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="Vgf-es-tME"/>
+                    <include reference="v6e-th-O4a"/>
+                    <include reference="wAE-z7-Dnu"/>
+                    <include reference="0cG-3X-5yw"/>
+                    <include reference="E6v-Yy-lLX"/>
+                    <include reference="GZc-Lf-I4C"/>
+                    <include reference="3Ym-E9-Vp9"/>
+                    <include reference="gZZ-WE-Zg8"/>
+                    <include reference="iVZ-CM-4WM"/>
+                    <include reference="qRZ-vG-7wF"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
                 <mask key="constraints">
                     <include reference="Vgf-es-tME"/>
                     <include reference="v6e-th-O4a"/>
