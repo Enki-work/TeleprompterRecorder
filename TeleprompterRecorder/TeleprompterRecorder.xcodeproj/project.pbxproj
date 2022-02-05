@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A420D03527ABC2AB00366487 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A420D03427ABC2AB00366487 /* MenuViewController.swift */; };
+		A420D03727ABCC9200366487 /* ContactMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A420D03627ABCC9200366487 /* ContactMeViewController.swift */; };
 		A4A45E9E2775C557004D7D4E /* RewardedVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A45E9D2775C557004D7D4E /* RewardedVideoManager.swift */; };
 		A4A45EA4277AD9A3004D7D4E /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = A4A45EA3277AD9A3004D7D4E /* SideMenu */; };
 		A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523882747B33E006B22F9 /* AppDelegate.swift */; };
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		A420D03427ABC2AB00366487 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		A420D03627ABCC9200366487 /* ContactMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMeViewController.swift; sourceTree = "<group>"; };
 		A4A45E9D2775C557004D7D4E /* RewardedVideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideoManager.swift; sourceTree = "<group>"; };
 		A4A523852747B33E006B22F9 /* TeleprompterRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeleprompterRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A523882747B33E006B22F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				A4A523E3274887CA006B22F9 /* VideoRecorderViewController.swift */,
 				A4DDBEEA274CABB5009199FC /* FormatListViewController.swift */,
 				A420D03427ABC2AB00366487 /* MenuViewController.swift */,
+				A420D03627ABCC9200366487 /* ContactMeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				A4A5238B2747B33E006B22F9 /* SceneDelegate.swift in Sources */,
 				A4A523E02747CDB3006B22F9 /* UIViewController+Rx.swift in Sources */,
 				A4A523DF2747CDB3006B22F9 /* ViewModelType.swift in Sources */,
+				A420D03727ABCC9200366487 /* ContactMeViewController.swift in Sources */,
 				A4A523F7274A02C2006B22F9 /* CaptureManager.swift in Sources */,
 				A420D03527ABC2AB00366487 /* MenuViewController.swift in Sources */,
 			);
@@ -684,6 +688,7 @@
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TeleprompterRecorder/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "プロンプターカメラ";
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真ライブラリへのアクセスの許可を求める";
@@ -721,6 +726,7 @@
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TeleprompterRecorder/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "プロンプターカメラ";
 				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真ライブラリへのアクセスの許可を求める";
