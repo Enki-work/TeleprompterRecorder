@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A4A45E9E2775C557004D7D4E /* RewardedVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A45E9D2775C557004D7D4E /* RewardedVideoManager.swift */; };
+		A4A45EA4277AD9A3004D7D4E /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = A4A45EA3277AD9A3004D7D4E /* SideMenu */; };
 		A4A523892747B33E006B22F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523882747B33E006B22F9 /* AppDelegate.swift */; };
 		A4A5238B2747B33E006B22F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5238A2747B33E006B22F9 /* SceneDelegate.swift */; };
 		A4A523902747B33E006B22F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4A5238E2747B33E006B22F9 /* Main.storyboard */; };
@@ -125,6 +126,7 @@
 				A4F2F81C27609D0E00291618 /* FirebaseCrashlytics in Frameworks */,
 				A4A523BA2747B68E006B22F9 /* RxBlocking in Frameworks */,
 				A4A523ED27488B30006B22F9 /* UIKit.framework in Frameworks */,
+				A4A45EA4277AD9A3004D7D4E /* SideMenu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +323,7 @@
 				A4F2F81927609D0E00291618 /* FirebaseAnalytics */,
 				A4F2F81B27609D0E00291618 /* FirebaseCrashlytics */,
 				A4F2F81D27609D0E00291618 /* FirebaseMessaging */,
+				A4A45EA3277AD9A3004D7D4E /* SideMenu */,
 			);
 			productName = TeleprompterRecorder;
 			productReference = A4A523852747B33E006B22F9 /* TeleprompterRecorder.app */;
@@ -398,6 +401,7 @@
 				A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				A4DDBEEC274D07B8009199FC /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				A4F2F81827609D0E00291618 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A4A45EA2277AD9A2004D7D4E /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = A4A523862747B33E006B22F9 /* Products */;
 			projectDirPath = "";
@@ -875,6 +879,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A4A45EA2277AD9A2004D7D4E /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -902,6 +914,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A4A45EA3277AD9A3004D7D4E /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A4A45EA2277AD9A2004D7D4E /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
+		};
 		A4A523B92747B68E006B22F9 /* RxBlocking */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A4A523B82747B68E006B22F9 /* XCRemoteSwiftPackageReference "RxSwift" */;
