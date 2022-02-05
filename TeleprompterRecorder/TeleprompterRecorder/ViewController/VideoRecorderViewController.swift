@@ -65,6 +65,11 @@ class VideoRecorderViewController: UIViewController {
             guard result else {return}
             self?.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIWindow.orientation.AVCaptureVideoOrientation
         }).disposed(by: disposeBag)
+        
+        cameraPreview.captureButtonsView.openMenuBtn.rx.tap.asDriver().drive(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.performSegue(withIdentifier: "showMenu", sender: nil)
+        }).disposed(by: disposeBag)
     }
     
     private func bindNotification() {
