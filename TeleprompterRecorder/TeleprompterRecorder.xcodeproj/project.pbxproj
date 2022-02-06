@@ -693,9 +693,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TeleprompterRecorder/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "プロンプターカメラ";
-				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真ライブラリへのアクセスの許可を求める";
+				INFOPLIST_KEY_NSCameraUsageDescription = "撮影する際に画像を保存できるようになります";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "撮影する際に音声を保存できるようになります";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "撮影したビデオ保存のために写真ライブラリへのアクセス権限が必須です";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」するとお客様に最適化された広告が表示されます";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -732,9 +732,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TeleprompterRecorder/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "プロンプターカメラ";
-				INFOPLIST_KEY_NSCameraUsageDescription = "カメラを使用することの許可を求める";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクを使用することの許可を求める";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "写真ライブラリへのアクセスの許可を求める";
+				INFOPLIST_KEY_NSCameraUsageDescription = "撮影する際に画像を保存できるようになります";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "撮影する際に音声を保存できるようになります";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "撮影したビデオ保存のために写真ライブラリへのアクセス権限が必須です";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "「許可」するとお客様に最適化された広告が表示されます";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
