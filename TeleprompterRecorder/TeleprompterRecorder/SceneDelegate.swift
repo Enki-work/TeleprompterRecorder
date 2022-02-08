@@ -7,10 +7,13 @@
 
 import UIKit
 import AppTrackingTransparency
+import RxSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    private let disposeBag = DisposeBag()
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,6 +21,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        NotificationCenter.default.rx.notification(UIApplication.didBecomeActiveNotification).take(until: self.rx.deallocated).subscribe { [weak self] notification in
+            
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+            
+            if let currentVC = self?.window?.rootViewController {
+                if #available(iOS 14, *) {
+                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                        appDelegate.showAdIfAvailable(viewController: currentVC)
+                    })
+                } else {
+                    appDelegate.showAdIfAvailable(viewController: currentVC)
+                }
+            }
+        }.disposed(by: disposeBag)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -29,17 +47,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidBecomeActive(_ scene: UIScene) {
         UIApplication.shared.isIdleTimerDisabled = true
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-        
-        if let currentVC = window?.rootViewController {
-            if #available(iOS 14, *) {
-                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                    appDelegate.showAdIfAvailable(viewController: currentVC)
-                })
-            } else {
-                appDelegate.showAdIfAvailable(viewController: currentVC)
-            }
-        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
