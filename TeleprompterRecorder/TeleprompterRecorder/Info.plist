@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>APP_OPEN_AD_ID</key>
+	<string>$(APP_OPEN_AD_ID)</string>
+	<key>APP_REWARDED_AD_ID</key>
+	<string>$(APP_REWARDED_AD_ID)</string>
 	<key>GADApplicationIdentifier</key>
 	<string>$(APP_AD_ID)</string>
 	<key>SKAdNetworkItems</key>

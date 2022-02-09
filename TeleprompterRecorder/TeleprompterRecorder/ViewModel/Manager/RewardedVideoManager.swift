@@ -15,8 +15,9 @@ class RewardedVideoManager: NSObject {
     private var completion: ((Bool) -> Void)?
     
     func showRewardedVideoAd(completion: ((Bool) -> Void)? = nil) {
+        let APP_REWARDED_AD_ID = Bundle.main.infoDictionary?["APP_REWARDED_AD_ID"] as? String ?? "ca-app-pub-3940256099942544/1712485313"
         GADRewardedAd.load(
-            withAdUnitID: "ca-app-pub-3940256099942544/1712485313", request: GADRequest()
+            withAdUnitID: APP_REWARDED_AD_ID, request: GADRequest()
         ) { (ad, error) in
             if let error = error {
                 print("Rewarded ad failed to load with error: \(error.localizedDescription)")
