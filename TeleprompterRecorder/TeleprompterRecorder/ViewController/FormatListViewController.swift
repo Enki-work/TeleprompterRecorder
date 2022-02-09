@@ -41,10 +41,19 @@ class FormatListViewController: UIViewController {
             configureCell: { [weak self] ds, tv, index, item in
                 let cell = tv.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
                 cell.textLabel?.numberOfLines = 0
-//                cell.textLabel?.text = "fps{\(Int64(item.videoSupportedFrameRateRanges.first?.minFrameRate ?? -1))-\(Int64(item.videoSupportedFrameRateRanges.first?.maxFrameRate ?? -1))}," +
-//                "ISO{\(Int(item.minISO))-\(Int(item.maxISO))}," +
-//                "Rate{\(Int64(item.videoSupportedFrameRateRanges.first?.minFrameRate ?? -1))-\(Int64(item.videoSupportedFrameRateRanges.first?.maxFrameRate ?? -1))}," +
-                cell.textLabel?.text = item.debugDescription
+                let formatDimensions = CMVideoFormatDescriptionGetDimensions(item.formatDescription)
+                let formatMediaType = CMFormatDescriptionGetMediaType(item.formatDescription)
+                let formatMediaSubType = CMFormatDescriptionGetMediaSubType(item.formatDescription)
+                cell.textLabel?.text =
+                "mediaType: \(formatMediaType.toString()) / \(formatMediaSubType.toString())  " +
+                "FrameRate: \(Int64(item.videoSupportedFrameRateRanges.first?.minFrameRate ?? -1)) ~ \(Int64(item.videoSupportedFrameRateRanges.first?.maxFrameRate ?? -1))  " +
+                "dimensions: \(formatDimensions.height) x \(formatDimensions.width)  " +
+                "ISO: \(Int(item.minISO)) ~ \(Int(item.maxISO))   " +
+                "MaxZoom: \(Int64(item.videoMaxZoomFactor))    " +
+                "ZoomUpscale: \(String(format: "%.3f", item.videoZoomFactorUpscaleThreshold))   \n" +
+                "FOV: \(item.videoFieldOfView)   " +
+                "videoHDRSupported: \(item.isVideoHDRSupported ? "YES" : "NO")    " +
+                "isVideoBinned: \(item.isVideoBinned ? "YES" : "NO")    "
                 if (item.debugDescription.identity == self?.formats.activeFormat.debugDescription.identity) {
                     tv.selectRow(at: index, animated: true, scrollPosition: .none)
                 }
@@ -104,5 +113,15 @@ class FormatListViewController: UIViewController {
             let output = viewModel.transform(input: input)
             tableViewDisposable = output.datas.asObservable().bind(to: tableView.rx.items(dataSource: dataSource))
         }
+    }
+}
+fileprivate extension FourCharCode {
+    func toString() -> String {
+        let n = Int(self)
+        var s: String = String(UnicodeScalar((n >> 24) & 255)!)
+        s.append(String(UnicodeScalar((n >> 16) & 255)!))
+        s.append(String(UnicodeScalar((n >> 8) & 255)!))
+        s.append(String(UnicodeScalar(n & 255)!))
+        return s.trimmingCharacters(in: CharacterSet.whitespaces)
     }
 }

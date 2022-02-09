@@ -100,7 +100,7 @@ class VideoRecorderViewController: UIViewController {
         if segue.identifier == "showformatlist",
             let formatListVC = segue.destination as? FormatListViewController,
         let sender = sender as? ((activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format]), Binder<AVCaptureDevice.Format>) {
-            formatListVC.title = "FormatList"
+            formatListVC.title = "フォーマットリスト一覧"
             formatListVC.formats = sender.0
             formatListVC.selectedFormat.bind(to: sender.1).disposed(by: formatListVC.disposeBag)
         }
