@@ -683,7 +683,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A4F2F82427633EF500291618 /* Debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				APP_ICON = "$(APP_ICON)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "${APP_ICON}";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TeleprompterRecorder/TeleprompterRecorder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -722,7 +723,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A4F2F82527633F0C00291618 /* Release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				APP_ICON = "$(APP_ICON)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "${APP_ICON}";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TeleprompterRecorder/TeleprompterRecorder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
