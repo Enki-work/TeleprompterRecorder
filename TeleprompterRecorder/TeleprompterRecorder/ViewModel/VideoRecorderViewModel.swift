@@ -96,8 +96,8 @@ final class VideoRecorderViewModel: ViewModelType {
                     captureButtonsView.isUserInteractionEnabled = false
                     let rewardedVideoManager = RewardedVideoManager()
                     rewardedVideoManager.showRewardedVideoAd {result in
-                        guard result else {return}
                         captureButtonsView.isUserInteractionEnabled = true
+                        guard result else {return}
                         UserDefaults.standard.setPrompterAdsDate(value: .init())
                     }
                 }
