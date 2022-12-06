@@ -1,0 +1,75 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+import './BaseFastfile'
+
+default_platform(:ios)
+
+platform :ios do
+  before_all do
+    setup_env
+  end
+
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
+    build_app(scheme: "TeleprompterRecorder",
+              export_method: "app-store",
+                export_options: {
+                  provisioningProfiles: {
+                    "enki.TeleprompterRecorder" => "XC enki TeleprompterRecorder ios_app_store 1667445288",
+                  }
+                })
+    upload_to_testflight(skip_waiting_for_build_processing: true,)
+    slack(
+      message: "Successfully distributed a new beta build to testflight!",
+      channel: "#github-action",  # Optional, by default will post to the default channel configured for the POST URL.
+      success: true,
+      username: "testflight_bot",
+      icon_url: "https://fastlane.tools/assets/img/fastlane_icon.png",
+      attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+           # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
+        thumb_url: "http://example.com/path/to/thumb.png",
+        fields: [{
+          title: "My Field",
+          value: "My Value",
+          short: true
+        }]
+      }
+    )
+  end
+
+  desc "slacktalk_test"
+  lane :slacktalk_test do
+    slack(
+      message: "Successfully distributed a new beta build to testflight!",
+      channel: "#github-action",  # Optional, by default will post to the default channel configured for the POST URL.
+      success: true,
+      username: "testflight_bot",
+      icon_url: "https://fastlane.tools/assets/img/fastlane_icon.png",
+       # Optional, lets you specify default payloads to include. Pass an empty array to suppress all the default payloads.
+      default_payloads: [:lane, :test_result, :git_branch, :git_author, :last_git_commit, :last_git_commit_hash], # Optional, lets you specify default payloads to include. Pass an empty array to suppress all the default payloads.
+      attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+           # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
+        thumb_url: "http://example.com/path/to/thumb.png",
+        fields: [{
+          title: "fastlane.tools finished successfully",
+          value: " 🎉 🎉 🎉 🎉 🎉 🎉",
+          short: true
+        }]
+      }
+    )
+  end
+
+end
