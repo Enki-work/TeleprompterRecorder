@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		892F6F99293F3B2B00EE628D /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 892F6F98293F3B2B00EE628D /* GoogleMobileAds */; };
+		892F6F9C293F568400EE628D /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 892F6F9B293F568400EE628D /* GoogleMobileAds */; };
 		A420D03527ABC2AB00366487 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A420D03427ABC2AB00366487 /* MenuViewController.swift */; };
 		A420D03727ABCC9200366487 /* ContactMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A420D03627ABCC9200366487 /* ContactMeViewController.swift */; };
 		A420D03927AE304300366487 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A420D03827AE304300366487 /* Settings.bundle */; };
@@ -121,12 +121,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				892F6F99293F3B2B00EE628D /* GoogleMobileAds in Frameworks */,
 				A4F2F81E27609D0E00291618 /* FirebaseMessaging in Frameworks */,
 				A4F2F81A27609D0E00291618 /* FirebaseAnalytics in Frameworks */,
 				A4A523EB27488947006B22F9 /* AVFoundation.framework in Frameworks */,
 				A4A523BE2747B68E006B22F9 /* RxSwift in Frameworks */,
 				A4A523BC2747B68E006B22F9 /* RxCocoa in Frameworks */,
+				892F6F9C293F568400EE628D /* GoogleMobileAds in Frameworks */,
 				A4DDBEEE274D07B8009199FC /* RxDataSources in Frameworks */,
 				A4F2F81C27609D0E00291618 /* FirebaseCrashlytics in Frameworks */,
 				A4A523BA2747B68E006B22F9 /* RxBlocking in Frameworks */,
@@ -331,7 +331,7 @@
 				A4F2F81B27609D0E00291618 /* FirebaseCrashlytics */,
 				A4F2F81D27609D0E00291618 /* FirebaseMessaging */,
 				A4A45EA3277AD9A3004D7D4E /* SideMenu */,
-				892F6F98293F3B2B00EE628D /* GoogleMobileAds */,
+				892F6F9B293F568400EE628D /* GoogleMobileAds */,
 			);
 			productName = TeleprompterRecorder;
 			productReference = A4A523852747B33E006B22F9 /* TeleprompterRecorder.app */;
@@ -410,7 +410,7 @@
 				A4DDBEEC274D07B8009199FC /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				A4F2F81827609D0E00291618 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A4A45EA2277AD9A2004D7D4E /* XCRemoteSwiftPackageReference "SideMenu" */,
-				892F6F97293F3B2B00EE628D /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				892F6F9A293F568400EE628D /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = A4A523862747B33E006B22F9 /* Products */;
 			projectDirPath = "";
@@ -688,7 +688,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TeleprompterRecorder/TeleprompterRecorder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 44;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -729,7 +729,7 @@
 				CODE_SIGN_ENTITLEMENTS = TeleprompterRecorder/TeleprompterRecorder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 44;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -767,7 +767,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -792,7 +792,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -816,7 +816,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -839,7 +839,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 44;
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -899,7 +899,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		892F6F97293F3B2B00EE628D /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+		892F6F9A293F568400EE628D /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
@@ -942,9 +942,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		892F6F98293F3B2B00EE628D /* GoogleMobileAds */ = {
+		892F6F9B293F568400EE628D /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 892F6F97293F3B2B00EE628D /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			package = 892F6F9A293F568400EE628D /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
 		};
 		A4A45EA3277AD9A3004D7D4E /* SideMenu */ = {

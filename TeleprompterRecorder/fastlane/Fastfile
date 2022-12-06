@@ -22,7 +22,7 @@ platform :ios do
   end
 
   desc "Push a new beta build to TestFlight"
-  lane :beta do
+  lane :testflight_upload do
     increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
     build_app(scheme: "TeleprompterRecorder",
               export_method: "app-store",
@@ -42,24 +42,38 @@ platform :ios do
            # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
         thumb_url: "http://example.com/path/to/thumb.png",
         fields: [{
-          title: "My Field",
-          value: "My Value",
+          title: "fastlane.tools finished successfully",
+          value: " 🎉 🎉 🎉 🎉 🎉 🎉",
           short: true
         }]
       }
     )
   end
 
-  desc "slacktalk_test"
-  lane :slacktalk_test do
+  desc "Push a new beta build to Deploygate"
+  lane :deploygate_upload do
+    increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
+    build_app(scheme: "TeleprompterRecorder",
+              export_method: "ad-hoc",
+              output_directory: "../build/", # Destination directory. Defaults to current directory.
+                output_name: "ios.ipa",
+                export_options: {
+                  provisioningProfiles: {
+                    "enki.TeleprompterRecorder" => "Ad Hoc",
+                  }
+                })
+    deploygate(
+      api_token: ENV["DEPLOYGATE_API_KEY"],
+      user: ENV["DEPLOYGATE_USER"],
+      ipa: "../build/ios.ipa",
+      message: "[#{version}] [#{git_branch}] [Build #{lane_context[SharedValues::BUILD_NUMBER]}] #{last_git_commit}",
+    )
     slack(
-      message: "Successfully distributed a new beta build to testflight!",
+      message: "Successfully distributed a new beta build to deploygate!",
       channel: "#github-action",  # Optional, by default will post to the default channel configured for the POST URL.
       success: true,
-      username: "testflight_bot",
+      username: "deploygate_bot",
       icon_url: "https://fastlane.tools/assets/img/fastlane_icon.png",
-       # Optional, lets you specify default payloads to include. Pass an empty array to suppress all the default payloads.
-      default_payloads: [:lane, :test_result, :git_branch, :git_author, :last_git_commit, :last_git_commit_hash], # Optional, lets you specify default payloads to include. Pass an empty array to suppress all the default payloads.
       attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
            # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
         thumb_url: "http://example.com/path/to/thumb.png",
@@ -72,4 +86,16 @@ platform :ios do
     )
   end
 
+  desc "test"
+    lane :test do
+    version = get_version_number(
+          xcodeproj: "TeleprompterRecorder.xcodeproj",
+        )
+    deploygate(
+      api_token: ENV["DEPLOYGATE_API_KEY"],
+      user: ENV["DEPLOYGATE_USER"],
+      ipa: "../build/ios.ipa",
+      message: "[#{version}] [#{git_branch}] [Build #{lane_context[SharedValues::BUILD_NUMBER]}] #{last_git_commit}",
+    )
+    end
 end
