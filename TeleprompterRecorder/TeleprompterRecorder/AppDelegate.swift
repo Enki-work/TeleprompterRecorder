@@ -107,10 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADFullScreenContentDeleg
     }
 
     // MARK: GADFullScreenContentDelegate
-    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        debugPrint("App open ad presented.")
-    }
-
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         appOpenAd = nil
         isShowingAd = false
