@@ -18,6 +18,8 @@ jobs:
     - name: Increment and commit version
       run: |
         cd TeleprompterRecorder
+        echo "@@@@@@@@@@@@@@@@@@@@"
+        ls -a
         bundle install
         bundle exec fastlane deploygate_upload
       env:
