@@ -123,14 +123,21 @@ platform :ios do
 
   desc "test"
     lane :test do
-    version = get_version_number(
-          xcodeproj: "TeleprompterRecorder.xcodeproj",
-        )
-    deploygate(
-      api_token: ENV["DEPLOYGATE_API_KEY"],
-      user: ENV["DEPLOYGATE_USER"],
-      ipa: "../build/ios.ipa",
-      message: "[#{version}] [#{git_branch}] [Build #{lane_context[SharedValues::BUILD_NUMBER]}] #{last_git_commit}",
+    slack(
+      message: "Successfully distributed a new beta build to deploygate!",
+      channel: "#github-action",  # Optional, by default will post to the default channel configured for the POST URL.
+      success: true,
+      username: "deploygate_bot",
+      icon_url: "https://fastlane.tools/assets/img/fastlane_icon.png",
+      attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+           # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
+        thumb_url: "http://example.com/path/to/thumb.png",
+        fields: [{
+          title: "fastlane.tools finished successfully",
+          value: " 🎉 🎉 🎉 🎉 🎉 🎉",
+          short: true
+        }]
+      }
     )
     end
 end
