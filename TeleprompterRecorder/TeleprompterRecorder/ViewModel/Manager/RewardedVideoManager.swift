@@ -61,9 +61,6 @@ class RewardedVideoManager: NSObject {
 
 extension RewardedVideoManager: GADFullScreenContentDelegate {
     // MARK: GADFullScreenContentDelegate
-    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Rewarded ad presented.")
-    }
     
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("Rewarded ad dismissed.")

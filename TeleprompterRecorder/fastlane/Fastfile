@@ -1,0 +1,143 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+import './BaseFastfile'
+
+default_platform(:ios)
+
+platform :ios do
+  before_all do
+    setup_env
+  end
+
+  desc "Push a new beta build to TestFlight"
+  lane :testflight_upload do |options|
+    build_type = options[:build_type]
+    case build_type
+    when "appstore" then
+      ENV['EXPORT_METHOD'] = "app-store"
+      ENV['PROVISIONING_PROFILES'] = "XC enki TeleprompterRecorder ios_app_store 1667445288"
+      ENV['CODE_SIGNING_TYPE'] = "appstore"
+    when "adhoc" then
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+    else
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+    end
+    increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
+    #sync_code_signing(force_for_new_devices: true, type: ENV['CODE_SIGNING_TYPE'])
+    build_app(scheme: "TeleprompterRecorder",
+              export_method: ENV['EXPORT_METHOD'],
+                export_options: {
+                  provisioningProfiles: {
+                    ENV['APP_IDENTIFIER'] => ENV['PROVISIONING_PROFILES'],
+                  }
+                })
+    upload_to_testflight(skip_waiting_for_build_processing: true,)
+    slack(
+      message: "Successfully distributed a new beta build to testflight!",
+      channel: "#github-action",  # Optional, by default will post to the default channel configured for the POST URL.
+      success: true,
+      username: "testflight_bot",
+      icon_url: "https://fastlane.tools/assets/img/fastlane_icon.png",
+      attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+           # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
+        thumb_url: "http://example.com/path/to/thumb.png",
+        fields: [{
+          title: "fastlane.tools finished successfully",
+          value: " 🎉 🎉 🎉 🎉 🎉 🎉",
+          short: true
+        }]
+      }
+    )
+  end
+
+  desc "Push a new beta build to Deploygate"
+  lane :deploygate_upload do |options|
+    build_type = options[:build_type]
+    case build_type
+    when "appstore" then
+      ENV['EXPORT_METHOD'] = "app-store"
+      ENV['PROVISIONING_PROFILES'] = "XC enki TeleprompterRecorder ios_app_store 1667445288"
+      ENV['CODE_SIGNING_TYPE'] = "appstore"
+    when "adhoc" then
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+    else
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+    end
+    increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
+    #sync_code_signing(force_for_new_devices: true, type: ENV['CODE_SIGNING_TYPE'])
+    build_app(scheme: "TeleprompterRecorder",
+              export_method: ENV['EXPORT_METHOD'],
+              output_directory: "../build/", # Destination directory. Defaults to current directory.
+                output_name: "ios.ipa",
+                export_options: {
+                  provisioningProfiles: {
+                    ENV['APP_IDENTIFIER'] => ENV['PROVISIONING_PROFILES'],
+                  }
+                })
+    version = get_version_number(
+          xcodeproj: "TeleprompterRecorder.xcodeproj",
+        )
+    deploygate(
+      api_token: ENV["DEPLOYGATE_API_KEY"],
+      user: ENV["DEPLOYGATE_USER"],
+      ipa: "../build/ios.ipa",
+      message: "[#{version}] [#{git_branch}] [Build #{lane_context[SharedValues::BUILD_NUMBER]}] #{last_git_commit}",
+    )
+    slack(
+      message: "Successfully distributed a new beta build to deploygate!",
+      channel: "#github-action",  # Optional, by default will post to the default channel configured for the POST URL.
+      success: true,
+      username: "deploygate_bot",
+      icon_url: "https://fastlane.tools/assets/img/fastlane_icon.png",
+      attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+           # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
+        thumb_url: "http://example.com/path/to/thumb.png",
+        fields: [{
+          title: "fastlane.tools finished successfully",
+          value: " 🎉 🎉 🎉 🎉 🎉 🎉",
+          short: true
+        }]
+      }
+    )
+  end
+
+  desc "test"
+    lane :test do
+    slack(
+      message: "Successfully distributed a new beta build to deploygate!",
+      channel: "#github-action",  # Optional, by default will post to the default channel configured for the POST URL.
+      success: true,
+      username: "deploygate_bot",
+      icon_url: "https://fastlane.tools/assets/img/fastlane_icon.png",
+      attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+           # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
+        thumb_url: "http://example.com/path/to/thumb.png",
+        fields: [{
+          title: "fastlane.tools finished successfully",
+          value: " 🎉 🎉 🎉 🎉 🎉 🎉",
+          short: true
+        }]
+      }
+    )
+    end
+end

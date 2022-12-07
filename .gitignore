@@ -90,3 +90,6 @@ fastlane/test_output
 iOSInjectionProject/
 GoogleService-Info.plist
 Release.xcconfig
+
+Appfile
+BaseFastfile
