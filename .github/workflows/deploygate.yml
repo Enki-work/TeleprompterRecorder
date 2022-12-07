@@ -21,6 +21,9 @@ jobs:
         echo "@@@@@@@@@@@@@@@@@@@@"
         ls -a
         bundle install
+        Dir.chdir("../") do
+         sh("xcodebuild", "-resolvePackageDependencies")
+        end
         bundle exec fastlane deploygate_upload
       env:
         FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
