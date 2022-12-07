@@ -22,13 +22,25 @@ platform :ios do
   end
 
   desc "Push a new beta build to TestFlight"
-  lane :testflight_upload do
+  lane :testflight_upload do |options|
+    build_type = options[:build_type]
+    case build_type
+    when "appstore" then
+      ENV['EXPORT_METHOD'] = "app-store"
+      ENV['PROVISIONING_PROFILES'] = "XC enki TeleprompterRecorder ios_app_store 1667445288"
+    when "adhoc" then
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+    else
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+    end
     increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
     build_app(scheme: "TeleprompterRecorder",
-              export_method: "app-store",
+              export_method: ENV['EXPORT_METHOD'],
                 export_options: {
                   provisioningProfiles: {
-                    "enki.TeleprompterRecorder" => "XC enki TeleprompterRecorder ios_app_store 1667445288",
+                    ENV['APP_IDENTIFIER'] => ENV['PROVISIONING_PROFILES'],
                   }
                 })
     upload_to_testflight(skip_waiting_for_build_processing: true,)
@@ -51,17 +63,32 @@ platform :ios do
   end
 
   desc "Push a new beta build to Deploygate"
-  lane :deploygate_upload do
+  lane :deploygate_upload do |options|
+    build_type = options[:build_type]
+    case build_type
+    when "appstore" then
+      ENV['EXPORT_METHOD'] = "app-store"
+      ENV['PROVISIONING_PROFILES'] = "XC enki TeleprompterRecorder ios_app_store 1667445288"
+    when "adhoc" then
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+    else
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+    end
     increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
     build_app(scheme: "TeleprompterRecorder",
-              export_method: "ad-hoc",
+              export_method: ENV['EXPORT_METHOD'],
               output_directory: "../build/", # Destination directory. Defaults to current directory.
                 output_name: "ios.ipa",
                 export_options: {
                   provisioningProfiles: {
-                    "enki.TeleprompterRecorder" => "Ad Hoc",
+                    ENV['APP_IDENTIFIER'] => ENV['PROVISIONING_PROFILES'],
                   }
                 })
+    version = get_version_number(
+          xcodeproj: "TeleprompterRecorder.xcodeproj",
+        )
     deploygate(
       api_token: ENV["DEPLOYGATE_API_KEY"],
       user: ENV["DEPLOYGATE_USER"],
