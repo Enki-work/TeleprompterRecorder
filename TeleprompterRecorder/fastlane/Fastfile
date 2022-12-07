@@ -87,6 +87,7 @@ platform :ios do
     #sync_code_signing(force_for_new_devices: true, type: ENV['CODE_SIGNING_TYPE'])
     build_app(scheme: "TeleprompterRecorder",
              # skip_package_dependencies_resolution: true,
+             sdk: "iphoneos11.4",
               disable_package_automatic_updates: true,
               export_method: ENV['EXPORT_METHOD'],
               output_directory: "../build/", # Destination directory. Defaults to current directory.
