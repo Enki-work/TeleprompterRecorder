@@ -20,6 +20,18 @@ jobs:
         cd TeleprompterRecorder
         bundle install
         bundle exec fastlane test
+      env:
+        FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+        MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+        SLACK_URL: ${{ secrets.SLACK_URL }}
+        DEPLOYGATE_API_KEY: ${{ secrets.DEPLOYGATE_API_KEY }}
+        DEPLOYGATE_USER: ${{ secrets.DEPLOYGATE_USER }}
+        APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
+        TEAM_ID: ${{ secrets.TEAM_ID }}
     - name: Run Fastlane - Deploy to AppStore Connect
       run: bundle exec fastlane test
       env:
