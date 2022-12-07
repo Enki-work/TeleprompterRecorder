@@ -32,6 +32,7 @@ jobs:
         APPLE_ID: ${{ secrets.APPLE_ID }}
         ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
         TEAM_ID: ${{ secrets.TEAM_ID }}
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
     - name: iOS Build Action
   # You may pin to the exact commit or the version.
   # uses: yukiarrr/ios-build-action@3d8ff63d40bce5dfd0ff8d1dda6ce543bf4c605a
