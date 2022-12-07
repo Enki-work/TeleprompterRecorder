@@ -28,14 +28,18 @@ platform :ios do
     when "appstore" then
       ENV['EXPORT_METHOD'] = "app-store"
       ENV['PROVISIONING_PROFILES'] = "XC enki TeleprompterRecorder ios_app_store 1667445288"
+      ENV['CODE_SIGNING_TYPE'] = "appstore"
     when "adhoc" then
       ENV['EXPORT_METHOD'] = "ad-hoc"
       ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
     else
       ENV['EXPORT_METHOD'] = "ad-hoc"
       ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
     end
     increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
+    #sync_code_signing(force_for_new_devices: true, type: ENV['CODE_SIGNING_TYPE'])
     build_app(scheme: "TeleprompterRecorder",
               export_method: ENV['EXPORT_METHOD'],
                 export_options: {
@@ -69,14 +73,18 @@ platform :ios do
     when "appstore" then
       ENV['EXPORT_METHOD'] = "app-store"
       ENV['PROVISIONING_PROFILES'] = "XC enki TeleprompterRecorder ios_app_store 1667445288"
+      ENV['CODE_SIGNING_TYPE'] = "appstore"
     when "adhoc" then
       ENV['EXPORT_METHOD'] = "ad-hoc"
       ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
     else
       ENV['EXPORT_METHOD'] = "ad-hoc"
       ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
     end
     increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
+    #sync_code_signing(force_for_new_devices: true, type: ENV['CODE_SIGNING_TYPE'])
     build_app(scheme: "TeleprompterRecorder",
               export_method: ENV['EXPORT_METHOD'],
               output_directory: "../build/", # Destination directory. Defaults to current directory.
