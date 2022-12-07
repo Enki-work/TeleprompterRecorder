@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Increment and commit version
       run: |
-        pwd
+        cd TeleprompterRecorder
         bundle install
         bundle exec fastlane test
     - name: Run Fastlane - Deploy to AppStore Connect
