@@ -18,7 +18,7 @@ jobs:
     - name: "Select the last available Xcode Beta"
       uses: BoundfoxStudios/action-xcode-select@v1
       with:
-       version: "12"
+       version: "14.1"
     - name: Increment and commit version
       run: |
         cd TeleprompterRecorder
