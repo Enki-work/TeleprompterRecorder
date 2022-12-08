@@ -15,11 +15,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: "Select the last available Xcode Beta"
+      uses: devbotsxyz/xcode-select@v1
+      with:
+       beta: true
     - name: Increment and commit version
       run: |
         cd TeleprompterRecorder
         bundle install
-        bundle exec fastlane run xcodes version:"13.2.1"
         bundle exec fastlane deploygate_upload
       env:
         FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
