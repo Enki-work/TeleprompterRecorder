@@ -81,7 +81,8 @@ platform :ios do
     else
       ENV['EXPORT_METHOD'] = "ad-hoc"
       ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
-      ENV['CODE_SIGNING_
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+    end
       # 1. Keychainの準備
       setup_ci(provider: "travis")
 
