@@ -50,24 +50,7 @@ jobs:
         ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
         PERSONAL_GITHUB_ACCESS_TOKEN: ${{ secrets.PERSONAL_GITHUB_ACCESS_TOKEN }}
         PERSONAL_GITHUB_USERNAME: ${{ secrets.PERSONAL_GITHUB_USERNAME }}
-    - name: iOS Build Action
+    - name: Label Commenter
   # You may pin to the exact commit or the version.
-  # uses: yukiarrr/ios-build-action@3d8ff63d40bce5dfd0ff8d1dda6ce543bf4c605a
-      uses: yukiarrr/ios-build-action@v1.5.0
-      with:
-    # Base64 encoded p12 key
-        p12-key-base64: ${{ secrets.P12_KEY_BASE64 }}
-        # Base64 encoded certificate for the p12 key
-        p12-cer-base64: ${{ secrets.P12_CER_BASE64 }}
-        # Base64 encoded mobileprovision file
-        mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
-        # Project path
-        project-path: ./TeleprompterRecorder/TeleprompterRecorder.xcodeproj
-        # For example, iOS Distribution
-        code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
-        # Team id
-        team-id: ${{ secrets.TEAM_ID }}
-        # Choose app-store, ad-hoc, package, enterprise, development, or developer-id
-        export-method: ad-hoc
-        # Scheme
-        scheme: TeleprompterRecorder
+  # uses: peaceiris/actions-label-commenter@f0dbbef043eb1b150b566db36b0bdc8b7f505579
+      uses: peaceiris/actions-label-commenter@v1.10.0
