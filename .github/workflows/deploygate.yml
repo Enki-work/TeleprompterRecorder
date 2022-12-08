@@ -21,10 +21,13 @@ jobs:
        version: "14.1"
     - name: Release.xcconfig
       run: |
-        echo "${{ secrets.RELEASE_XCCONFIG }}" > ./TeleprompterRecorder/TeleprompterRecorder/Resource/Release.xcconfig
+        ls -a
+        echo "${{ secrets.RELEASE_XCCONFIG }}" > ./TeleprompterRecorder/TeleprompterRecorder/Resource/Release.xcconfig.txt
+        base64 -D -i ./TeleprompterRecorder/TeleprompterRecorder/Resource/Release.xcconfig.txt -o ./TeleprompterRecorder/TeleprompterRecorder/Resource/Release.xcconfig
     - name: Increment and commit version
       run: |
         cd TeleprompterRecorder
+        ls -a ./TeleprompterRecorder/Resource
         bundle install
         bundle exec fastlane deploygate_upload
       env:
