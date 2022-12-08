@@ -67,4 +67,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_ACCESS_TOKEN }}
         URL: ${{ github.event.pull_request.html_url }}
       run:
-        gh pr "https://deploygate.com/organizations/Enki/platforms/ios/apps/enki.TeleprompterRecorder" -F ./comments "${URL}"
+        gh pr comment -body "DeployGate  https://deploygate.com/organizations/Enki/platforms/ios/apps/enki.TeleprompterRecorder" "${URL}"
