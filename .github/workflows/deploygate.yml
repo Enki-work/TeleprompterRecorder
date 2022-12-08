@@ -22,6 +22,7 @@ jobs:
     - name: Increment and commit version
       run: |
         cd TeleprompterRecorder
+        echo ${{ secrets.RELEASE_XCCONFIG }} > ./TeleprompterRecorder/Resource/Release.xcconfig
         bundle install
         bundle exec fastlane deploygate_upload
       env:
