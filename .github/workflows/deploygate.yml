@@ -19,6 +19,7 @@ jobs:
       run: |
         cd TeleprompterRecorder
         bundle install
+        xcode_select "/Applications/Xcode_14.0.1.app"
         bundle exec fastlane deploygate_upload
       env:
         FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
