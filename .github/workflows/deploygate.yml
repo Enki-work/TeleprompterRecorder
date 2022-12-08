@@ -19,11 +19,13 @@ jobs:
       uses: BoundfoxStudios/action-xcode-select@v1
       with:
        version: "14.1"
-    - name: Release.xcconfig
+    - name: necessary config
       run: |
         ls -a
         echo "${{ secrets.RELEASE_XCCONFIG }}" > ./TeleprompterRecorder/TeleprompterRecorder/Resource/Release.xcconfig.txt
         base64 -D -i ./TeleprompterRecorder/TeleprompterRecorder/Resource/Release.xcconfig.txt -o ./TeleprompterRecorder/TeleprompterRecorder/Resource/Release.xcconfig
+        echo "${{ secrets.GOOGLESERVICE_INFO }}" > ./TeleprompterRecorder/TeleprompterRecorder/GoogleService-Info.plist.txt
+        base64 -D -i ./TeleprompterRecorder/TeleprompterRecorder/GoogleService-Info.plist.txt -o ./TeleprompterRecorder/TeleprompterRecorder/GoogleService-Info.plist
     - name: Increment and commit version
       run: |
         cd TeleprompterRecorder
