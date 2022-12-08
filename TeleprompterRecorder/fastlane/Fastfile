@@ -31,11 +31,11 @@ platform :ios do
       ENV['CODE_SIGNING_TYPE'] = "appstore"
     when "adhoc" then
       ENV['EXPORT_METHOD'] = "ad-hoc"
-      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['PROVISIONING_PROFILES'] = "match AdHoc enki.TeleprompterRecorder"
       ENV['CODE_SIGNING_TYPE'] = "adhoc"
     else
       ENV['EXPORT_METHOD'] = "ad-hoc"
-      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['PROVISIONING_PROFILES'] = "match AdHoc enki.TeleprompterRecorder"
       ENV['CODE_SIGNING_TYPE'] = "adhoc"
     end
     increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
@@ -76,11 +76,11 @@ platform :ios do
       ENV['CODE_SIGNING_TYPE'] = "appstore"
     when "adhoc" then
       ENV['EXPORT_METHOD'] = "ad-hoc"
-      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['PROVISIONING_PROFILES'] = "match AdHoc enki.TeleprompterRecorder"
       ENV['CODE_SIGNING_TYPE'] = "adhoc"
     else
       ENV['EXPORT_METHOD'] = "ad-hoc"
-      ENV['PROVISIONING_PROFILES'] = "Ad Hoc"
+      ENV['PROVISIONING_PROFILES'] = "match AdHoc enki.TeleprompterRecorder"
       ENV['CODE_SIGNING_TYPE'] = "adhoc"
     end
       # 1. Keychainの準備
