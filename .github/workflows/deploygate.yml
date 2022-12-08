@@ -16,9 +16,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: "Select the last available Xcode Beta"
-      uses: devbotsxyz/xcode-select@v1
+      uses: BoundfoxStudios/action-xcode-select@v1
       with:
-       beta: true
+       version: "12"
     - name: Increment and commit version
       run: |
         cd TeleprompterRecorder
