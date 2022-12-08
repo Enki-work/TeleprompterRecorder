@@ -8,6 +8,11 @@ on:
    branches: [ "main" ]
   pull_request:
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   build:
 
@@ -54,3 +59,12 @@ jobs:
   # You may pin to the exact commit or the version.
   # uses: peaceiris/actions-label-commenter@f0dbbef043eb1b150b566db36b0bdc8b7f505579
       uses: peaceiris/actions-label-commenter@v1.10.0
+      with:
+        # Auth token used to manage issues or pull requests
+        github_token: ${{ secrets.PERSONAL_GITHUB_ACCESS_TOKEN }}
+    - name: Post comments
+      env:
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_ACCESS_TOKEN }}
+        URL: ${{ github.event.pull_request.html_url }}
+      run:
+        gh pr "https://deploygate.com/organizations/Enki/platforms/ios/apps/enki.TeleprompterRecorder" -F ./comments "${URL}"
