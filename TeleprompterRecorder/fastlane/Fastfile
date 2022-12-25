@@ -1,0 +1,206 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+# import './BaseFastfile'
+
+default_platform(:ios)
+
+platform :ios do
+  before_all do
+    # setup_env
+  end
+
+  desc "Push a new beta build to TestFlight"
+  lane :testflight_upload do |options|
+    build_type = options[:build_type]
+    case build_type
+    when "appstore" then
+      ENV['EXPORT_METHOD'] = "app-store"
+      ENV['PROVISIONING_PROFILES'] = "XC enki TeleprompterRecorder ios_app_store 1667445288"
+      ENV['CODE_SIGNING_TYPE'] = "appstore"
+    when "adhoc" then
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "match AdHoc enki.TeleprompterRecorder"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+    else
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "match AdHoc enki.TeleprompterRecorder"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+    end
+    increment_build_number(xcodeproj: "TeleprompterRecorder.xcodeproj")
+      # 1. Keychainの準備
+      setup_ci(provider: "travis")
+
+      # 2. AppStoreConenct APIの準備
+      api_key = app_store_connect_api_key(
+        key_id: ENV['ASC_KEY_ID'],
+        issuer_id: ENV['ASC_ISSUER_ID'],
+        key_content: ENV['ASC_KEY_CONTENT'],
+        in_house: false,
+        is_key_content_base64: true
+      )
+
+      # 3. GitHubアクセスの準備
+      username = ENV['USERNAME']
+      personal_github_access_token = ENV["PERSONAL_GITHUB_ACCESS_TOKEN"]
+      authorization_token_str = "#{username}:#{personal_github_access_token}"
+      basic_authorization_token = Base64.strict_encode64(authorization_token_str)
+
+      # 4. fastlane matchを使って証明書をインストール
+      match(
+        git_basic_authorization:basic_authorization_token,
+        api_key: api_key,
+        app_identifier: ENV["APP_IDENTIFIER"],
+        type: ENV['CODE_SIGNING_TYPE'],
+        readonly: is_ci
+      )
+    build_app(scheme: "TeleprompterRecorder",
+              export_method: ENV['EXPORT_METHOD'],
+                export_options: {
+                  provisioningProfiles: {
+                    ENV['APP_IDENTIFIER'] => ENV['PROVISIONING_PROFILES'],
+                  }
+                })
+    upload_to_testflight(skip_waiting_for_build_processing: true,)
+    slack(
+      message: "Successfully distributed a new beta build to testflight!",
+      channel: "#github-action",  # Optional, by default will post to the default channel configured for the POST URL.
+      success: true,
+      username: "testflight_bot",
+      icon_url: "https://fastlane.tools/assets/img/fastlane_icon.png",
+      attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+           # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
+        thumb_url: "http://example.com/path/to/thumb.png",
+        fields: [{
+          title: "fastlane.tools finished successfully",
+          value: " 🎉 🎉 🎉 🎉 🎉 🎉",
+          short: true
+        }]
+      }
+    )
+  end
+
+  desc "Push a new beta build to Deploygate"
+  lane :deploygate_upload do |options|
+    build_type = options[:build_type]
+    case build_type
+    when "appstore" then
+      ENV['EXPORT_METHOD'] = "app-store"
+      ENV['PROVISIONING_PROFILES'] = "XC enki TeleprompterRecorder ios_app_store 1667445288"
+      ENV['CODE_SIGNING_TYPE'] = "appstore"
+    when "adhoc" then
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "match AdHoc enki.TeleprompterRecorder"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+    else
+      ENV['EXPORT_METHOD'] = "ad-hoc"
+      ENV['PROVISIONING_PROFILES'] = "match AdHoc enki.TeleprompterRecorder"
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+    end
+      # 1. Keychainの準備
+      setup_ci(provider: "travis")
+
+      # 2. AppStoreConenct APIの準備
+      api_key = app_store_connect_api_key(
+        key_id: ENV['ASC_KEY_ID'],
+        issuer_id: ENV['ASC_ISSUER_ID'],
+        key_content: ENV['ASC_KEY_CONTENT'],
+        in_house: false,
+        is_key_content_base64: true
+      )
+
+      # 3. GitHubアクセスの準備
+      username = ENV['USERNAME']
+      personal_github_access_token = ENV["PERSONAL_GITHUB_ACCESS_TOKEN"]
+      authorization_token_str = "#{username}:#{personal_github_access_token}"
+      basic_authorization_token = Base64.strict_encode64(authorization_token_str)
+
+      # 4. fastlane matchを使って証明書をインストール
+      match(
+        git_basic_authorization:basic_authorization_token,
+        api_key: api_key,
+        app_identifier: ENV["APP_IDENTIFIER"],
+        type: ENV['CODE_SIGNING_TYPE'],
+        readonly: is_ci
+      )
+    build_app(scheme: "TeleprompterRecorder",
+             # skip_package_dependencies_resolution: true,
+             #xcargs: "-UseModernBuildSystem=YES",
+             # disable_package_automatic_updates: true,
+              export_method: ENV['EXPORT_METHOD'],
+              output_directory: "../build/", # Destination directory. Defaults to current directory.
+                output_name: "ios.ipa",
+                export_options: {
+                  provisioningProfiles: {
+                    ENV['APP_IDENTIFIER'] => ENV['PROVISIONING_PROFILES'],
+                  }
+                })
+    version = get_version_number(
+          xcodeproj: "TeleprompterRecorder.xcodeproj",
+        )
+    deploygate(
+      api_token: ENV["DEPLOYGATE_API_KEY"],
+      user: ENV["DEPLOYGATE_USER"],
+      ipa: "../build/ios.ipa",
+      message: "[#{version}] [#{git_branch}] [Build #{lane_context[SharedValues::BUILD_NUMBER]}] #{last_git_commit}",
+    )
+    slack(
+      message: "Successfully distributed a new beta build to deploygate!",
+      channel: "#github-action",  # Optional, by default will post to the default channel configured for the POST URL.
+      success: true,
+      username: "deploygate_bot",
+      icon_url: "https://fastlane.tools/assets/img/fastlane_icon.png",
+      attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+           # This hash is deep merged with the existing properties set using the other properties above. This allows your own fields properties to be appended to the existing fields that were created using the `payload` property for instance.
+        thumb_url: "http://example.com/path/to/thumb.png",
+        fields: [{
+          title: "fastlane.tools finished successfully",
+          value: " 🎉 🎉 🎉 🎉 🎉 🎉",
+          short: true
+        }]
+      }
+    )
+  end
+
+  desc "test"
+    lane :test do
+      ENV['CODE_SIGNING_TYPE'] = "adhoc"
+      # 1. Keychainの準備
+      setup_ci(provider: "travis")
+
+      # 2. AppStoreConenct APIの準備
+      api_key = app_store_connect_api_key(
+        key_id: ENV['ASC_KEY_ID'],
+        issuer_id: ENV['ASC_ISSUER_ID'],
+        key_content: ENV['ASC_KEY_CONTENT'],
+        in_house: false,
+        is_key_content_base64: true
+      )
+
+      # 3. GitHubアクセスの準備
+      username = ENV['USERNAME']
+      personal_github_access_token = ENV["PERSONAL_GITHUB_ACCESS_TOKEN"]
+      authorization_token_str = "#{username}:#{personal_github_access_token}"
+      basic_authorization_token = Base64.strict_encode64(authorization_token_str)
+
+      # 4. fastlane matchを使って証明書をインストール
+      match(
+        git_basic_authorization:basic_authorization_token,
+        api_key: api_key,
+        app_identifier: ENV["APP_IDENTIFIER"],
+        type: ENV['CODE_SIGNING_TYPE'],
+        readonly: is_ci
+      )
+    end
+end
