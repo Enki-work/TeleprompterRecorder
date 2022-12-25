@@ -86,8 +86,6 @@ final class VideoRecorderViewModel: ViewModelType {
         
         input.prompterTextEditBtnClick.drive(onNext: {captureButtonsView in
             guard let captureButtonsView = captureButtonsView else {return}
-            // テストのため、一時的に広告非表示にする
-            UserDefaults.standard.setPrompterAdsDate(value: .init())
             if UserDefaults.standard.isPrompterAdsShow && !captureButtonsView.textViewEditButton.isSelected {
                 
                 UIAlertController.showTwoBtnAlert(title: "リワード広告見たら\n24時間プロンプター自由に編集可能となります",

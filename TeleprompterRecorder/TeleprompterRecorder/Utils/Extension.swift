@@ -118,10 +118,12 @@ extension UserDefaults {
     }
     
     var isPrompterAdsShow: Bool {
-        guard let showedDate = UserDefaults.standard.object(forKey: UserDefaults.isPrompterAdsShowKey) as? Date else {
-            return true
-        }
-        return Date().timeIntervalSince(showedDate) > UserDefaults.isPrompterAdsInterval
+        // テストのため、一時的に広告非表示にする
+        return false
+//        guard let showedDate = UserDefaults.standard.object(forKey: UserDefaults.isPrompterAdsShowKey) as? Date else {
+//            return true
+//        }
+//        return Date().timeIntervalSince(showedDate) > UserDefaults.isPrompterAdsInterval
     }
     
     func setPrompterAdsDate(value: Date) {
