@@ -23,17 +23,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         NotificationCenter.default.rx.notification(UIApplication.didBecomeActiveNotification).take(until: self.rx.deallocated).subscribe { [weak self] notification in
-            
+
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-            
+
             if let currentVC = self?.window?.rootViewController {
-                if #available(iOS 14, *) {
-                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                    // 広告ロードをメインスレッド処理の安定後まで遅延させる
+                    // （カメラ初期化・AdMob SDK起動が完了する前に広告を表示しようとすると
+                    //   WebKit / Networking プロセスの生成が起動直後に集中し UI がフリーズする）
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                         appDelegate.showAdIfAvailable(viewController: currentVC)
-                    })
-                } else {
-                    appDelegate.showAdIfAvailable(viewController: currentVC)
-                }
+                    }
+                })
             }
         }.disposed(by: disposeBag)
     }

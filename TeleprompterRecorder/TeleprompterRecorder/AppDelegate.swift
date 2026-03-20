@@ -24,23 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADFullScreenContentDeleg
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UserDefaults.setDefaultValues()
         FirebaseApp.configure()
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
         Messaging.messaging().delegate = self
-        if #available(iOS 10.0, *) {
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self
-
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: { _, _ in }
-            )
-        } else {
-            let settings: UIUserNotificationSettings =
-            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound],
+            completionHandler: { _, _ in }
+        )
         application.registerForRemoteNotifications()
+
+        // AdMob SDK の初期化はバックグラウンドで行い、メインスレッドをブロックしない
+        // 広告ロード自体は SceneDelegate 側で遅延させる
+        DispatchQueue.global(qos: .utility).async {
+            GADMobileAds.sharedInstance().start(completionHandler: nil)
+        }
+
         return true
     }
     
