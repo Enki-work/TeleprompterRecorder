@@ -23,6 +23,10 @@ final class PrompterSettingsViewController: UIViewController {
     private let bgColorSwatch = UIView()
     private let textColorSwatch = UIView()
 
+    // Preview
+    private let previewBgView = UIView()
+    private let previewLabel = UILabel()
+
     private var pendingColorTarget: ColorTarget = .background
     private enum ColorTarget { case background, text }
 
@@ -72,7 +76,7 @@ final class PrompterSettingsViewController: UIViewController {
         d.setPrompterFontSize(21)
         d.removeObject(forKey: UserDefaults.prompterBgColorKey)
         d.removeObject(forKey: UserDefaults.prompterTextColorKey)
-        loadCurrentValues()
+        loadCurrentValues()  // スライダー・スウォッチ・プレビューをまとめて更新
         notifyChange()
     }
 
@@ -178,6 +182,7 @@ final class PrompterSettingsViewController: UIViewController {
         updateFontSizeLabel(Float(d.prompterFontSize))
         bgColorSwatch.backgroundColor = d.prompterBgColor
         textColorSwatch.backgroundColor = d.prompterTextColor
+        updatePreview()
     }
 
     // MARK: - Slider actions
@@ -186,6 +191,7 @@ final class PrompterSettingsViewController: UIViewController {
         updateBlurLabel(v)
         UserDefaults.standard.setPrompterBlurIntensity(v)
         notifyChange()
+        updatePreview()
     }
 
     @objc private func fontSizeSliderChanged() {
@@ -193,6 +199,7 @@ final class PrompterSettingsViewController: UIViewController {
         updateFontSizeLabel(v)
         UserDefaults.standard.setPrompterFontSize(CGFloat(v))
         notifyChange()
+        updatePreview()
     }
 
     private func updateBlurLabel(_ v: Float) {
@@ -336,7 +343,6 @@ final class PrompterSettingsViewController: UIViewController {
     }
 
     private func makePrompterPreview() -> UIView {
-        let d = UserDefaults.standard
         let blur = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
         blur.layer.cornerRadius = 14
         blur.layer.masksToBounds = true
@@ -344,33 +350,35 @@ final class PrompterSettingsViewController: UIViewController {
         blur.layer.borderColor = UIColor.white.withAlphaComponent(0.18).cgColor
         blur.translatesAutoresizingMaskIntoConstraints = false
 
-        let bg = UIView()
-        bg.backgroundColor = d.prompterBgColor
-        bg.translatesAutoresizingMaskIntoConstraints = false
+        previewBgView.translatesAutoresizingMaskIntoConstraints = false
 
-        let label = UILabel()
-        label.text = "サンプルテキスト\nSample Text"
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = d.prompterTextColor
-        label.font = .systemFont(ofSize: min(d.prompterFontSize, 24), weight: .regular)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        previewLabel.text = "サンプルテキスト\nSample Text"
+        previewLabel.numberOfLines = 0
+        previewLabel.textAlignment = .center
+        previewLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        blur.contentView.addSubview(bg)
-        blur.contentView.addSubview(label)
+        blur.contentView.addSubview(previewBgView)
+        blur.contentView.addSubview(previewLabel)
         NSLayoutConstraint.activate([
-            bg.topAnchor.constraint(equalTo: blur.contentView.topAnchor),
-            bg.leadingAnchor.constraint(equalTo: blur.contentView.leadingAnchor),
-            bg.trailingAnchor.constraint(equalTo: blur.contentView.trailingAnchor),
-            bg.bottomAnchor.constraint(equalTo: blur.contentView.bottomAnchor),
-            label.centerXAnchor.constraint(equalTo: blur.contentView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: blur.contentView.centerYAnchor),
-            label.leadingAnchor.constraint(equalTo: blur.contentView.leadingAnchor, constant: 12),
-            label.trailingAnchor.constraint(equalTo: blur.contentView.trailingAnchor, constant: -12),
+            previewBgView.topAnchor.constraint(equalTo: blur.contentView.topAnchor),
+            previewBgView.leadingAnchor.constraint(equalTo: blur.contentView.leadingAnchor),
+            previewBgView.trailingAnchor.constraint(equalTo: blur.contentView.trailingAnchor),
+            previewBgView.bottomAnchor.constraint(equalTo: blur.contentView.bottomAnchor),
+            previewLabel.centerXAnchor.constraint(equalTo: blur.contentView.centerXAnchor),
+            previewLabel.centerYAnchor.constraint(equalTo: blur.contentView.centerYAnchor),
+            previewLabel.leadingAnchor.constraint(equalTo: blur.contentView.leadingAnchor, constant: 12),
+            previewLabel.trailingAnchor.constraint(equalTo: blur.contentView.trailingAnchor, constant: -12),
             blur.heightAnchor.constraint(equalToConstant: 100),
         ])
 
         return blur
+    }
+
+    private func updatePreview() {
+        let d = UserDefaults.standard
+        previewBgView.backgroundColor = d.prompterBgColor
+        previewLabel.textColor = d.prompterTextColor
+        previewLabel.font = .systemFont(ofSize: min(d.prompterFontSize, 24), weight: .regular)
     }
 }
 
@@ -388,5 +396,6 @@ extension PrompterSettingsViewController: UIColorPickerViewControllerDelegate {
             UserDefaults.standard.setPrompterTextColor(color)
         }
         notifyChange()
+        updatePreview()
     }
 }
