@@ -86,7 +86,11 @@ class VideoRecorderViewController: UIViewController {
         }.disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(UIDevice.orientationDidChangeNotification).take(until: self.rx.deallocated).subscribe { [weak self] notification in
-            self?.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = UIWindow.orientation.AVCaptureVideoOrientation
+            let orientation = UIWindow.orientation.AVCaptureVideoOrientation
+            self?.cameraPreview.cameraPreviewLayer.connection?.videoOrientation = orientation
+            // videoDataOutput の orientation も常に同期させておく
+            // （録画開始時に変更するとパイプライン停止が起きるためここで管理する）
+            self?.viewModel.dependencies.captureManager.updateVideoOrientation(orientation)
         }.disposed(by: disposeBag)
     }
     

@@ -102,8 +102,14 @@ class CaptureManager: NSObject {
                 let videoDataOutput = AVCaptureVideoDataOutput()
                 videoDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
                 videoDataOutput.alwaysDiscardsLateVideoFrames = true
+                // HDR フォーマット選択時は 10bit pixel format を使用する
+                // 8bit だと HDR→SDR 変換コストが 4K で顕著になり冒頭が詰まる原因になる
+                let isHDR = UserDefaults.standard.isHDRSwitch
+                let pixelFormat = isHDR
+                    ? kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange   // 10bit HDR
+                    : kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange    // 8bit SDR
                 videoDataOutput.videoSettings = [
-                    kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
+                    kCVPixelBufferPixelFormatTypeKey: pixelFormat
                 ] as [String: Any]
                 if self.captureSession.canAddOutput(videoDataOutput) {
                     self.captureSession.addOutput(videoDataOutput)
@@ -122,6 +128,10 @@ class CaptureManager: NSObject {
 
             self.captureSession.startRunning()
             self.selectUserDefaultFormat()
+            // セッション起動後に一度だけ orientation を設定する
+            // （録画開始時に変更するとパイプラインが停止するため、ここで済ませる）
+            let orientation = UIDevice.current.orientation.AVCaptureVideoOrientation
+            self.videoDataOutput?.connection(with: .video)?.videoOrientation = orientation
         }
     }
     
@@ -169,14 +179,16 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
             var videoSize = CGSize.init(width: 1280, height: 720)
             if let currentFormatDescription = currentCamera?.activeFormat.formatDescription {
                 let dimensions = CMVideoFormatDescriptionGetDimensions(currentFormatDescription)
-                
-                videoDataOutput?.connection(with: .video)?.videoOrientation = UIDevice.current.orientation.AVCaptureVideoOrientation
+                // videoOrientation はここで変更しない（ライブ中の接続設定変更は
+                // パイプラインを約1秒停止させ、録画冒頭が freeze する原因になる）
                 videoSize = UIDevice.current.orientation.isLandscape ? .init(width: Int(dimensions.width), height: Int(dimensions.height)) : .init(width: Int(dimensions.height), height: Int(dimensions.width))
             }
+            let isHDR = UserDefaults.standard.isHDRSwitch
             recordEncoder = try? CaptureEncoder(path: getUploadFilePath(),
                                                 videoSize: videoSize,
                                                 channels: Int(channels ?? 1),
-                                                rate: samplerate ?? 44100)
+                                                rate: samplerate ?? 44100,
+                                                isHDR: isHDR)
         }
         var sampleBuffer: CMSampleBuffer = sampleBuffer
         if timeOffset.value > 0, let buffer = adjustTime(sample: sampleBuffer, offset: timeOffset){
@@ -310,6 +322,8 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
                     }
                     self.captureSession.startRunning()
                     self.selectUserDefaultFormat(isSave: true)
+                    let orientation = UIDevice.current.orientation.AVCaptureVideoOrientation
+                    self.videoDataOutput?.connection(with: .video)?.videoOrientation = orientation
                     observer.onNext(true)
                 }
                 return Disposables.create()
@@ -334,6 +348,14 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         }
     }
     
+    /// デバイス回転時に videoDataOutput の orientation を更新する
+    /// 録画中に変更しても安全（パイプラインを停止させない）
+    func updateVideoOrientation(_ orientation: AVCaptureVideoOrientation) {
+        recordingQueue.async { [weak self] in
+            self?.videoDataOutput?.connection(with: .video)?.videoOrientation = orientation
+        }
+    }
+
     func getUserDefaultCamera() -> AVCaptureDevice? {
         if let deviceUniqueID = LocalDeviceFormat.getLocalDeviceFormatList().first(where: {$0.isDefaultCamera})?.deviceUniqueID {
             

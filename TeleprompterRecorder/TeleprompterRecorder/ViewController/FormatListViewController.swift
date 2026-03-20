@@ -227,7 +227,10 @@ fileprivate extension AVCaptureDevice.Format {
         let w = dims.width, h = dims.height
         let maxFPS  = Int(videoSupportedFrameRateRanges.map(\.maxFrameRate).max() ?? 0)
         let fov     = Int(videoFieldOfView)
-        let isHDR   = isVideoHDRSupported
+        // フィルターと同じ判定基準を使う（isVideoHDRSupported はハードウェアフラグで
+        // HLG_BT2020 色空間とは別物。HDR OFF リストに出るフォーマットが
+        // 「HDR撮影対応」と表示されてしまう矛盾を防ぐ）
+        let isHDR   = supportedColorSpaces.contains(.HLG_BT2020)
         let binned  = isVideoBinned
         let maxZoom = Int64(videoMaxZoomFactor)
 

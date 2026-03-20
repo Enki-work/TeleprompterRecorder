@@ -35,7 +35,7 @@ final class VideoRecorderViewModel: ViewModelType {
         let videoRecorderVC: VideoRecorderViewController
     }
     
-    private let dependencies: Dependencies
+    let dependencies: Dependencies
     private let disposeBag = DisposeBag()
     private var backgroundTaskID = UIBackgroundTaskIdentifier(rawValue: 0)
     
@@ -152,38 +152,31 @@ final class VideoRecorderViewModel: ViewModelType {
             isVCShowing = true
         }).disposed(by: disposeBag)
         
-        var notificationKey = ""
-        if #available(iOS 15.0, *) {
-            notificationKey = "SystemVolumeDidChange"
-        } else {
-            notificationKey = "AVSystemController_SystemVolumeDidChangeNotification"
-        }
-        
-        let obserable = NotificationCenter.default.rx.notification(Notification.Name.init(rawValue: notificationKey)).take(until: dependencies.videoRecorderVC.rx.deallocated).distinctUntilChanged({ a, b in
-            if #available(iOS 15.0, *) {
-                guard let aSequenceNumber = a.userInfo?["SequenceNumber"] as? Int,
-                      let bSequenceNumber = b.userInfo?["SequenceNumber"] as? Int,
-                      let aVolume = a.userInfo?["Volume"] as? Float,
-                      let bVolume = b.userInfo?["Volume"] as? Float else {
-                          return false
-                      }
-                if (aVolume == 1 && bVolume == 1) || (aVolume == 0 && bVolume == 0) {
-                    return aSequenceNumber == bSequenceNumber
-                } else {
-                    return aSequenceNumber == bSequenceNumber || aVolume == bVolume
-                }
-            } else {
-                guard let aVolume = a.userInfo?["AVSystemController_AudioVolumeNotificationParameter"] as? Float,
-                      let bVolume = b.userInfo?["AVSystemController_AudioVolumeNotificationParameter"] as? Float else {
-                          return false
-                      }
-                if (aVolume == 1 && bVolume == 1) || (aVolume == 0 && bVolume == 0) {
-                    return false
-                } else {
-                    return aVolume == bVolume
-                }
+        // iOS 17 以降は "SystemVolumeDidChange" のみ使用
+        let notificationKey = "SystemVolumeDidChange"
+
+        let obserable = NotificationCenter.default.rx
+            .notification(Notification.Name(notificationKey))
+            .take(until: dependencies.videoRecorderVC.rx.deallocated)
+            // "ExplicitVolumeChange" = ユーザーが音量ボタンを押した操作のみ通過させる
+            // システム由来（カメラ・オーディオセッション切り替え等）の通知を除外することで
+            // 提词器が意図せず表示される誤作動を防ぐ
+            .filter { notification in
+                guard let reason = notification.userInfo?["Reason"] as? String else { return false }
+                return reason == "ExplicitVolumeChange"
             }
-        }).map { _ in}
+            .distinctUntilChanged({ a, b in
+                guard let aSeq = a.userInfo?["SequenceNumber"] as? Int,
+                      let bSeq = b.userInfo?["SequenceNumber"] as? Int,
+                      let aVol = a.userInfo?["Volume"] as? Float,
+                      let bVol = b.userInfo?["Volume"] as? Float else { return false }
+                if (aVol == 1 && bVol == 1) || (aVol == 0 && bVol == 0) {
+                    return aSeq == bSeq
+                } else {
+                    return aSeq == bSeq || aVol == bVol
+                }
+            })
+            .map { _ in }
         let manualTap = PublishSubject<Void>()
         obserable.observe(on: MainScheduler.asyncInstance).subscribe(on: MainScheduler.asyncInstance)
             .flatMapFirst {_ in
