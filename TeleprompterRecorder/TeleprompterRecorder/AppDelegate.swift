@@ -47,7 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADFullScreenContentDeleg
             return
         }
         isLoadingAd = true
-        let AD_UNIT_ID = Bundle.main.infoDictionary?["APP_OPEN_AD_ID"] as? String ?? "ca-app-pub-3940256099942544/3419835294"
+        // Fallback は App Open Ad 専用のテスト ID（3419835294 は Interstitial 用のため誤り）
+        let AD_UNIT_ID = Bundle.main.infoDictionary?["APP_OPEN_AD_ID"] as? String ?? "ca-app-pub-3940256099942544/5575463023"
         debugPrint("Start loading ad.")
         GADAppOpenAd.load(
             withAdUnitID: AD_UNIT_ID,

@@ -274,7 +274,7 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
             let alertController = UIAlertController(title: "カメラ選択",
                                                     message: nil, preferredStyle: .actionSheet)
             devices.enumerated().forEach { index, device in
-                let action = UIAlertAction(title: device.localizedName, style: .default) { _ in
+                let action = UIAlertAction(title: device.japaneseDescription, style: .default) { _ in
                     observer.onNext(devices[index])
                     observer.onCompleted()
                 }
@@ -342,6 +342,30 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
             return camera
         }
         return nil
+    }
+}
+
+// MARK: - Japanese natural language description for camera devices
+private extension AVCaptureDevice {
+    var japaneseDescription: String {
+        switch (position, deviceType) {
+        case (.front, _):
+            return "フロントカメラ（自撮り・ビデオ通話向け）"
+        case (.back, .builtInUltraWideCamera):
+            return "超広角カメラ（風景・建物・広い空間を一枚に収める）"
+        case (.back, .builtInWideAngleCamera):
+            return "広角カメラ（標準的な撮影に最も適した万能レンズ）"
+        case (.back, .builtInTelephotoCamera):
+            return "望遠カメラ（遠くの被写体を光学ズームで撮影）"
+        case (.back, .builtInDualCamera):
+            return "デュアルカメラ・広角＋望遠（シーンに応じて自動切替）"
+        case (.back, .builtInDualWideCamera):
+            return "デュアルカメラ・超広角＋広角（シーンに応じて自動切替）"
+        case (.back, .builtInTripleCamera):
+            return "トリプルカメラ・超広角＋広角＋望遠（最も多彩な撮影が可能）"
+        default:
+            return localizedName
+        }
     }
 }
 

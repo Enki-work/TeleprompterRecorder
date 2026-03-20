@@ -12,30 +12,39 @@ import RxSwift
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    
-    private let disposeBag = DisposeBag()
 
+    private let disposeBag = DisposeBag()
+    /// コールドスタート時は広告を表示しない（WebKit プロセス群の生成が起動直後に集中するため）
+    /// バックグラウンドから復帰した 2 回目以降のアクティブ化から広告を表示する
+    private var isFirstActivation = true
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
-        
+
         NotificationCenter.default.rx.notification(UIApplication.didBecomeActiveNotification).take(until: self.rx.deallocated).subscribe { [weak self] notification in
+            guard let self else { return }
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            guard let currentVC = self.window?.rootViewController else { return }
 
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-
-            if let currentVC = self?.window?.rootViewController {
-                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                    // 広告ロードをメインスレッド処理の安定後まで遅延させる
-                    // （カメラ初期化・AdMob SDK起動が完了する前に広告を表示しようとすると
-                    //   WebKit / Networking プロセスの生成が起動直後に集中し UI がフリーズする）
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                        appDelegate.showAdIfAvailable(viewController: currentVC)
-                    }
-                })
+            if isFirstActivation {
+                // コールドスタート: 広告は表示せず、バックグラウンドで事前ロードだけ行う
+                // （次回フォアグラウンド復帰時に即表示できるよう準備）
+                isFirstActivation = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                    appDelegate.loadAd()
+                }
+                return
             }
+
+            // バックグラウンドから復帰: トラッキング許可確認後に広告を表示
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                DispatchQueue.main.async {
+                    appDelegate.showAdIfAvailable(viewController: currentVC)
+                }
+            })
         }.disposed(by: disposeBag)
     }
 
