@@ -47,7 +47,7 @@ class FormatListViewController: UIViewController {
                 let fps = "\(Int64(item.videoSupportedFrameRateRanges.first?.minFrameRate ?? -1))–\(Int64(item.videoSupportedFrameRateRanges.first?.maxFrameRate ?? -1)) fps"
                 let dims = "\(formatDimensions.width) × \(formatDimensions.height)"
                 let codec = "\(formatMediaType.toString())/\(formatMediaSubType.toString())"
-                let hdr = item.isVideoHDRSupported ? "HDR" : ""
+                let hdr = item.supportedColorSpaces.contains(.HLG_BT2020) ? "HDR" : ""
                 let binned = item.isVideoBinned ? "Binned" : ""
                 let tags = [codec, fps, dims, hdr, binned].filter { !$0.isEmpty }.joined(separator: "  ·  ")
                 let detail = "ISO \(Int(item.minISO))–\(Int(item.maxISO))  ·  Zoom ×\(Int64(item.videoMaxZoomFactor))  ·  FOV \(Int(item.videoFieldOfView))°"

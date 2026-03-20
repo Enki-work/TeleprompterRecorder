@@ -102,14 +102,8 @@ class CaptureManager: NSObject {
                 let videoDataOutput = AVCaptureVideoDataOutput()
                 videoDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
                 videoDataOutput.alwaysDiscardsLateVideoFrames = true
-                // HDR フォーマット選択時は 10bit pixel format を使用する
-                // 8bit だと HDR→SDR 変換コストが 4K で顕著になり冒頭が詰まる原因になる
-                let isHDR = UserDefaults.standard.isHDRSwitch
-                let pixelFormat = isHDR
-                    ? kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange   // 10bit HDR
-                    : kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange    // 8bit SDR
                 videoDataOutput.videoSettings = [
-                    kCVPixelBufferPixelFormatTypeKey: pixelFormat
+                    kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
                 ] as [String: Any]
                 if self.captureSession.canAddOutput(videoDataOutput) {
                     self.captureSession.addOutput(videoDataOutput)
