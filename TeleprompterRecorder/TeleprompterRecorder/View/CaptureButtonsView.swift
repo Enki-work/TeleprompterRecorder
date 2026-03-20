@@ -27,20 +27,32 @@ class CaptureButtonsView: UIView {
         effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
     private let bottomBlurView = UIVisualEffectView(
         effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
-    private let prompterBlur = UIVisualEffectView(
-        effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
+    private let prompterBlur = UIVisualEffectView(effect: nil)
+    private let prompterBgColorView = UIView()
+    private var blurAnimator: UIViewPropertyAnimator?
 
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         buildUI()
         buildBindings()
+        applyPrompterSettings()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyPrompterSettings),
+                                               name: .prompterSettingsChanged, object: nil)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         buildUI()
         buildBindings()
+        applyPrompterSettings()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyPrompterSettings),
+                                               name: .prompterSettingsChanged, object: nil)
+    }
+
+    deinit {
+        blurAnimator?.stopAnimation(true)
+        NotificationCenter.default.removeObserver(self, name: .prompterSettingsChanged, object: nil)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -94,6 +106,11 @@ extension CaptureButtonsView {
         styleBlurPill(prompterBlur, cornerRadius: 18)
         addSubview(prompterBlur)
 
+        prompterBgColorView.translatesAutoresizingMaskIntoConstraints = false
+        prompterBgColorView.layer.cornerRadius = 18
+        prompterBgColorView.layer.masksToBounds = true
+        prompterBlur.contentView.insertSubview(prompterBgColorView, at: 0)
+
         textView.backgroundColor = .clear
         textView.textColor = .white
         textView.font = .systemFont(ofSize: 21, weight: .regular)
@@ -122,6 +139,11 @@ extension CaptureButtonsView {
         prompterBlur.contentView.addSubview(fadeHost)
 
         NSLayoutConstraint.activate([
+            prompterBgColorView.topAnchor.constraint(equalTo: prompterBlur.contentView.topAnchor),
+            prompterBgColorView.leadingAnchor.constraint(equalTo: prompterBlur.contentView.leadingAnchor),
+            prompterBgColorView.trailingAnchor.constraint(equalTo: prompterBlur.contentView.trailingAnchor),
+            prompterBgColorView.bottomAnchor.constraint(equalTo: prompterBlur.contentView.bottomAnchor),
+
             prompterBlur.topAnchor.constraint(equalTo: topBlurView.bottomAnchor, constant: 4),
             prompterBlur.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
             prompterBlur.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -14),
@@ -210,6 +232,37 @@ extension CaptureButtonsView {
                 self.textViewEditButton.layer.borderColor = c.withAlphaComponent(0.5).cgColor
             })
             .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - Prompter settings
+extension CaptureButtonsView {
+
+    @objc func applyPrompterSettings() {
+        let defaults = UserDefaults.standard
+        applyBlurIntensity(defaults.prompterBlurIntensity)
+        prompterBgColorView.backgroundColor = defaults.prompterBgColor
+        textView.textColor = defaults.prompterTextColor
+        let size = defaults.prompterFontSize
+        textView.font = .systemFont(ofSize: size, weight: .regular)
+    }
+
+    private func applyBlurIntensity(_ intensity: Float) {
+        blurAnimator?.stopAnimation(true)
+        blurAnimator = nil
+        prompterBlur.effect = nil
+
+        let clamped = CGFloat(max(0, min(1, intensity)))
+        if clamped >= 1.0 {
+            prompterBlur.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+            return
+        }
+        blurAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear) { [weak self] in
+            self?.prompterBlur.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        }
+        blurAnimator?.startAnimation()
+        blurAnimator?.pauseAnimation()
+        blurAnimator?.fractionComplete = clamped
     }
 }
 

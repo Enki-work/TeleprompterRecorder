@@ -85,21 +85,31 @@ extension UIWindow {
     }
 }
 
+extension Notification.Name {
+    static let prompterSettingsChanged = Notification.Name("prompterSettingsChanged")
+}
+
 extension UserDefaults {
     static let PrompterViewShowKey = "PrompterViewShowKey"
     static let PrompterTextKey = "PrompterTextKey"
     static let isHDRSwitchKey = "isHDRSwitchKey"
     static let isPrompterAdsShowKey = "isPrompterAdsShowKey"
-    
+    static let prompterBlurIntensityKey = "prompterBlurIntensityKey"
+    static let prompterBgColorKey = "prompterBgColorKey"
+    static let prompterTextColorKey = "prompterTextColorKey"
+    static let prompterFontSizeKey = "prompterFontSizeKey"
+
 #if DEBUG
     private static let isPrompterAdsInterval: CGFloat = 60
 #else
     private static let isPrompterAdsInterval: CGFloat = 60 * 60 * 24
 #endif
-    
+
     static func setDefaultValues() {
         UserDefaults.standard.register(defaults: [PrompterViewShowKey : false])
         UserDefaults.standard.register(defaults: [isHDRSwitchKey : false])
+        UserDefaults.standard.register(defaults: [prompterBlurIntensityKey : Float(0.7)])
+        UserDefaults.standard.register(defaults: [prompterFontSizeKey : Float(21)])
     }
     
     var isPrompterViewShow: Bool {
@@ -129,6 +139,52 @@ extension UserDefaults {
         UserDefaults.standard.set(value, forKey: UserDefaults.isPrompterAdsShowKey)
     }
     
+    var prompterBlurIntensity: Float {
+        let v = UserDefaults.standard.float(forKey: UserDefaults.prompterBlurIntensityKey)
+        return v == 0 ? 0.7 : v
+    }
+
+    func setPrompterBlurIntensity(_ value: Float) {
+        UserDefaults.standard.set(value, forKey: UserDefaults.prompterBlurIntensityKey)
+    }
+
+    var prompterBgColor: UIColor {
+        guard let components = UserDefaults.standard.array(forKey: UserDefaults.prompterBgColorKey) as? [CGFloat],
+              components.count == 4 else {
+            return UIColor.white.withAlphaComponent(0.05)
+        }
+        return UIColor(red: components[0], green: components[1], blue: components[2], alpha: components[3])
+    }
+
+    func setPrompterBgColor(_ color: UIColor) {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        color.getRed(&r, green: &g, blue: &b, alpha: &a)
+        UserDefaults.standard.set([r, g, b, a], forKey: UserDefaults.prompterBgColorKey)
+    }
+
+    var prompterTextColor: UIColor {
+        guard let components = UserDefaults.standard.array(forKey: UserDefaults.prompterTextColorKey) as? [CGFloat],
+              components.count == 4 else {
+            return .white
+        }
+        return UIColor(red: components[0], green: components[1], blue: components[2], alpha: components[3])
+    }
+
+    func setPrompterTextColor(_ color: UIColor) {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        color.getRed(&r, green: &g, blue: &b, alpha: &a)
+        UserDefaults.standard.set([r, g, b, a], forKey: UserDefaults.prompterTextColorKey)
+    }
+
+    var prompterFontSize: CGFloat {
+        let v = UserDefaults.standard.float(forKey: UserDefaults.prompterFontSizeKey)
+        return CGFloat(v == 0 ? 21 : v)
+    }
+
+    func setPrompterFontSize(_ size: CGFloat) {
+        UserDefaults.standard.set(Float(size), forKey: UserDefaults.prompterFontSizeKey)
+    }
+
     var prompterText: NSAttributedString? {
         guard let strData = UserDefaults.standard.object(forKey:  UserDefaults.PrompterTextKey) as? Data else {
             return nil

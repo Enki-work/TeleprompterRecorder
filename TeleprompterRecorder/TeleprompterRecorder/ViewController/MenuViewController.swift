@@ -30,6 +30,11 @@ class MenuViewController: UITableViewController {
             case 0:
                 switch indexPath.row {
                 case 0:
+                    let settingsVC = PrompterSettingsViewController()
+                    let nav = UINavigationController(rootViewController: settingsVC)
+                    nav.modalPresentationStyle = .formSheet
+                    self.present(nav, animated: true)
+                case 1:
                     let vc = (self.presentingViewController as? UINavigationController)?.topViewController
                     vc?.performSegue(withIdentifier: "showContactMe", sender: nil)
                     SideMenuManager.default.rightMenuNavigationController?.dismiss(animated: false, completion: nil)

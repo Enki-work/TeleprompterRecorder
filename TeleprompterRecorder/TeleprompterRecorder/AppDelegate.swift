@@ -35,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADFullScreenContentDeleg
         // AdMob SDK の初期化はバックグラウンドで行い、メインスレッドをブロックしない
         // 広告ロード自体は SceneDelegate 側で遅延させる
         DispatchQueue.global(qos: .utility).async {
+#if DEBUG
+            GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers =
+                ["aa66affc84cc89cf71e10a6936bd6670"]
+#endif
             GADMobileAds.sharedInstance().start(completionHandler: nil)
         }
 
