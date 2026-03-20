@@ -69,6 +69,7 @@ extension CaptureButtonsView {
         setupTopBar()
         setupPrompterArea()
         setupBottomBar()
+        setupPrompterTapGesture()
     }
 
     // ── Top pill ─────────────────────────────────────────────────────────────
@@ -202,6 +203,24 @@ extension CaptureButtonsView {
             stack.topAnchor.constraint(equalTo: bottomBlurView.contentView.topAnchor),
             stack.bottomAnchor.constraint(equalTo: bottomBlurView.contentView.bottomAnchor),
         ])
+    }
+}
+
+// MARK: - Tap to hide prompter
+extension CaptureButtonsView {
+
+    fileprivate func setupPrompterTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handlePrompterTap))
+        // スクロールジェスチャーと競合しないよう同時認識を許可
+        tap.cancelsTouchesInView = false
+        prompterBlur.contentView.addGestureRecognizer(tap)
+    }
+
+    @objc private func handlePrompterTap(_ gesture: UITapGestureRecognizer) {
+        // 編集モード中はタップでキーボードを操作するため非表示トリガーをスキップ
+        guard !textView.isEditable else { return }
+        // 既存の prompterBtn タップと同じパスを通して ViewModel の状態管理に乗せる
+        prompterBtn.sendActions(for: .touchUpInside)
     }
 }
 
