@@ -60,90 +60,69 @@ class CaptureManager: NSObject {
     }
     
     func initSetting() {
-        guard !self.captureSession.isRunning else {
-            return
+        guard !self.captureSession.isRunning else { return }
+
+        // All AVCaptureSession operations must run on a background thread
+        // to avoid blocking the main thread (UI unresponsiveness)
+        recordingQueue.async { [weak self] in
+            guard let self = self else { return }
+
+            self.captureSession.beginConfiguration()
+            if self.captureSession.canSetSessionPreset(.high) {
+                self.captureSession.sessionPreset = .high
+            }
+            self.captureSession.commitConfiguration()
+
+            let cameraDiscoverySession = AVCaptureDevice.DiscoverySession(
+                deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .unspecified)
+            cameraDiscoverySession.devices.forEach {
+                switch $0.position {
+                case .back:  self.mainCamera  = $0
+                case .front: self.innerCamera = $0
+                default: break
+                }
+            }
+
+            let audioDiscoverySession = AVCaptureDevice.DiscoverySession(
+                deviceTypes: [.builtInMicrophone], mediaType: .audio, position: .unspecified)
+            self.currentAudio  = audioDiscoverySession.devices.first
+            self.currentCamera = self.getUserDefaultCamera() ?? self.mainCamera
+
+            do {
+                let videoInput = try AVCaptureDeviceInput(device: self.currentCamera!)
+                let audioInput = try AVCaptureDeviceInput(device: self.currentAudio!)
+
+                if self.captureSession.canAddInput(videoInput) {
+                    self.captureSession.addInput(videoInput)
+                }
+                if self.captureSession.canAddInput(audioInput) {
+                    self.captureSession.addInput(audioInput)
+                }
+
+                let videoDataOutput = AVCaptureVideoDataOutput()
+                videoDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
+                videoDataOutput.alwaysDiscardsLateVideoFrames = true
+                videoDataOutput.videoSettings = [
+                    kCVPixelBufferPixelFormatTypeKey: kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
+                ] as [String: Any]
+                if self.captureSession.canAddOutput(videoDataOutput) {
+                    self.captureSession.addOutput(videoDataOutput)
+                }
+                self.videoDataOutput = videoDataOutput
+
+                let audioDataOutput = AVCaptureAudioDataOutput()
+                audioDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
+                if self.captureSession.canAddOutput(audioDataOutput) {
+                    self.captureSession.addOutput(audioDataOutput)
+                }
+                self.audioDataOutput = audioDataOutput
+            } catch {
+                debugPrint(error)
+            }
+
+            self.captureSession.startRunning()
+            self.selectUserDefaultFormat()
         }
-        captureSession.beginConfiguration()
-        if (captureSession.canSetSessionPreset(.high)) {
-            captureSession.sessionPreset = .high
-        }
-        captureSession.commitConfiguration()
-        
-        let cameraDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .unspecified)
-        cameraDiscoverySession.devices.forEach({
-            switch $0.position {
-            case .back:
-                self.mainCamera = $0
-            case .front:
-                self.innerCamera = $0
-            default:
-                break
-            }
-        })
-        
-        let audioDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInMicrophone], mediaType: .audio, position: .unspecified)
-        currentAudio = audioDiscoverySession.devices.first;
-        
-        // 起動時のカメラを設定
-        currentCamera = getUserDefaultCamera() ?? mainCamera
-        
-        do {
-            /*
-             // 指定したデバイスを使用するために入力を初期化
-             let captureDeviceInput = try AVCaptureDeviceInput(device: currentCamera!)
-             // 指定した入力をセッションに追加
-             session.addInput(captureDeviceInput)
-             // 出力データを受け取るオブジェクトの作成
-             photoOutput = AVCapturePhotoOutput()
-             // 出力ファイルのフォーマットを指定
-             photoOutput!.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey : AVVideoCodecType.jpeg])], completionHandler: nil)
-             session.addOutput(photoOutput!)
-             let settings = AVCapturePhotoSettings()
-             // フラッシュの設定
-             settings.flashMode = .auto
-             // 撮影された画像をdelegateメソッドで処理
-             self.photoOutput?.capturePhoto(with: settings, delegate: self)
-             */
-            
-            let videoInput = try AVCaptureDeviceInput(device: currentCamera!)
-            
-            let audioInput = try AVCaptureDeviceInput(device: currentAudio!)
-            
-            if captureSession.canAddInput(videoInput) {
-                captureSession.addInput(videoInput)
-            }
-            if captureSession.canAddInput(audioInput) {
-                captureSession.addInput(audioInput)
-            }
-            
-            let videoDataOutput = AVCaptureVideoDataOutput()
-            videoDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
-            videoDataOutput.alwaysDiscardsLateVideoFrames = true
-            videoDataOutput.videoSettings = [
-                kCVPixelBufferPixelFormatTypeKey : kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
-            ] as [String : Any]
-            self.captureSession.addOutput(videoDataOutput)
-            self.videoDataOutput = videoDataOutput
-            
-            let audioDataOutput = AVCaptureAudioDataOutput()
-            audioDataOutput.setSampleBufferDelegate(self, queue: self.recordingQueue)
-            self.captureSession.addOutput(audioDataOutput)
-            self.audioDataOutput = audioDataOutput
-            
-            if captureSession.canAddOutput(videoDataOutput) {
-                captureSession.addOutput(videoDataOutput)
-            }
-            
-            if captureSession.canAddOutput(audioDataOutput) {
-                captureSession.addOutput(audioDataOutput)
-            }
-            
-            
-        } catch {
-            debugPrint(error)
-        }
-        self.captureSession.startRunning()
-        selectUserDefaultFormat()
     }
     
     func startRecording() {
@@ -309,23 +288,30 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
             Observable<Bool>.create { [weak self] observer in
                 guard let self = self else {
                     observer.onNext(false)
-                    return Disposables.create()}
-                self.captureSession.stopRunning()
-                if let videoInput = self.captureSession.inputs.first(where: {($0 as? AVCaptureDeviceInput)?.device.hasMediaType(.video) ?? false}) {
-                    self.captureSession.removeInput(videoInput)
+                    return Disposables.create()
                 }
-                do {
-                    let videoInput = try AVCaptureDeviceInput(device: device)
-                    self.currentCamera = device
-                    if self.captureSession.canAddInput(videoInput) {
-                        self.captureSession.addInput(videoInput)
+                // Run all session operations on the dedicated background queue
+                self.recordingQueue.async {
+                    self.captureSession.stopRunning()
+                    if let videoInput = self.captureSession.inputs.first(where: {
+                        ($0 as? AVCaptureDeviceInput)?.device.hasMediaType(.video) ?? false
+                    }) {
+                        self.captureSession.removeInput(videoInput)
                     }
-                } catch {
-                    observer.onError(error)
+                    do {
+                        let videoInput = try AVCaptureDeviceInput(device: device)
+                        self.currentCamera = device
+                        if self.captureSession.canAddInput(videoInput) {
+                            self.captureSession.addInput(videoInput)
+                        }
+                    } catch {
+                        observer.onError(error)
+                        return
+                    }
+                    self.captureSession.startRunning()
+                    self.selectUserDefaultFormat(isSave: true)
+                    observer.onNext(true)
                 }
-                self.captureSession.startRunning()
-                self.selectUserDefaultFormat(isSave: true)
-                observer.onNext(true)
                 return Disposables.create()
             }
         }.asDriver(onErrorJustReturn: false)
