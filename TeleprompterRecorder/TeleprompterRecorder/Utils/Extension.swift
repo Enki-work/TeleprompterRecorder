@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 import RxCocoa
 
+
 extension UIViewController {
     static var rootViewController: UIViewController? = {
         UIApplication.shared.windows.first?.rootViewController

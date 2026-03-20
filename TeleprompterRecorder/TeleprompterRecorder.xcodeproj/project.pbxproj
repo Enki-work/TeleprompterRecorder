@@ -38,7 +38,6 @@
 		A4A523F12748B400006B22F9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523F02748B400006B22F9 /* Extension.swift */; };
 		A4A523F42749D40F006B22F9 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523F32749D40F006B22F9 /* CameraPreview.swift */; };
 		A4A523F7274A02C2006B22F9 /* CaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523F6274A02C2006B22F9 /* CaptureManager.swift */; };
-		A4A523F9274A0ABA006B22F9 /* CaptureButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4A523F8274A0ABA006B22F9 /* CaptureButtonsView.xib */; };
 		A4A523FB274A0AC8006B22F9 /* CaptureButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A523FA274A0AC8006B22F9 /* CaptureButtonsView.swift */; };
 		A4DDBEE9274B31F4009199FC /* CaptureEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEE8274B31F4009199FC /* CaptureEncoder.swift */; };
 		A4DDBEEB274CABB5009199FC /* FormatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DDBEEA274CABB5009199FC /* FormatListViewController.swift */; };
@@ -102,7 +101,6 @@
 		A4A523F02748B400006B22F9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		A4A523F32749D40F006B22F9 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		A4A523F6274A02C2006B22F9 /* CaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureManager.swift; sourceTree = "<group>"; };
-		A4A523F8274A0ABA006B22F9 /* CaptureButtonsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaptureButtonsView.xib; sourceTree = "<group>"; };
 		A4A523FA274A0AC8006B22F9 /* CaptureButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureButtonsView.swift; sourceTree = "<group>"; };
 		A4DDBEE8274B31F4009199FC /* CaptureEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureEncoder.swift; sourceTree = "<group>"; };
 		A4DDBEEA274CABB5009199FC /* FormatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatListViewController.swift; sourceTree = "<group>"; };
@@ -277,8 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				A4A523F32749D40F006B22F9 /* CameraPreview.swift */,
-				A4A523F8274A0ABA006B22F9 /* CaptureButtonsView.xib */,
-				A4A523FA274A0AC8006B22F9 /* CaptureButtonsView.swift */,
+					A4A523FA274A0AC8006B22F9 /* CaptureButtonsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -429,8 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4A523952747B343006B22F9 /* LaunchScreen.storyboard in Resources */,
-				A4A523F9274A0ABA006B22F9 /* CaptureButtonsView.xib in Resources */,
-				A4F2F81727609BE600291618 /* GoogleService-Info.plist in Resources */,
+					A4F2F81727609BE600291618 /* GoogleService-Info.plist in Resources */,
 				A4A523922747B343006B22F9 /* Assets.xcassets in Resources */,
 				A420D03927AE304300366487 /* Settings.bundle in Resources */,
 				A4A523902747B33E006B22F9 /* Main.storyboard in Resources */,
@@ -613,7 +609,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -669,7 +665,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -704,7 +700,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -745,7 +741,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -770,7 +766,7 @@
 				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -795,7 +791,7 @@
 				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = 8NX3GPVDHF;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

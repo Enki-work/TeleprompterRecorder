@@ -238,12 +238,8 @@ final class VideoRecorderViewModel: ViewModelType {
         input.openPhotoBtnClick.drive(onNext: {captureButtonsView in
             let urlStr = "cGhvdG9zLXJlZGlyZWN0Oi8v".decodeFromBase64()
             
-            if let url = URL(string:urlStr) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, options: Dictionary(), completionHandler: nil)
-                } else {
-                    UIApplication.shared.openURL(url)
-                }
+            if let url = URL(string: urlStr) {
+                UIApplication.shared.open(url)
             }}).disposed(by: disposeBag)
 
         return Output(requestAuthorizationFailed: requestAuthorizationFailed,

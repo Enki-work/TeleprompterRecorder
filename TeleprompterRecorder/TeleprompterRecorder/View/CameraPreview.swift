@@ -22,9 +22,7 @@ class CameraPreview: UIView {
     }
     
     init() {
-        captureButtonsView = UINib(nibName: "CaptureButtonsView", bundle: nil)
-                    .instantiate(withOwner: nil, options: nil)
-                    .first as! CaptureButtonsView
+        captureButtonsView = CaptureButtonsView(frame: UIScreen.main.bounds)
         super.init(frame: UIScreen.main.bounds)
         captureButtonsView.frame = UIScreen.main.bounds
         // プレビューレイヤが、カメラのキャプチャーを縦横比を維持した状態で、表示するように設定

@@ -17,6 +17,7 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyDarkStyle()
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         versionLabel.text = appVersion
         
@@ -49,4 +50,33 @@ class MenuViewController: UITableViewController {
         }).disposed(by: disposeBag)
     }
 
+}
+
+// MARK: - Dark appearance
+private extension MenuViewController {
+    func applyDarkStyle() {
+        tableView.backgroundColor = UIColor(white: 0.07, alpha: 1)
+        tableView.separatorColor  = UIColor.white.withAlphaComponent(0.09)
+        view.backgroundColor      = UIColor(white: 0.07, alpha: 1)
+        versionLabel?.textColor   = UIColor.white.withAlphaComponent(0.35)
+    }
+}
+
+extension MenuViewController {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = .clear
+        cell.textLabel?.textColor = .white
+        cell.imageView?.tintColor = .systemCyan
+        let sel = UIView()
+        sel.backgroundColor = UIColor.systemCyan.withAlphaComponent(0.12)
+        cell.selectedBackgroundView = sel
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.textColor  = UIColor.white.withAlphaComponent(0.45)
+            header.textLabel?.font       = .systemFont(ofSize: 11, weight: .medium)
+            header.contentView.backgroundColor = UIColor(white: 0.07, alpha: 1)
+        }
+    }
 }
