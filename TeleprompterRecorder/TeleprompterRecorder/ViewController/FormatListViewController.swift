@@ -51,7 +51,7 @@ class FormatListViewController: UIViewController {
                 let binned = item.isVideoBinned ? "Binned" : ""
                 let tags = [codec, fps, dims, hdr, binned].filter { !$0.isEmpty }.joined(separator: "  ·  ")
                 let detail = "ISO \(Int(item.minISO))–\(Int(item.maxISO))  ·  Zoom ×\(Int64(item.videoMaxZoomFactor))  ·  FOV \(Int(item.videoFieldOfView))°"
-                cell.configure(title: tags, subtitle: detail, description: item.japaneseDescription)
+                cell.configure(title: tags, subtitle: detail, description: item.localizedFormatDescription)
                 let isActive = item.debugDescription.identity == self?.formats.activeFormat.debugDescription.identity
                 if isActive { tv.selectRow(at: index, animated: true, scrollPosition: .none) }
                 return cell
@@ -219,60 +219,51 @@ fileprivate extension FourCharCode {
     }
 }
 
-// MARK: - Japanese natural language description
+// MARK: - Localized format description
 fileprivate extension AVCaptureDevice.Format {
 
-    var japaneseDescription: String {
+    var localizedFormatDescription: String {
         let dims    = CMVideoFormatDescriptionGetDimensions(formatDescription)
         let w = dims.width, h = dims.height
         let maxFPS  = Int(videoSupportedFrameRateRanges.map(\.maxFrameRate).max() ?? 0)
         let fov     = Int(videoFieldOfView)
-        // フィルターと同じ判定基準を使う（isVideoHDRSupported はハードウェアフラグで
-        // HLG_BT2020 色空間とは別物。HDR OFF リストに出るフォーマットが
-        // 「HDR撮影対応」と表示されてしまう矛盾を防ぐ）
         let isHDR   = supportedColorSpaces.contains(.HLG_BT2020)
         let binned  = isVideoBinned
         let maxZoom = Int64(videoMaxZoomFactor)
 
-        // ── 解像度ラベル ──────────────────────────────────────────
+        // Resolution label
         let resLabel: String
         switch max(w, h) {
         case 3840...: resLabel = "4K"
         case 2560...: resLabel = "2.7K"
-        case 1920...: resLabel = "フルHD"
-        case 1280...: resLabel = "HD（720p）"
-        default:      resLabel = "SD（\(w)×\(h)）"
+        case 1920...: resLabel = L("format.res_fullhd")
+        case 1280...: resLabel = L("format.res_hd")
+        default:      resLabel = String(format: L("format.res_sd"), w, h)
         }
 
-        // ── フレームレート説明 ────────────────────────────────────
+        // FPS note
         let fpsNote: String
         switch maxFPS {
-        case 240...: fpsNote = "最大\(maxFPS)fpsのスーパースローモーション撮影が可能"
-        case 120...: fpsNote = "最大\(maxFPS)fpsのスローモーション撮影が可能"
-        case 60...:  fpsNote = "最大\(maxFPS)fpsで滑らかな動画撮影が可能"
-        default:     fpsNote = "最大\(maxFPS)fpsの標準撮影"
+        case 240...: fpsNote = String(format: L("format.fps_super_slow"), maxFPS)
+        case 120...: fpsNote = String(format: L("format.fps_slow"), maxFPS)
+        case 60...:  fpsNote = String(format: L("format.fps_smooth"), maxFPS)
+        default:     fpsNote = String(format: L("format.fps_standard"), maxFPS)
         }
 
-        // ── 画角説明 ──────────────────────────────────────────────
+        // FOV note
         let fovNote: String
         switch fov {
-        case 100...: fovNote = "超広角（視野角\(fov)°）"
-        case 80...:  fovNote = "広角（視野角\(fov)°）"
-        case 60...:  fovNote = "標準画角（視野角\(fov)°）"
-        default:     fovNote = "望遠（視野角\(fov)°）"
+        case 100...: fovNote = String(format: L("format.fov_ultra_wide"), fov)
+        case 80...:  fovNote = String(format: L("format.fov_wide"), fov)
+        case 60...:  fovNote = String(format: L("format.fov_standard"), fov)
+        default:     fovNote = String(format: L("format.fov_tele"), fov)
         }
 
-        // ── 各機能の説明 ──────────────────────────────────────────
-        var parts: [String] = [
-            "\(resLabel)（\(w)×\(h)）",
-            fpsNote,
-            fovNote,
-        ]
+        var parts: [String] = ["\(resLabel)（\(w)×\(h)）", fpsNote, fovNote]
+        if isHDR   { parts.append(L("format.hdr_support")) }
+        if binned  { parts.append(L("format.pixel_binning")) }
+        if maxZoom >= 10 { parts.append(String(format: L("format.digital_zoom"), maxZoom)) }
 
-        if isHDR   { parts.append("HDR撮影対応（高輝度・高コントラスト）") }
-        if binned  { parts.append("ピクセルビニング処理あり（暗所撮影に有利）") }
-        if maxZoom >= 10 { parts.append("最大\(maxZoom)倍デジタルズーム") }
-
-        return parts.joined(separator: "。") + "。"
+        return parts.joined(separator: "  ·  ")
     }
 }

@@ -1,0 +1,65 @@
+/* Menu */
+"menu.section_functions" = "功能";
+"menu.section_about" = "关于";
+"menu.prompter_settings" = "提词器设置";
+"menu.language" = "语言设置";
+"menu.contact" = "联系开发者";
+"menu.version" = "版本";
+
+/* Prompter Settings */
+"settings.title" = "提词器设置";
+"settings.close" = "关闭";
+"settings.reset" = "重置";
+"settings.reset_title" = "重置设置";
+"settings.reset_message" = "将所有设置恢复为默认值？";
+"settings.cancel" = "取消";
+"settings.blur" = "模糊强度";
+"settings.font_size" = "字体大小";
+"settings.color" = "颜色";
+"settings.bg_color" = "背景色";
+"settings.text_color" = "文字颜色";
+"settings.preview" = "预览";
+"settings.sample_text" = "示例文本";
+
+/* Prompter Buttons */
+"prompter.edit" = "编辑";
+"prompter.done" = "完成";
+
+/* Prompter Default Text */
+"prompter.default_text" = "请在此输入台词。\n\n操作提示：\n• 音量键单击：向下滚动\n• 音量键双击：向上滚动\n• 音量键长按：显示/隐藏提词器\n• 支持遥控快门和键盘操作\n\n示例文本：\n花开两朵，各表一枝。山重水复疑无路，柳暗花明又一村。人生自古谁无死，留取丹心照汗青。春眠不觉晓，处处闻啼鸟。举头望明月，低头思故乡。会当凌绝顶，一览众山小。欲穷千里目，更上一层楼。问渠那得清如许，为有源头活水来。";
+
+/* Permissions */
+"permission.message" = "请开启使用本应用所需的权限";
+"permission.go_settings" = "前往设置";
+
+/* Reward Ad */
+"reward.unlock_message" = "观看广告后可免费编辑提词器24小时";
+"reward.cancel" = "取消";
+"reward.watch_ad" = "观看广告";
+"reward.unavailable" = "无法显示激励广告";
+"reward.failed" = "激励广告显示失败";
+"reward.retry" = "重试";
+"reward.ok" = "确定";
+
+/* Format List */
+"format.title" = "格式列表";
+"format.res_fullhd" = "全高清";
+"format.res_hd" = "高清（720p）";
+"format.res_sd" = "标清（%d×%d）";
+"format.fps_super_slow" = "支持最高 %d fps 超慢动作拍摄";
+"format.fps_slow" = "支持最高 %d fps 慢动作拍摄";
+"format.fps_smooth" = "支持最高 %d fps 流畅视频";
+"format.fps_standard" = "标准拍摄，最高 %d fps";
+"format.fov_ultra_wide" = "超广角（视角 %d°）";
+"format.fov_wide" = "广角（视角 %d°）";
+"format.fov_standard" = "标准视角（%d°）";
+"format.fov_tele" = "长焦（视角 %d°）";
+"format.hdr_support" = "支持 HDR（高亮度·高对比度）";
+"format.pixel_binning" = "像素合并处理（低光拍摄更佳）";
+"format.digital_zoom" = "最高 %ld 倍数字变焦";
+
+/* Language Settings */
+"language.title" = "语言设置";
+
+/* Mail */
+"mail.subject" = "关于提词器相机";

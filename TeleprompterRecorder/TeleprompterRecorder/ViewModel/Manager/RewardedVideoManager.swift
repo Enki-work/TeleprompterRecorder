@@ -41,8 +41,8 @@ class RewardedVideoManager: NSObject {
                 self.completion = nil
             }
         } else {
-            UIAlertController.showCancelAlert(title: "リワード広告表示できません",
-                                              cancelBtnTitle: "OK",
+            UIAlertController.showCancelAlert(title: L("reward.unavailable"),
+                                              cancelBtnTitle: L("reward.ok"),
                                               handler: { [weak self] action in
                 self?.showRewardedVideoAd(completion: self?.completion)
             })
@@ -75,8 +75,8 @@ extension RewardedVideoManager: GADFullScreenContentDelegate {
     ) {
         print("Rewarded ad failed to present with error: \(error.localizedDescription).")
         
-        UIAlertController.showCancelAlert(title: "リワード広告表示が失敗しました",
-                                          cancelBtnTitle: "リトライ",
+        UIAlertController.showCancelAlert(title: L("reward.failed"),
+                                          cancelBtnTitle: L("reward.retry"),
                                           handler: { [weak self] action in
             self?.showRewardedVideoAd(completion: self?.completion)
         })

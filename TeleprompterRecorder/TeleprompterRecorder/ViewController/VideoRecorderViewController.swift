@@ -49,7 +49,7 @@ class VideoRecorderViewController: UIViewController {
         
         output.requestAuthorizationFailed.drive(onNext: { result in
             if !result {
-                UIAlertController.showTwoBtnAlert(title: "アプリ正常に使用するのに必要の権限オンにしてください", secondBtnTitle: "設定画面へ") { _ in
+                UIAlertController.showTwoBtnAlert(title: L("permission.message"), secondBtnTitle: L("permission.go_settings")) { _ in
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
@@ -104,7 +104,7 @@ class VideoRecorderViewController: UIViewController {
         if segue.identifier == "showformatlist",
             let formatListVC = segue.destination as? FormatListViewController,
         let sender = sender as? ((activeFormat: AVCaptureDevice.Format, supportFormats: [AVCaptureDevice.Format]), Binder<AVCaptureDevice.Format>) {
-            formatListVC.title = "フォーマットリスト一覧"
+            formatListVC.title = L("format.title")
             formatListVC.formats = sender.0
             formatListVC.selectedFormat.bind(to: sender.1).disposed(by: formatListVC.disposeBag)
         }

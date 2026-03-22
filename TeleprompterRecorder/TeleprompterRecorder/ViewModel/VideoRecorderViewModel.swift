@@ -89,10 +89,10 @@ final class VideoRecorderViewModel: ViewModelType {
             
             if UserDefaults.standard.isPrompterAdsShow && !captureButtonsView.textViewEditButton.isSelected {
                 
-                UIAlertController.showTwoBtnAlert(title: "リワード広告見たら\n24時間プロンプター自由に編集可能となります",
+                UIAlertController.showTwoBtnAlert(title: L("reward.unlock_message"),
                                                   message: nil,
-                                                  cancelBtnTitle: "キャンセル",
-                                                  secondBtnTitle: "広告表示する") { action in
+                                                  cancelBtnTitle: L("reward.cancel"),
+                                                  secondBtnTitle: L("reward.watch_ad")) { action in
                     captureButtonsView.isUserInteractionEnabled = false
                     let rewardedVideoManager = RewardedVideoManager()
                     rewardedVideoManager.showRewardedVideoAd {result in

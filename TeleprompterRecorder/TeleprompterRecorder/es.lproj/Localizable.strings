@@ -1,0 +1,65 @@
+/* Menu */
+"menu.section_functions" = "Funciones";
+"menu.section_about" = "Información";
+"menu.prompter_settings" = "Ajustes del Teleprompter";
+"menu.language" = "Idioma";
+"menu.contact" = "Contactar al desarrollador";
+"menu.version" = "Versión";
+
+/* Prompter Settings */
+"settings.title" = "Ajustes del Teleprompter";
+"settings.close" = "Cerrar";
+"settings.reset" = "Restablecer";
+"settings.reset_title" = "Restablecer ajustes";
+"settings.reset_message" = "¿Restablecer todos los ajustes a los valores predeterminados?";
+"settings.cancel" = "Cancelar";
+"settings.blur" = "Intensidad de desenfoque";
+"settings.font_size" = "Tamaño de texto";
+"settings.color" = "Color";
+"settings.bg_color" = "Color de fondo";
+"settings.text_color" = "Color de texto";
+"settings.preview" = "Vista previa";
+"settings.sample_text" = "Texto de ejemplo";
+
+/* Prompter Buttons */
+"prompter.edit" = "Editar";
+"prompter.done" = "Listo";
+
+/* Prompter Default Text */
+"prompter.default_text" = "Escribe tu guión aquí.\n\nConsejos:\n• Botón de volumen (1 vez): desplazar hacia abajo\n• Botón de volumen (2 veces): desplazar hacia arriba\n• Botón de volumen (mantener): mostrar/ocultar teleprompter\n• Compatible con disparador remoto y teclado\n\nEjemplo:\nMuchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota en que su padre lo llevó a conocer el hielo. Macondo era entonces una aldea de veinte casas de barro y cañabrava construidas a la orilla de un río de aguas diáfanas que se precipitaban por un lecho de piedras pulidas, blancas y enormes como huevos prehistóricos.";
+
+/* Permissions */
+"permission.message" = "Por favor, activa los permisos necesarios para usar esta app";
+"permission.go_settings" = "Ir a Ajustes";
+
+/* Reward Ad */
+"reward.unlock_message" = "Ve un anuncio para editar el teleprompter libremente durante 24 horas";
+"reward.cancel" = "Cancelar";
+"reward.watch_ad" = "Ver anuncio";
+"reward.unavailable" = "El anuncio de recompensa no está disponible";
+"reward.failed" = "Error al mostrar el anuncio de recompensa";
+"reward.retry" = "Reintentar";
+"reward.ok" = "Aceptar";
+
+/* Format List */
+"format.title" = "Lista de formatos";
+"format.res_fullhd" = "Full HD";
+"format.res_hd" = "HD (720p)";
+"format.res_sd" = "SD (%d×%d)";
+"format.fps_super_slow" = "Súper cámara lenta hasta %d fps";
+"format.fps_slow" = "Cámara lenta hasta %d fps";
+"format.fps_smooth" = "Vídeo fluido hasta %d fps";
+"format.fps_standard" = "Grabación estándar hasta %d fps";
+"format.fov_ultra_wide" = "Gran angular extremo (%d°)";
+"format.fov_wide" = "Gran angular (%d°)";
+"format.fov_standard" = "Ángulo estándar (%d°)";
+"format.fov_tele" = "Teleobjetivo (%d°)";
+"format.hdr_support" = "Compatible con HDR (alto brillo y contraste)";
+"format.pixel_binning" = "Agrupación de píxeles (mejor en poca luz)";
+"format.digital_zoom" = "Zoom digital hasta %ldx";
+
+/* Language Settings */
+"language.title" = "Idioma";
+
+/* Mail */
+"mail.subject" = "Acerca de Prompter Camera";

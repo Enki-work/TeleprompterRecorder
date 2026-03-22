@@ -1,0 +1,65 @@
+/* Menu */
+"menu.section_functions" = "Functions";
+"menu.section_about" = "About";
+"menu.prompter_settings" = "Prompter Settings";
+"menu.language" = "Language";
+"menu.contact" = "Contact Developer";
+"menu.version" = "Version";
+
+/* Prompter Settings */
+"settings.title" = "Prompter Settings";
+"settings.close" = "Close";
+"settings.reset" = "Reset";
+"settings.reset_title" = "Reset Settings";
+"settings.reset_message" = "Reset all settings to default values?";
+"settings.cancel" = "Cancel";
+"settings.blur" = "Blur Intensity";
+"settings.font_size" = "Font Size";
+"settings.color" = "Color";
+"settings.bg_color" = "Background Color";
+"settings.text_color" = "Text Color";
+"settings.preview" = "Preview";
+"settings.sample_text" = "Sample Text";
+
+/* Prompter Buttons */
+"prompter.edit" = "Edit";
+"prompter.done" = "Done";
+
+/* Prompter Default Text */
+"prompter.default_text" = "Enter your script here.\n\nTips:\n• Volume button (single tap): scroll down\n• Volume button (double tap): scroll up\n• Volume button (long press): show/hide prompter\n• Remote shutter and keyboard are also supported\n\nSample:\nTo be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer the slings and arrows of outrageous fortune, or to take arms against a sea of troubles and by opposing end them. To die—to sleep, no more; and by a sleep to say we end the heartache and the thousand natural shocks that flesh is heir to: 'tis a consummation devoutly to be wish'd.";
+
+/* Permissions */
+"permission.message" = "Please enable the required permissions to use this app";
+"permission.go_settings" = "Go to Settings";
+
+/* Reward Ad */
+"reward.unlock_message" = "Watch an ad to edit the prompter freely for 24 hours";
+"reward.cancel" = "Cancel";
+"reward.watch_ad" = "Watch Ad";
+"reward.unavailable" = "Rewarded ad is not available";
+"reward.failed" = "Failed to show rewarded ad";
+"reward.retry" = "Retry";
+"reward.ok" = "OK";
+
+/* Format List */
+"format.title" = "Format List";
+"format.res_fullhd" = "Full HD";
+"format.res_hd" = "HD (720p)";
+"format.res_sd" = "SD (%d×%d)";
+"format.fps_super_slow" = "Super slow motion up to %d fps";
+"format.fps_slow" = "Slow motion up to %d fps";
+"format.fps_smooth" = "Smooth video up to %d fps";
+"format.fps_standard" = "Standard recording up to %d fps";
+"format.fov_ultra_wide" = "Ultra wide angle (%d°)";
+"format.fov_wide" = "Wide angle (%d°)";
+"format.fov_standard" = "Standard angle (%d°)";
+"format.fov_tele" = "Telephoto (%d°)";
+"format.hdr_support" = "HDR supported (high brightness & contrast)";
+"format.pixel_binning" = "Pixel binning (better in low light)";
+"format.digital_zoom" = "Up to %ldx digital zoom";
+
+/* Language Settings */
+"language.title" = "Language";
+
+/* Mail */
+"mail.subject" = "About Prompter Camera";

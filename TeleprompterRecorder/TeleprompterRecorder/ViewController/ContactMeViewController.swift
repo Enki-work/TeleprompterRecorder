@@ -34,7 +34,7 @@ class ContactMeViewController: UIViewController {
     @IBAction func mailMeBtnClick(_ sender: Any) {
         // Modify following variables with your text / recipient
         let recipientEmail = "daqige2333@email.com"
-        let subject = "プロンプターカメラについて"
+        let subject = L("mail.subject")
         let body = ""
         
         // Show default mail composer

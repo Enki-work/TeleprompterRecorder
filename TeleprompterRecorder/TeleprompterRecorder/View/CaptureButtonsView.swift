@@ -39,6 +39,8 @@ class CaptureButtonsView: UIView {
         applyPrompterSettings()
         NotificationCenter.default.addObserver(self, selector: #selector(applyPrompterSettings),
                                                name: .prompterSettingsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLanguageChanged),
+                                               name: LanguageManager.languageChangedNotification, object: nil)
     }
 
     required init?(coder: NSCoder) {
@@ -48,11 +50,14 @@ class CaptureButtonsView: UIView {
         applyPrompterSettings()
         NotificationCenter.default.addObserver(self, selector: #selector(applyPrompterSettings),
                                                name: .prompterSettingsChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLanguageChanged),
+                                               name: LanguageManager.languageChangedNotification, object: nil)
     }
 
     deinit {
         blurAnimator?.stopAnimation(true)
         NotificationCenter.default.removeObserver(self, name: .prompterSettingsChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: LanguageManager.languageChangedNotification, object: nil)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -129,7 +134,7 @@ extension CaptureButtonsView {
             textView.attributedText = defaultPrompterText()
         }
 
-        textViewEditButton = pillButton(title: "編集")
+        textViewEditButton = pillButton(title: L("prompter.edit"))
         textViewEditButton.translatesAutoresizingMaskIntoConstraints = false
 
         let fadeHost = makeTopFade()
@@ -245,7 +250,7 @@ extension CaptureButtonsView {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] selected in
                 guard let self else { return }
-                self.textViewEditButton.setTitle(selected ? "完了" : "編集", for: .normal)
+                self.textViewEditButton.setTitle(selected ? L("prompter.done") : L("prompter.edit"), for: .normal)
                 let c: UIColor = selected ? .systemCyan : .white
                 self.textViewEditButton.setTitleColor(c, for: .normal)
                 self.textViewEditButton.layer.borderColor = c.withAlphaComponent(0.5).cgColor
@@ -256,6 +261,11 @@ extension CaptureButtonsView {
 
 // MARK: - Prompter settings
 extension CaptureButtonsView {
+
+    @objc private func handleLanguageChanged() {
+        let selected = textViewEditButton.isSelected
+        textViewEditButton.setTitle(selected ? L("prompter.done") : L("prompter.edit"), for: .normal)
+    }
 
     @objc func applyPrompterSettings() {
         let defaults = UserDefaults.standard
@@ -289,23 +299,8 @@ extension CaptureButtonsView {
 extension CaptureButtonsView {
 
     fileprivate func defaultPrompterText() -> NSAttributedString {
-        let text = """
-            こちらにセリフを入力してください。
-
-            操作ヒント：
-            音量ボタンワンクリックでページダウン
-            音量ボタンダブルクリックでページアップ
-            音量ボタン長押しでプロンプター表示／非表示切り替えできます
-            リモコンシャッターやキーボードも操作可能です
-
-            サンプル：
-            吾輩わがはいは猫である。名前はまだ無い。
-            　どこで生れたかとんと見当けんとうがつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪どうあくな種族であったそうだ。この書生というのは時々我々を捕つかまえて煮にて食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。ただ彼の掌てのひらに載せられてスーと持ち上げられた時何だかフワフワした感じがあったばかりである。掌の上で少し落ちついて書生の顔を見たのがいわゆる人間というものの見始みはじめであろう。この時妙なものだと思った感じが今でも残っている。第一毛をもって装飾されべきはずの顔がつるつるしてまるで薬缶やかんだ。その後ご猫にもだいぶ逢あったがこんな片輪かたわには一度も出会でくわした事がない。のみならず顔の真中があまりに突起している。そうしてその穴の中から時々ぷうぷうと煙けむりを吹く。どうも咽むせぽくて実に弱った。これが人間の飲む煙草たばこというものである事はようやくこの頃知った。
-            　この書生の掌の裏うちでしばらくはよい心持に坐っておったが、しばらくすると非常な速力で運転し始めた。書生が動くのか自分だけが動くのか分らないが無暗むやみに眼が廻る。胸が悪くなる。到底とうてい助からないと思っていると、どさりと音がして眼から火が出た。それまでは記憶しているがあとは何の事やらいくら考え出そうとしても分らない。
-            　ふと気が付いて見ると書生はいない。たくさんおった兄弟が一疋ぴきも見えぬ。肝心かんじんの母親さえ姿を隠してしまった。その上今いままでの所とは違って無暗むやみに明るい。眼を明いていられぬくらいだ。はてな何でも容子ようすがおかしいと、のそのそ這はい出して見ると非常に痛い。吾輩は藁わらの上から急に笹原の中へ棄てられたのである。
-            """
-        return NSAttributedString(
-            string: text,
+        NSAttributedString(
+            string: L("prompter.default_text"),
             attributes: [
                 .foregroundColor: UIColor.white,
                 .font: UIFont.systemFont(ofSize: 21, weight: .regular),

@@ -1,0 +1,65 @@
+/* Menu */
+"menu.section_functions" = "その他";
+"menu.section_about" = "アプリに関する";
+"menu.prompter_settings" = "プロンプター設定";
+"menu.language" = "言語設定";
+"menu.contact" = "開発者に連絡";
+"menu.version" = "バージョン";
+
+/* Prompter Settings */
+"settings.title" = "プロンプター設定";
+"settings.close" = "閉じる";
+"settings.reset" = "リセット";
+"settings.reset_title" = "設定をリセット";
+"settings.reset_message" = "すべての設定を初期値に戻しますか？";
+"settings.cancel" = "キャンセル";
+"settings.blur" = "ぼかし強度";
+"settings.font_size" = "文字サイズ";
+"settings.color" = "カラー";
+"settings.bg_color" = "背景色";
+"settings.text_color" = "文字色";
+"settings.preview" = "プレビュー";
+"settings.sample_text" = "サンプルテキスト\nSample Text";
+
+/* Prompter Buttons */
+"prompter.edit" = "編集";
+"prompter.done" = "完了";
+
+/* Prompter Default Text */
+"prompter.default_text" = "こちらにセリフを入力してください。\n\n操作ヒント：\n音量ボタンワンクリックでページダウン\n音量ボタンダブルクリックでページアップ\n音量ボタン長押しでプロンプター表示／非表示切り替えできます\nリモコンシャッターやキーボードも操作可能です\n\nサンプル：\n吾輩わがはいは猫である。名前はまだ無い。\n　どこで生れたかとんと見当けんとうがつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪どうあくな種族であったそうだ。この書生というのは時々我々を捕つかまえて煮にて食うという話である。";
+
+/* Permissions */
+"permission.message" = "アプリ正常に使用するのに必要の権限オンにしてください";
+"permission.go_settings" = "設定画面へ";
+
+/* Reward Ad */
+"reward.unlock_message" = "リワード広告見たら\n24時間プロンプター自由に編集可能となります";
+"reward.cancel" = "キャンセル";
+"reward.watch_ad" = "広告表示する";
+"reward.unavailable" = "リワード広告表示できません";
+"reward.failed" = "リワード広告表示が失敗しました";
+"reward.retry" = "リトライ";
+"reward.ok" = "OK";
+
+/* Format List */
+"format.title" = "フォーマットリスト一覧";
+"format.res_fullhd" = "フルHD";
+"format.res_hd" = "HD（720p）";
+"format.res_sd" = "SD（%d×%d）";
+"format.fps_super_slow" = "最大%dfpsのスーパースローモーション撮影が可能";
+"format.fps_slow" = "最大%dfpsのスローモーション撮影が可能";
+"format.fps_smooth" = "最大%dfpsで滑らかな動画撮影が可能";
+"format.fps_standard" = "最大%dfpsの標準撮影";
+"format.fov_ultra_wide" = "超広角（視野角%d°）";
+"format.fov_wide" = "広角（視野角%d°）";
+"format.fov_standard" = "標準画角（視野角%d°）";
+"format.fov_tele" = "望遠（視野角%d°）";
+"format.hdr_support" = "HDR撮影対応（高輝度・高コントラスト）";
+"format.pixel_binning" = "ピクセルビニング処理あり（暗所撮影に有利）";
+"format.digital_zoom" = "最大%ld倍デジタルズーム";
+
+/* Language Settings */
+"language.title" = "言語設定";
+
+/* Mail */
+"mail.subject" = "プロンプターカメラについて";

@@ -34,7 +34,7 @@ final class PrompterSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(white: 0.06, alpha: 1)
-        title = "プロンプター設定"
+        title = L("settings.title")
         setupNavBar()
         buildUI()
         loadCurrentValues()
@@ -50,9 +50,9 @@ final class PrompterSettingsViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .systemCyan
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "閉じる", style: .plain, target: self, action: #selector(closeTapped))
+            title: L("settings.close"), style: .plain, target: self, action: #selector(closeTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "リセット", style: .plain, target: self, action: #selector(resetTapped))
+            title: L("settings.reset"), style: .plain, target: self, action: #selector(resetTapped))
     }
 
     @objc private func closeTapped() {
@@ -60,11 +60,11 @@ final class PrompterSettingsViewController: UIViewController {
     }
 
     @objc private func resetTapped() {
-        let alert = UIAlertController(title: "設定をリセット",
-                                      message: "すべての設定を初期値に戻しますか？",
+        let alert = UIAlertController(title: L("settings.reset_title"),
+                                      message: L("settings.reset_message"),
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel))
-        alert.addAction(UIAlertAction(title: "リセット", style: .destructive) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: L("settings.cancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: L("settings.reset"), style: .destructive) { [weak self] _ in
             self?.applyReset()
         })
         present(alert, animated: true)
@@ -106,7 +106,7 @@ final class PrompterSettingsViewController: UIViewController {
         ])
 
         // ── Section: Blur ─────────────────────────────────────────────────────
-        contentStack.addArrangedSubview(sectionHeader("ぼかし強度"))
+        contentStack.addArrangedSubview(sectionHeader(L("settings.blur")))
         let blurCard = makeCard()
         blurSlider.minimumValue = 0
         blurSlider.maximumValue = 1
@@ -126,7 +126,7 @@ final class PrompterSettingsViewController: UIViewController {
         contentStack.setCustomSpacing(20, after: blurCard)
 
         // ── Section: Font Size ────────────────────────────────────────────────
-        contentStack.addArrangedSubview(sectionHeader("文字サイズ"))
+        contentStack.addArrangedSubview(sectionHeader(L("settings.font_size")))
         let fontCard = makeCard()
         fontSizeSlider.minimumValue = 12
         fontSizeSlider.maximumValue = 60
@@ -146,12 +146,12 @@ final class PrompterSettingsViewController: UIViewController {
         contentStack.setCustomSpacing(20, after: fontCard)
 
         // ── Section: Colors ───────────────────────────────────────────────────
-        contentStack.addArrangedSubview(sectionHeader("カラー"))
+        contentStack.addArrangedSubview(sectionHeader(L("settings.color")))
         let colorCard = makeCard()
 
-        let bgRow = colorRow(title: "背景色", swatch: bgColorSwatch, action: #selector(bgColorTapped))
+        let bgRow = colorRow(title: L("settings.bg_color"), swatch: bgColorSwatch, action: #selector(bgColorTapped))
         let separator = makeSeparator()
-        let textRow = colorRow(title: "文字色", swatch: textColorSwatch, action: #selector(textColorTapped))
+        let textRow = colorRow(title: L("settings.text_color"), swatch: textColorSwatch, action: #selector(textColorTapped))
 
         let colorStack = UIStackView(arrangedSubviews: [bgRow, separator, textRow])
         colorStack.axis = .vertical
@@ -168,7 +168,7 @@ final class PrompterSettingsViewController: UIViewController {
 
         // ── Preview label ─────────────────────────────────────────────────────
         contentStack.setCustomSpacing(20, after: colorCard)
-        contentStack.addArrangedSubview(sectionHeader("プレビュー"))
+        contentStack.addArrangedSubview(sectionHeader(L("settings.preview")))
         let previewCard = makePrompterPreview()
         contentStack.addArrangedSubview(previewCard)
     }
@@ -352,7 +352,7 @@ final class PrompterSettingsViewController: UIViewController {
 
         previewBgView.translatesAutoresizingMaskIntoConstraints = false
 
-        previewLabel.text = "サンプルテキスト\nSample Text"
+        previewLabel.text = L("settings.sample_text")
         previewLabel.numberOfLines = 0
         previewLabel.textAlignment = .center
         previewLabel.translatesAutoresizingMaskIntoConstraints = false

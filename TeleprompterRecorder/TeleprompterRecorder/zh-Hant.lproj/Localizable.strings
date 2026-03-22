@@ -1,0 +1,65 @@
+/* Menu */
+"menu.section_functions" = "功能";
+"menu.section_about" = "關於";
+"menu.prompter_settings" = "提詞器設置";
+"menu.language" = "語言設置";
+"menu.contact" = "聯繫開發者";
+"menu.version" = "版本";
+
+/* Prompter Settings */
+"settings.title" = "提詞器設置";
+"settings.close" = "關閉";
+"settings.reset" = "重置";
+"settings.reset_title" = "重置設置";
+"settings.reset_message" = "將所有設置恢復為預設值？";
+"settings.cancel" = "取消";
+"settings.blur" = "模糊強度";
+"settings.font_size" = "字體大小";
+"settings.color" = "顏色";
+"settings.bg_color" = "背景色";
+"settings.text_color" = "文字顏色";
+"settings.preview" = "預覽";
+"settings.sample_text" = "示例文本";
+
+/* Prompter Buttons */
+"prompter.edit" = "編輯";
+"prompter.done" = "完成";
+
+/* Prompter Default Text */
+"prompter.default_text" = "請在此輸入台詞。\n\n操作提示：\n• 音量鍵單擊：向下捲動\n• 音量鍵雙擊：向上捲動\n• 音量鍵長按：顯示/隱藏提詞器\n• 支援遙控快門和鍵盤操作\n\n示例文本：\n花開兩朵，各表一枝。山重水複疑無路，柳暗花明又一村。人生自古誰無死，留取丹心照汗青。春眠不覺曉，處處聞啼鳥。舉頭望明月，低頭思故鄉。會當凌絕頂，一覽眾山小。欲窮千里目，更上一層樓。";
+
+/* Permissions */
+"permission.message" = "請開啟使用本應用程式所需的權限";
+"permission.go_settings" = "前往設置";
+
+/* Reward Ad */
+"reward.unlock_message" = "觀看廣告後可免費編輯提詞器24小時";
+"reward.cancel" = "取消";
+"reward.watch_ad" = "觀看廣告";
+"reward.unavailable" = "無法顯示激勵廣告";
+"reward.failed" = "激勵廣告顯示失敗";
+"reward.retry" = "重試";
+"reward.ok" = "確定";
+
+/* Format List */
+"format.title" = "格式列表";
+"format.res_fullhd" = "全高清";
+"format.res_hd" = "高清（720p）";
+"format.res_sd" = "標清（%d×%d）";
+"format.fps_super_slow" = "支援最高 %d fps 超慢動作拍攝";
+"format.fps_slow" = "支援最高 %d fps 慢動作拍攝";
+"format.fps_smooth" = "支援最高 %d fps 流暢影片";
+"format.fps_standard" = "標準拍攝，最高 %d fps";
+"format.fov_ultra_wide" = "超廣角（視角 %d°）";
+"format.fov_wide" = "廣角（視角 %d°）";
+"format.fov_standard" = "標準視角（%d°）";
+"format.fov_tele" = "長焦（視角 %d°）";
+"format.hdr_support" = "支援 HDR（高亮度·高對比度）";
+"format.pixel_binning" = "像素合併處理（低光拍攝更佳）";
+"format.digital_zoom" = "最高 %ld 倍數位變焦";
+
+/* Language Settings */
+"language.title" = "語言設置";
+
+/* Mail */
+"mail.subject" = "關於提詞器相機";
