@@ -350,6 +350,44 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         }
     }
 
+    /// 触摸对焦 + 曝光。devicePoint 为归一化坐标 (0–1)，由 captureDevicePointConverted 转换而来。
+    func focus(at devicePoint: CGPoint) {
+        guard let device = currentCamera else { return }
+        do {
+            try device.lockForConfiguration()
+            if device.isFocusPointOfInterestSupported && device.isFocusModeSupported(.autoFocus) {
+                device.focusPointOfInterest = devicePoint
+                device.focusMode = .autoFocus
+            }
+            if device.isExposurePointOfInterestSupported && device.isExposureModeSupported(.autoExpose) {
+                device.exposurePointOfInterest = devicePoint
+                device.exposureMode = .autoExpose
+            }
+            device.isSubjectAreaChangeMonitoringEnabled = true
+            device.unlockForConfiguration()
+        } catch {
+            debugPrint("Focus error: \(error)")
+        }
+    }
+
+    /// 被摄体变化时恢复连续自动对焦
+    func resetFocusAndExposure() {
+        guard let device = currentCamera else { return }
+        do {
+            try device.lockForConfiguration()
+            if device.isFocusModeSupported(.continuousAutoFocus) {
+                device.focusMode = .continuousAutoFocus
+            }
+            if device.isExposureModeSupported(.continuousAutoExposure) {
+                device.exposureMode = .continuousAutoExposure
+            }
+            device.isSubjectAreaChangeMonitoringEnabled = false
+            device.unlockForConfiguration()
+        } catch {
+            debugPrint("Reset focus error: \(error)")
+        }
+    }
+
     func getUserDefaultCamera() -> AVCaptureDevice? {
         if let deviceUniqueID = LocalDeviceFormat.getLocalDeviceFormatList().first(where: {$0.isDefaultCamera})?.deviceUniqueID {
             

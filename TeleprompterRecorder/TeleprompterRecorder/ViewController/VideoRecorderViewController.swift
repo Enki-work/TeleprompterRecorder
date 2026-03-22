@@ -31,6 +31,7 @@ class VideoRecorderViewController: UIViewController {
         bindViewModel()
         bindNotification()
         hideVolumeView()
+        setupFocusTapGesture()
     }
     
     private func bindViewModel() {
@@ -110,6 +111,32 @@ class VideoRecorderViewController: UIViewController {
         }
     }
     
+    // MARK: - Touch to Focus
+
+    private func setupFocusTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleFocusTap(_:)))
+        tap.cancelsTouchesInView = false
+        cameraPreview.addGestureRecognizer(tap)
+
+        // 被摄体变化时恢复连续自动对焦
+        NotificationCenter.default.rx
+            .notification(AVCaptureDevice.subjectAreaDidChangeNotification)
+            .take(until: rx.deallocated)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.dependencies.captureManager.resetFocusAndExposure()
+            }).disposed(by: disposeBag)
+    }
+
+    @objc private func handleFocusTap(_ gesture: UITapGestureRecognizer) {
+        // 提词器编辑模式下不触发对焦（让键盘操作正常工作）
+        guard !cameraPreview.captureButtonsView.textView.isEditable else { return }
+        let point = gesture.location(in: cameraPreview)
+        let devicePoint = cameraPreview.cameraPreviewLayer.captureDevicePointConverted(fromLayerPoint: point)
+        viewModel.dependencies.captureManager.focus(at: devicePoint)
+        cameraPreview.showFocusIndicator(at: point)
+    }
+
     override var prefersStatusBarHidden: Bool { true }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
