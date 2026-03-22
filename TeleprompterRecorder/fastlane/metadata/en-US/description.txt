@@ -1,0 +1,59 @@
+Prompter Camera — the iPhone video recording app built specifically for YouTubers, VLoggers, and short-video creators.
+
+Record your video while reading your pre-written script right on screen. The teleprompter overlay floats transparently over the live camera feed, keeping your eyes on the lens for a natural, confident look. Best of all, you can flip through script pages with the volume button, selfie timer button, or keyboard — completely hands-free, at your own pace.
+
+━━━━━━━━━━━━━━━━━━━━━━
+KEY FEATURES
+━━━━━━━━━━━━━━━━━━━━━━
+
+TELEPROMPTER & SCRIPT MANAGEMENT
+• Script text floats transparently over the live camera preview
+• Flip pages with the volume button (+/−) — no need to touch the screen
+• Flip pages with the selfie timer button (Bluetooth remote shutter)
+• Flip pages with the keyboard — full control at your own rhythm
+• Adjustable frosted-glass blur (0–100%) keeps your footage clearly visible behind the text
+• Gradient fade at the top for natural, professional-looking eye guidance
+• Tap anywhere on the prompter to instantly show or hide it
+• Script is automatically saved and restored every time you open the app
+
+FULLY CUSTOMIZABLE APPEARANCE
+• Choose any background color with the system color picker
+• Choose any text color to match your style or lighting
+• Adjust font size with a slider (12–60 pt)
+• Fine-tune blur intensity in real time with live preview
+• One-tap reset to restore default settings
+• All customizations are saved automatically
+
+MULTI-LENS & PROFESSIONAL VIDEO RECORDING
+• Switch freely between all iPhone built-in lenses (wide, ultra-wide, telephoto)
+• Up to 4K (3840×2160) resolution
+• Also supports 2.7K, Full HD (1080p), HD (720p), and Standard Definition
+• Pre-configured format presets — pick your preferred quality in one tap
+• Choose from multiple frame rates: 24fps, 30fps, 60fps, and more
+• HDR video: HEVC codec + HLG BT.2020 wide color for vivid, true-to-life footage
+• SDR video: H.264 + Display P3 / sRGB for universal compatibility
+• Recorded videos are automatically saved to your Photos library
+
+CAMERA CONTROLS
+• Switch between front and rear cameras with one tap
+• Tap anywhere on the preview to set focus and exposure (touch focus)
+• Background recording: recording continues safely even when you switch apps
+
+━━━━━━━━━━━━━━━━━━━━━━
+PERFECT FOR
+━━━━━━━━━━━━━━━━━━━━━━
+• YouTubers, TikTokers, and Instagram Reels creators
+• VLoggers, short-video makers, and podcasters
+• Business presentations and corporate training videos
+• Online courses and e-learning recordings
+• Speech practice and interview prep videos
+• News anchors and announcer training
+
+━━━━━━━━━━━━━━━━━━━━━━
+PERMISSIONS USED
+━━━━━━━━━━━━━━━━━━━━━━
+• Camera — required for video recording
+• Microphone — required for audio recording
+• Photos — required to save recorded videos
+
+Requires iOS 17.0 or later.
