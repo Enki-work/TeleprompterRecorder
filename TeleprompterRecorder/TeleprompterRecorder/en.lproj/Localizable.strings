@@ -61,5 +61,16 @@
 /* Language Settings */
 "language.title" = "Language";
 
+/* Camera Selection */
+"camera.select.title" = "Select Camera";
+"camera.cancel" = "Cancel";
+"camera.front" = "Front Camera (selfie & video calls)";
+"camera.back.ultra_wide" = "Ultra Wide Camera (landscapes & wide spaces)";
+"camera.back.wide" = "Wide Angle Camera (standard all-purpose lens)";
+"camera.back.tele" = "Telephoto Camera (optical zoom for distant subjects)";
+"camera.back.dual" = "Dual Camera · Wide + Tele (auto-switch by scene)";
+"camera.back.dual_wide" = "Dual Camera · Ultra Wide + Wide (auto-switch by scene)";
+"camera.back.triple" = "Triple Camera · Ultra Wide + Wide + Tele (most versatile)";
+
 /* Mail */
 "mail.subject" = "About Prompter Camera";

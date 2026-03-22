@@ -61,5 +61,16 @@
 /* Language Settings */
 "language.title" = "언어 설정";
 
+/* Camera Selection */
+"camera.select.title" = "카메라 선택";
+"camera.cancel" = "취소";
+"camera.front" = "전면 카메라（셀피 · 영상 통화）";
+"camera.back.ultra_wide" = "초광각 카메라（풍경 · 건물 · 넓은 공간을 한 장에）";
+"camera.back.wide" = "광각 카메라（표준 다목적, 가장 범용적인 렌즈）";
+"camera.back.tele" = "망원 카메라（광학 줌으로 멀리 있는 피사체 촬영）";
+"camera.back.dual" = "듀얼 카메라·광각＋망원（장면에 따라 자동 전환）";
+"camera.back.dual_wide" = "듀얼 카메라·초광각＋광각（장면에 따라 자동 전환）";
+"camera.back.triple" = "트리플 카메라·초광각＋광각＋망원（가장 다양한 촬영 가능）";
+
 /* Mail */
 "mail.subject" = "프롬프터 카메라에 대하여";

@@ -61,5 +61,16 @@
 /* Language Settings */
 "language.title" = "Idioma";
 
+/* Camera Selection */
+"camera.select.title" = "Seleccionar cámara";
+"camera.cancel" = "Cancelar";
+"camera.front" = "Cámara frontal (selfies y videollamadas)";
+"camera.back.ultra_wide" = "Cámara ultra gran angular (paisajes, edificios y espacios amplios)";
+"camera.back.wide" = "Cámara gran angular (objetivo estándar y versátil)";
+"camera.back.tele" = "Cámara teleobjetivo (zoom óptico para sujetos lejanos)";
+"camera.back.dual" = "Cámara dual · Gran angular + Tele (cambio automático según escena)";
+"camera.back.dual_wide" = "Cámara dual · Ultra gran angular + Gran angular (cambio automático según escena)";
+"camera.back.triple" = "Cámara triple · Ultra gran angular + Gran angular + Tele (la más versátil)";
+
 /* Mail */
 "mail.subject" = "Acerca de Prompter Camera";

@@ -61,5 +61,16 @@
 /* Language Settings */
 "language.title" = "語言設置";
 
+/* Camera Selection */
+"camera.select.title" = "選擇鏡頭";
+"camera.cancel" = "取消";
+"camera.front" = "前置鏡頭（自拍 · 視訊通話）";
+"camera.back.ultra_wide" = "超廣角鏡頭（風景 · 建築 · 大空間一覽無遺）";
+"camera.back.wide" = "廣角鏡頭（標準多用途，最常用的萬能鏡頭）";
+"camera.back.tele" = "長焦鏡頭（光學變焦，拍攝遠處被攝體）";
+"camera.back.dual" = "雙攝·廣角＋長焦（依場景自動切換）";
+"camera.back.dual_wide" = "雙攝·超廣角＋廣角（依場景自動切換）";
+"camera.back.triple" = "三攝·超廣角＋廣角＋長焦（最多樣化的拍攝選擇）";
+
 /* Mail */
 "mail.subject" = "關於提詞器相機";

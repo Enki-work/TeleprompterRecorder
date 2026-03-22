@@ -277,16 +277,16 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         return Observable<AVCaptureDevice>.create { observer in
             let devices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInUltraWideCamera, .builtInTelephotoCamera], mediaType: .video, position: .unspecified).devices
             
-            let alertController = UIAlertController(title: "カメラ選択",
+            let alertController = UIAlertController(title: L("camera.select.title"),
                                                     message: nil, preferredStyle: .actionSheet)
             devices.enumerated().forEach { index, device in
-                let action = UIAlertAction(title: device.japaneseDescription, style: .default) { _ in
+                let action = UIAlertAction(title: device.localizedCameraDescription, style: .default) { _ in
                     observer.onNext(devices[index])
                     observer.onCompleted()
                 }
                 alertController.addAction(action)
             }
-            alertController.addAction(.init(title: "cancel", style: .cancel, handler: nil))
+            alertController.addAction(.init(title: L("camera.cancel"), style: .cancel, handler: nil))
             alertController.popoverPresentationController?.sourceView = sourceView
             UIViewController.rootViewController?.present(alertController, animated: true, completion: nil)
             return Disposables.create { alertController.dismiss(animated: true, completion: nil) }
@@ -399,26 +399,18 @@ extension CaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
     }
 }
 
-// MARK: - Japanese natural language description for camera devices
+// MARK: - Localized description for camera devices
 private extension AVCaptureDevice {
-    var japaneseDescription: String {
+    var localizedCameraDescription: String {
         switch (position, deviceType) {
-        case (.front, _):
-            return "フロントカメラ（自撮り・ビデオ通話向け）"
-        case (.back, .builtInUltraWideCamera):
-            return "超広角カメラ（風景・建物・広い空間を一枚に収める）"
-        case (.back, .builtInWideAngleCamera):
-            return "広角カメラ（標準的な撮影に最も適した万能レンズ）"
-        case (.back, .builtInTelephotoCamera):
-            return "望遠カメラ（遠くの被写体を光学ズームで撮影）"
-        case (.back, .builtInDualCamera):
-            return "デュアルカメラ・広角＋望遠（シーンに応じて自動切替）"
-        case (.back, .builtInDualWideCamera):
-            return "デュアルカメラ・超広角＋広角（シーンに応じて自動切替）"
-        case (.back, .builtInTripleCamera):
-            return "トリプルカメラ・超広角＋広角＋望遠（最も多彩な撮影が可能）"
-        default:
-            return localizedName
+        case (.front, _):                    return L("camera.front")
+        case (.back, .builtInUltraWideCamera): return L("camera.back.ultra_wide")
+        case (.back, .builtInWideAngleCamera): return L("camera.back.wide")
+        case (.back, .builtInTelephotoCamera): return L("camera.back.tele")
+        case (.back, .builtInDualCamera):      return L("camera.back.dual")
+        case (.back, .builtInDualWideCamera):  return L("camera.back.dual_wide")
+        case (.back, .builtInTripleCamera):    return L("camera.back.triple")
+        default:                               return localizedName
         }
     }
 }

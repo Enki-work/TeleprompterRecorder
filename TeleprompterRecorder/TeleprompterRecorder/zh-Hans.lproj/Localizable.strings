@@ -61,5 +61,16 @@
 /* Language Settings */
 "language.title" = "语言设置";
 
+/* Camera Selection */
+"camera.select.title" = "选择镜头";
+"camera.cancel" = "取消";
+"camera.front" = "前置镜头（自拍 · 视频通话）";
+"camera.back.ultra_wide" = "超广角镜头（风景 · 建筑 · 大空间一览无余）";
+"camera.back.wide" = "广角镜头（标准多用途，最常用的万能镜头）";
+"camera.back.tele" = "长焦镜头（光学变焦，拍摄远处被摄体）";
+"camera.back.dual" = "双摄·广角＋长焦（根据场景自动切换）";
+"camera.back.dual_wide" = "双摄·超广角＋广角（根据场景自动切换）";
+"camera.back.triple" = "三摄·超广角＋广角＋长焦（最多样化的拍摄选择）";
+
 /* Mail */
 "mail.subject" = "关于提词器相机";

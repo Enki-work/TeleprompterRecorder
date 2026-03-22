@@ -61,5 +61,16 @@
 /* Language Settings */
 "language.title" = "言語設定";
 
+/* Camera Selection */
+"camera.select.title" = "カメラ選択";
+"camera.cancel" = "キャンセル";
+"camera.front" = "フロントカメラ（自撮り・ビデオ通話向け）";
+"camera.back.ultra_wide" = "超広角カメラ（風景・建物・広い空間を一枚に収める）";
+"camera.back.wide" = "広角カメラ（標準的な撮影に最も適した万能レンズ）";
+"camera.back.tele" = "望遠カメラ（遠くの被写体を光学ズームで撮影）";
+"camera.back.dual" = "デュアルカメラ・広角＋望遠（シーンに応じて自動切替）";
+"camera.back.dual_wide" = "デュアルカメラ・超広角＋広角（シーンに応じて自動切替）";
+"camera.back.triple" = "トリプルカメラ・超広角＋広角＋望遠（最も多彩な撮影が可能）";
+
 /* Mail */
 "mail.subject" = "プロンプターカメラについて";
