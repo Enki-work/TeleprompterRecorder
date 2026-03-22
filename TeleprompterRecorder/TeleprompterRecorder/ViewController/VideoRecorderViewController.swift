@@ -116,6 +116,7 @@ class VideoRecorderViewController: UIViewController {
     private func setupFocusTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleFocusTap(_:)))
         tap.cancelsTouchesInView = false
+        tap.delegate = self
         cameraPreview.addGestureRecognizer(tap)
 
         // 被摄体变化时恢复连续自动对焦
@@ -141,6 +142,20 @@ class VideoRecorderViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         cameraPreview.captureButtonsView.textView.contentOffset = .zero
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate (Focus tap)
+extension VideoRecorderViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldReceive touch: UITouch) -> Bool {
+        // 触摸落在 UIControl（按钮等）或其子视图上时，不触发对焦
+        var view = touch.view
+        while let v = view {
+            if v is UIControl { return false }
+            view = v.superview
+        }
+        return true
     }
 }
 
