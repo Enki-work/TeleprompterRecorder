@@ -86,7 +86,6 @@ final class VideoRecorderViewModel: ViewModelType {
         
         input.prompterTextEditBtnClick.drive(onNext: {captureButtonsView in
             guard let captureButtonsView = captureButtonsView else {return}
-            
             if UserDefaults.standard.isPrompterAdsShow && !captureButtonsView.textViewEditButton.isSelected {
                 
                 UIAlertController.showTwoBtnAlert(title: L("reward.unlock_message"),
